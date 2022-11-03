@@ -14,11 +14,18 @@ module.exports = {
         ...colors,
         lightyellow: 'rgba(250, 248, 237, 1)',
         orange: 'rgba(246, 111, 77, 1)',
+        lightgray: 'rgba(234, 234, 235, 1)',
+        mediumgray: 'rgba(148, 152, 164, 1)',
+        darkgray: 'rgba(91, 95, 98, 1)',
+        'filter-dark': 'rgba(0, 0, 0, 0.3)',
       },
       transitionProperty: {
         textdecoration: 'text-decoration-color'
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+    // ...
+  ],
 }
