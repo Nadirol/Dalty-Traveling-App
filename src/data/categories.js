@@ -29,6 +29,21 @@ const locationCategories = [
         name: 'Pyramid',
         image: process.env.PUBLIC_URL + "/images/pyramid.png",
     },
+    {
+        id: '7',
+        name: 'River',
+        image: process.env.PUBLIC_URL + "/images/river.png",
+    },
+    {
+        id: '8',
+        name: 'Lake',
+        image: process.env.PUBLIC_URL + "/images/lake.png",
+    },
+    {
+        id: '9',
+        name: 'Space',
+        image: process.env.PUBLIC_URL + "/images/space.png",
+    },
 ];
 
 export default locationCategories;
