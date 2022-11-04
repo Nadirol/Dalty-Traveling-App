@@ -1,7 +1,46 @@
+import { useRef, useState } from "react";
 import locationCategories from "../data/categories";
 import CategoryCard from "./CategoryCard";
+import LeftIcon from "./icons/LeftIcon";
+import RightIcon from "./icons/RightIcon";
 
 const Main = () => {
+    const slider = useRef(null)
+
+    const [prevColor, setPrevColor] = useState('#2D3134');
+
+    const prevHoverIn = () => {
+        setPrevColor('#faf8ed');
+    }
+
+    const prevHoverOut = () => {
+        setPrevColor('#2D3134');
+    }
+
+    const prevCategory = () => slider.current.scrollBy(
+        {
+            top: 0,
+            left: -1
+            ,
+            behavior: "smooth"
+        }
+    )
+
+    const [nextColor, setNextColor] = useState('#2D3134');
+
+    const nextHoverIn = () => setNextColor('#faf8ed');
+
+    const nextHoverOut = () => setNextColor('#2D3134');
+
+    const nextCategory = () => slider.current.scrollBy(
+        {
+            top: 0,
+            left: 1
+            ,
+            behavior: "smooth"
+        }
+    )
+    
     return (
         <main className="mt-[0.625rem]">
             <section className="grid gap-36 md:grid-flow-col md:auto-cols-fr mb-20">
@@ -42,20 +81,24 @@ const Main = () => {
                 <div className="mb-6 flex justify-between">
                     <h1 className="font-inter font-semibold text-[56px] leading-none">Categories</h1>
                     <div className="flex gap-4">
-                        {/* <svg className="aspect-square p-[21px] rounded-full border border-very-dark-blue cursor-pointer
-                                hover:bg-very-dark-blue hover:stroke-white">
-                            <use href={process.env.PUBLIC_URL + "/images/left icon.svg"} />
-                        </svg> */}
-                        <img src={process.env.PUBLIC_URL + "/images/left icon.svg"} alt="previous" 
-                            className="aspect-square p-[21px] rounded-full border border-very-dark-blue cursor-pointer
-                                hover:bg-very-dark-blue hover:stroke-white"/>
-                        <img src={process.env.PUBLIC_URL + "/images/right icon.svg"} alt="next" 
-                            className="aspect-square p-[21px] rounded-full border border-very-dark-blue cursor-pointer"/>
+                        <LeftIcon 
+                            color={prevColor}
+                            handleHoverIn={prevHoverIn}
+                            handleHoverOut={prevHoverOut}
+                            handleClick={prevCategory}
+                        />
+                        <RightIcon 
+                            color={nextColor}
+                            handleHoverIn={nextHoverIn}
+                            handleHoverOut={nextHoverOut}
+                            handleClick={nextCategory}
+                        />
                     </div>
                 </div>
                 <p className="font-inter font-normal text-base leading-snug text-darkgray w-[370px] mb-[60px]">Here are lots of interesting destinations to visit, but don’t be confused—they’re already grouped by category.</p>
-                <div className="flex gap-[46px] items-center overflow-x-scroll scrollbar-hide">
-
+                <div className="flex gap-[46px] items-center overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
+                    [&>*:last-child]:snap-end"
+                    ref={slider}>
                     {locationCategories.map(category => (
                         <CategoryCard 
                             key={category.id}

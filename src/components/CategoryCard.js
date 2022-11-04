@@ -1,6 +1,6 @@
 const CategoryCard = ({ name, image }) => {
     return (
-        <div className="text-center">
+        <div className="text-center snap-start">
             <div className="mb-[1.125rem] cursor-pointer relative hover:before:block [&>div]:hover:opacity-100
                 before:hidden before:absolute before:inset-0 before:bg-filter-dark before:rounded-[85px]
                     ">
