@@ -5,6 +5,10 @@ import CategoryCard from "./CategoryCard";
 import LeftIcon from "./icons/LeftIcon";
 import RightIcon from "./icons/RightIcon";
 import PopularCard from "./PopularCard";
+import tags from "../data/tags"
+import TagCard from "./TagCard";
+import topDestinations from "../data/topDestination"
+import TopDestinationCard from "./TopDestinationCard";
 
 const Main = () => {
     const categorySlider = useRef(null)
@@ -193,7 +197,7 @@ const Main = () => {
                     </div>
                 </div>
             </section>
-            <section className="pt-[50px]">
+            <section className="pt-[50px] mb-14">
                 <div className="flex justify-between items-center">
                     <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight w-[400px]">Find Popular Destination</h1>
                     <div className="flex gap-4">
@@ -212,7 +216,7 @@ const Main = () => {
                     </div>
                 </div>
                 <div className="flex gap-[30px] overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
-                    [&>*:last-child]:pr-[30px] pt-9 pb-[50px]"
+                    [&>*:last-child]:mr-[120px] pt-9 pb-[50px] w-[calc(100vw-152px)]"
                     ref={popularSlider}>
                         {popularDestination.map(destination => (
                             <PopularCard 
@@ -223,6 +227,30 @@ const Main = () => {
                                 image={destination.image}
                             />
                         ))}
+                </div>
+            </section>
+            <section className="text-center py-9">
+                <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-4">Top Destinations</h1>
+                <p className="text-dark-gray font-inter font-normal text-base leading-none mb-7">Sost Brilliant reasons Entrada should be your one-stop-shop!</p>
+                <div className="flex gap-3.5 mx-auto w-min mb-[50px]">
+                    {tags.map(tag => (
+                        <TagCard 
+                            name={tag}
+                        />
+                    ))}
+                </div>
+                <div className="grid gap-x-[30px] grid-cols-gallery grid-rows-gallery w-min mx-auto
+                    [&>*:nth-child(2)]:row-start-4 [&>*:nth-child(3)]:row-[1/-1] [&>*:nth-child(4)]:col-[3/-1]
+                        [&>*:nth-child(5)]:row-[3/-1] [&>*:nth-child(6)]:row-[3/-1]">
+                    {topDestinations.map((destination, index) => (
+                        <TopDestinationCard
+                            key={destination.id}
+                            rating={destination.rating}
+                            name={destination.name}
+                            location={destination.location}
+                            image={destination.image}
+                        />
+                    ))}
                 </div>
             </section>
         </main>
