@@ -1,23 +1,25 @@
 import { useRef, useState } from "react";
 import locationCategories from "../data/categories";
+import popularDestination from "../data/popular"
 import CategoryCard from "./CategoryCard";
 import LeftIcon from "./icons/LeftIcon";
 import RightIcon from "./icons/RightIcon";
+import PopularCard from "./PopularCard";
 
 const Main = () => {
-    const slider = useRef(null)
+    const categorySlider = useRef(null)
 
-    const [prevColor, setPrevColor] = useState('#2D3134');
+    const [prevColorCategory, setPrevColorCategory] = useState('#2D3134');
 
-    const prevHoverIn = () => {
-        setPrevColor('#faf8ed');
+    const prevCategoryHoverIn = () => {
+        setPrevColorCategory('#faf8ed');
     }
 
-    const prevHoverOut = () => {
-        setPrevColor('#2D3134');
+    const prevCategoryHoverOut = () => {
+        setPrevColorCategory('#2D3134');
     }
 
-    const prevCategory = () => slider.current.scrollBy(
+    const prevCategory = () => categorySlider.current.scrollBy(
         {
             top: 0,
             left: -1
@@ -26,20 +28,59 @@ const Main = () => {
         }
     )
 
-    const [nextColor, setNextColor] = useState('#2D3134');
+    const [nextColorCategory, setNextColorCategory] = useState('#2D3134');
 
-    const nextHoverIn = () => setNextColor('#faf8ed');
+    const nextCategoryHoverIn = () => setNextColorCategory('#faf8ed');
 
-    const nextHoverOut = () => setNextColor('#2D3134');
+    const nextCategoryHoverOut = () => setNextColorCategory('#2D3134');
 
-    const nextCategory = () => slider.current.scrollBy(
+    const nextCategory = () => {categorySlider.current.scrollBy(
+            {
+                top: 0,
+                left: 1
+                ,
+                behavior: "smooth"
+            }
+        );
+    }
+
+    const popularSlider = useRef(null)
+
+    const [prevColorPopular, setPrevColorPopular] = useState('#2D3134');
+
+    const prevPopularHoverIn = () => {
+        setPrevColorPopular('#faf8ed');
+    }
+
+    const prevPopularHoverOut = () => {
+        setPrevColorPopular('#2D3134');
+    }
+
+    const prevPopular = () => popularSlider.current.scrollBy(
         {
             top: 0,
-            left: 1
+            left: -1
             ,
             behavior: "smooth"
         }
     )
+
+    const [nextColorPopular, setNextColorPopular] = useState('#2D3134');
+
+    const nextPopularHoverIn = () => setNextColorPopular('#faf8ed');
+
+    const nextPopularHoverOut = () => setNextColorPopular('#2D3134');
+
+    const nextPopular = () => {popularSlider.current.scrollBy(
+            {
+                top: 0,
+                left: 1
+                ,
+                behavior: "smooth"
+            }
+        );
+    }
+
     
     return (
         <main className="mt-[0.625rem]">
@@ -82,23 +123,23 @@ const Main = () => {
                     <h1 className="font-inter font-semibold text-[56px] leading-none">Categories</h1>
                     <div className="flex gap-4">
                         <LeftIcon 
-                            color={prevColor}
-                            handleHoverIn={prevHoverIn}
-                            handleHoverOut={prevHoverOut}
+                            color={prevColorCategory}
+                            handleHoverIn={prevCategoryHoverIn}
+                            handleHoverOut={prevCategoryHoverOut}
                             handleClick={prevCategory}
                         />
                         <RightIcon 
-                            color={nextColor}
-                            handleHoverIn={nextHoverIn}
-                            handleHoverOut={nextHoverOut}
+                            color={nextColorCategory}
+                            handleHoverIn={nextCategoryHoverIn}
+                            handleHoverOut={nextCategoryHoverOut}
                             handleClick={nextCategory}
                         />
                     </div>
                 </div>
-                <p className="font-inter font-normal text-base leading-snug text-darkgray w-[370px] mb-[60px]">Here are lots of interesting destinations to visit, but don’t be confused—they’re already grouped by category.</p>
+                <p className="font-inter font-normal text-base leading-snug text-dark-gray w-[370px] mb-[60px]">Here are lots of interesting destinations to visit, but don’t be confused—they’re already grouped by category.</p>
                 <div className="flex gap-[46px] items-center overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
-                    [&>*:last-child]:snap-end"
-                    ref={slider}>
+                    [&>*:last-child]:pr-[46px]" 
+                    ref={categorySlider}>
                     {locationCategories.map(category => (
                         <CategoryCard 
                             key={category.id}
@@ -106,6 +147,82 @@ const Main = () => {
                             image={category.image}
                         />
                     ))}
+                </div>
+            </section>
+            <section className="pb-8">
+                <div className="grid gap-28 md:grid-flow-col md:auto-cols-fr pt-[50px] pb-[58px]">
+                    <div className="relative mr-auto mb-auto">
+                        <img src={process.env.PUBLIC_URL + "/images/hero2.png"} alt="" />
+                        <div className="bg-white rounded-[14px] text-center px-[14px] py-[20px] 
+                            absolute bottom-[80px] left-[-51px]">
+                            <img src={process.env.PUBLIC_URL + "/images/star location icon.svg"} alt="" 
+                                className="mx-auto aspect-square w-20 mb-[20px]"/>
+                            <h2 className="text-orange font-poppins font-semibold text-[30px] leading-none mb-2">600%</h2>
+                            <h5 className="text-regular-gray font-inter font-normal text-[19px] leading-[30px]">Destinations</h5>
+                        </div>
+                        <div className="bg-white rounded-[10px] pl-16px pr-[21px] py-[20px]
+                            absolute bottom-[-20px] right-[1rem] flex justify-between">
+                            <img src={process.env.PUBLIC_URL + "/images/connect icon.svg"} alt="" />
+                            <div className="flex flex-col justify-between">
+                                <h2 className="text-very-dark-blue font-poppins font-semibold text-[30px] leading-none">5000+</h2>
+                                <h5 className="text-dark-gray font-poppins font-normal text-[12px] leading-none">Customers</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="pt-14">
+                        <h4 className="text-orange font-inter font-semibold text-[20px] leading-none tracking-wide mb-[20px]">Our Experience</h4>
+                        <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-[20px]">Our Stories Have Adventures</h1>
+                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-[40px] w-3/4">We are experienced in bringing adventures to stay their journey, 
+                            with all outdoor destinations in the world as our specialties. 
+                            Start your adventure now! Nature has already called you!
+                        </p>
+                        <div className="grid gap-[20px] grid-flow-col auto-cols-fr">
+                            <div className="bg-white bg-opacity-70 rounded-[14px] p-[30px]">
+                                <h2 className="text-orange font-inter font-semibold text-[46px] leading-none mb-[18px]">12K+</h2>
+                                <h4 className="text-regular-gray font-inter font-normal text-[21px] leading-normal">Succes Journey</h4>
+                            </div>
+                            <div className="bg-white bg-opacity-70 rounded-[14px] p-[30px]">
+                                <h2 className="text-orange font-inter font-semibold text-[46px] leading-none mb-[18px]">16+</h2>
+                                <h4 className="text-regular-gray font-inter font-normal text-[21px] leading-normal">Awards Winning</h4>
+                            </div>
+                            <div className="bg-white bg-opacity-70 rounded-[14px] p-[30px]">
+                                <h2 className="text-orange font-inter font-semibold text-[46px] leading-none mb-[18px]">20+</h2>
+                                <h4 className="text-regular-gray font-inter font-normal text-[21px] leading-normal">Years Of Experience</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="pt-[50px]">
+                <div className="flex justify-between items-center">
+                    <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight w-[400px]">Find Popular Destination</h1>
+                    <div className="flex gap-4">
+                        <LeftIcon 
+                            color={prevColorPopular}
+                            handleHoverIn={prevPopularHoverIn}
+                            handleHoverOut={prevPopularHoverOut}
+                            handleClick={prevPopular}
+                        />
+                        <RightIcon 
+                            color={nextColorPopular}
+                            handleHoverIn={nextPopularHoverIn}
+                            handleHoverOut={nextPopularHoverOut}
+                            handleClick={nextPopular}
+                        />
+                    </div>
+                </div>
+                <div className="flex gap-[30px] overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
+                    [&>*:last-child]:pr-[30px] pt-9 pb-[50px]"
+                    ref={popularSlider}>
+                        {popularDestination.map(destination => (
+                            <PopularCard 
+                                key={destination.id}
+                                name={destination.name}
+                                location={destination.location}
+                                price={destination.price}
+                                image={destination.image}
+                            />
+                        ))}
                 </div>
             </section>
         </main>
