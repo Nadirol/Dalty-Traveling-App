@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         ...colors,
         'lightyellow': 'rgba(250, 248, 237, 1)',
+        'medium-yellow': 'rgba(255, 212, 130, 1)',
         'orange': 'rgba(246, 111, 77, 1)',
         'lightgray': 'rgba(234, 234, 235, 1)',
         'mediumgray': 'rgba(148, 152, 164, 1)',
@@ -21,6 +22,7 @@ module.exports = {
         'bright-neutral': 'rgba(250, 248, 237, 1)',
         'very-dark-blue': 'rgba(45, 49, 52, 1)',
         'filter-dark': 'rgba(0, 0, 0, 0.3)',
+        'filter-very-dark': 'rgba(0, 0, 0, 0.6)',
       },
       transitionProperty: {
         textdecoration: 'text-decoration-color'

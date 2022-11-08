@@ -2,13 +2,15 @@ import { useRef, useState } from "react";
 import locationCategories from "../data/categories";
 import popularDestination from "../data/popular"
 import CategoryCard from "./CategoryCard";
-import LeftIcon from "./icons/LeftIcon";
-import RightIcon from "./icons/RightIcon";
+import LeftButton from "./buttons/LeftButton";
+import RightButton from "./buttons/RightButton";
 import PopularCard from "./PopularCard";
 import tags from "../data/tags"
 import TagCard from "./TagCard";
 import topDestinations from "../data/topDestination"
 import TopDestinationCard from "./TopDestinationCard";
+import reviews from "../data/reviews";
+import ReviewCard from "./ReviewCard";
 
 const Main = () => {
     const categorySlider = useRef(null)
@@ -126,13 +128,13 @@ const Main = () => {
                 <div className="mb-6 flex justify-between">
                     <h1 className="font-inter font-semibold text-[56px] leading-none">Categories</h1>
                     <div className="flex gap-4">
-                        <LeftIcon 
+                        <LeftButton 
                             color={prevColorCategory}
                             handleHoverIn={prevCategoryHoverIn}
                             handleHoverOut={prevCategoryHoverOut}
                             handleClick={prevCategory}
                         />
-                        <RightIcon 
+                        <RightButton 
                             color={nextColorCategory}
                             handleHoverIn={nextCategoryHoverIn}
                             handleHoverOut={nextCategoryHoverOut}
@@ -201,13 +203,13 @@ const Main = () => {
                 <div className="flex justify-between items-center">
                     <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight w-[400px]">Find Popular Destination</h1>
                     <div className="flex gap-4">
-                        <LeftIcon 
+                        <LeftButton 
                             color={prevColorPopular}
                             handleHoverIn={prevPopularHoverIn}
                             handleHoverOut={prevPopularHoverOut}
                             handleClick={prevPopular}
                         />
-                        <RightIcon 
+                        <RightButton 
                             color={nextColorPopular}
                             handleHoverIn={nextPopularHoverIn}
                             handleHoverOut={nextPopularHoverOut}
@@ -229,7 +231,7 @@ const Main = () => {
                         ))}
                 </div>
             </section>
-            <section className="text-center py-9">
+            <section className="text-center py-9 mb-9">
                 <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-4">Top Destinations</h1>
                 <p className="text-dark-gray font-inter font-normal text-base leading-none mb-7">Sost Brilliant reasons Entrada should be your one-stop-shop!</p>
                 <div className="flex gap-3.5 mx-auto w-min mb-[50px]">
@@ -249,6 +251,21 @@ const Main = () => {
                             name={destination.name}
                             location={destination.location}
                             image={destination.image}
+                        />
+                    ))}
+                </div>
+            </section>
+            <section className="grid md:grid-flow-col md:auto-cols-fr py-[66px] pl-[72px]">
+                <img src={process.env.PUBLIC_URL + "/images/hero3.png"} alt="" />
+                <div className="pt-10">
+                    <div className="w-16 h-2 bg-medium-yellow rounded mb-3"></div>
+                    <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-6 capitalize">A customer said about us:</h1>
+                    {reviews.map(review => (
+                        <ReviewCard
+                            key={review.id}
+                            content={review.content}
+                            name={review.name}
+                            title={review.title}
                         />
                     ))}
                 </div>
