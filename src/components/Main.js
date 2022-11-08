@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import locationCategories from "../data/categories";
 import popularDestination from "../data/popular"
 import CategoryCard from "./CategoryCard";
@@ -15,16 +15,6 @@ import ReviewCard from "./ReviewCard";
 const Main = () => {
     const categorySlider = useRef(null)
 
-    const [prevColorCategory, setPrevColorCategory] = useState('#2D3134');
-
-    const prevCategoryHoverIn = () => {
-        setPrevColorCategory('#faf8ed');
-    }
-
-    const prevCategoryHoverOut = () => {
-        setPrevColorCategory('#2D3134');
-    }
-
     const prevCategory = () => categorySlider.current.scrollBy(
         {
             top: 0,
@@ -33,12 +23,6 @@ const Main = () => {
             behavior: "smooth"
         }
     )
-
-    const [nextColorCategory, setNextColorCategory] = useState('#2D3134');
-
-    const nextCategoryHoverIn = () => setNextColorCategory('#faf8ed');
-
-    const nextCategoryHoverOut = () => setNextColorCategory('#2D3134');
 
     const nextCategory = () => {categorySlider.current.scrollBy(
             {
@@ -52,16 +36,6 @@ const Main = () => {
 
     const popularSlider = useRef(null)
 
-    const [prevColorPopular, setPrevColorPopular] = useState('#2D3134');
-
-    const prevPopularHoverIn = () => {
-        setPrevColorPopular('#faf8ed');
-    }
-
-    const prevPopularHoverOut = () => {
-        setPrevColorPopular('#2D3134');
-    }
-
     const prevPopular = () => popularSlider.current.scrollBy(
         {
             top: 0,
@@ -70,12 +44,6 @@ const Main = () => {
             behavior: "smooth"
         }
     )
-
-    const [nextColorPopular, setNextColorPopular] = useState('#2D3134');
-
-    const nextPopularHoverIn = () => setNextColorPopular('#faf8ed');
-
-    const nextPopularHoverOut = () => setNextColorPopular('#2D3134');
 
     const nextPopular = () => {popularSlider.current.scrollBy(
             {
@@ -129,15 +97,9 @@ const Main = () => {
                     <h1 className="font-inter font-semibold text-[56px] leading-none">Categories</h1>
                     <div className="flex gap-4">
                         <LeftButton 
-                            color={prevColorCategory}
-                            handleHoverIn={prevCategoryHoverIn}
-                            handleHoverOut={prevCategoryHoverOut}
                             handleClick={prevCategory}
                         />
                         <RightButton 
-                            color={nextColorCategory}
-                            handleHoverIn={nextCategoryHoverIn}
-                            handleHoverOut={nextCategoryHoverOut}
                             handleClick={nextCategory}
                         />
                     </div>
@@ -204,15 +166,9 @@ const Main = () => {
                     <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight w-[400px]">Find Popular Destination</h1>
                     <div className="flex gap-4">
                         <LeftButton 
-                            color={prevColorPopular}
-                            handleHoverIn={prevPopularHoverIn}
-                            handleHoverOut={prevPopularHoverOut}
                             handleClick={prevPopular}
                         />
                         <RightButton 
-                            color={nextColorPopular}
-                            handleHoverIn={nextPopularHoverIn}
-                            handleHoverOut={nextPopularHoverOut}
                             handleClick={nextPopular}
                         />
                     </div>
@@ -255,7 +211,7 @@ const Main = () => {
                     ))}
                 </div>
             </section>
-            <section className="grid md:grid-flow-col md:auto-cols-fr py-[66px] pl-[72px]">
+            <section className="grid md:grid-flow-col md:auto-cols-fr py-[66px] pl-[72px] mb-7">
                 <img src={process.env.PUBLIC_URL + "/images/hero3.png"} alt="" />
                 <div className="pt-10">
                     <div className="w-16 h-2 bg-medium-yellow rounded mb-3"></div>
@@ -268,6 +224,26 @@ const Main = () => {
                             title={review.title}
                         />
                     ))}
+                </div>
+            </section>
+            <section className="py-[46px] mb-4">
+                <div className="bg-medium-yellow rounded-[30px] py-[75px] text-center relative">
+                    <img src={process.env.PUBLIC_URL + "/images/intersect.png"} alt="" 
+                        className="absolute inset-0 z-0 w-full h-full"/>
+                    <div className="relative z-10">
+                        <h1 className="text-very-dark-blue font-inter font-semibold text-[40px] leading-none mb-4">Sign up to our newsletter</h1>
+                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-10">Reciev latest news, update, and many other things every week. </p>
+                        <form className="flex justify-between items-center bg-white rounded-xl p-2.5 w-[450px] mx-auto">
+                            <input type="email" placeholder="Enter Your Email Address"
+                                className="bg-transparent pl-4 text-very-dark-blue font-inter font-normal text-xl focus:outline-0
+                                placeholder:text-dark-gray placeholder:font-inter placeholder:font-normal placeholder:text-[14px] placeholder:leading-none"/>
+                            <input type="submit" className="hidden" id="email-sumbit__button"/>
+                            <label htmlFor="email-sumbit__button">
+                                <img src={process.env.PUBLIC_URL + "/images/paper plane2.svg"} alt="submit button" 
+                                    className="p-3 rounded-xl bg-orange cursor-pointer hover:bg-dark-orange"/>
+                            </label>
+                        </form>
+                    </div>
                 </div>
             </section>
         </main>

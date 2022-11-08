@@ -15,6 +15,7 @@ module.exports = {
         'lightyellow': 'rgba(250, 248, 237, 1)',
         'medium-yellow': 'rgba(255, 212, 130, 1)',
         'orange': 'rgba(246, 111, 77, 1)',
+        'dark-orange': 'rgba(226, 75, 37, 1)',
         'lightgray': 'rgba(234, 234, 235, 1)',
         'mediumgray': 'rgba(148, 152, 164, 1)',
         'regular-gray': 'rgba(147, 149, 151, 1)',
