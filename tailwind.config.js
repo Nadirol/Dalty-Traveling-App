@@ -12,13 +12,14 @@ module.exports = {
       },
       colors: {
         ...colors,
-        'lightyellow': 'rgba(250, 248, 237, 1)',
+        'light-yellow': 'rgba(250, 248, 237, 1)',
         'medium-yellow': 'rgba(255, 212, 130, 1)',
         'orange': 'rgba(246, 111, 77, 1)',
         'dark-orange': 'rgba(226, 75, 37, 1)',
-        'lightgray': 'rgba(234, 234, 235, 1)',
+        'light-gray': 'rgba(234, 234, 235, 1)',
         'mediumgray': 'rgba(148, 152, 164, 1)',
         'regular-gray': 'rgba(147, 149, 151, 1)',
+        'semi-dark-gray': 'rgba(103, 106, 108, 1)',
         'dark-gray': 'rgba(91, 95, 98, 1)',
         'bright-neutral': 'rgba(250, 248, 237, 1)',
         'very-dark-blue': 'rgba(45, 49, 52, 1)',
@@ -26,16 +27,22 @@ module.exports = {
         'filter-very-dark': 'rgba(0, 0, 0, 0.6)',
       },
       transitionProperty: {
-        textdecoration: 'text-decoration-color'
+        'textdecoration': 'text-decoration-color'
       },
       boxShadow: {
         'card': '0px 24px 36px rgba(192, 188, 161, 0.32)',
       },
       gridTemplateColumns: {
-        'gallery': '270px 370px 170px 270px'
+        'gallery': '270px 370px 170px 270px',
+        'gallery-md': '135px 185px 85px 135px',
       },
       gridTemplateRows: {
-        'gallery': '250px 13px 13px 250px'
+        'gallery': '250px 13px 13px 250px',
+        'gallery-md': '125px 13px 13px 125px',
+      },
+      width: {
+        'container': 'min(1170px, 100% - 2rem)'
+
       }
     },
   },

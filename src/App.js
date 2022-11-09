@@ -1,12 +1,14 @@
 import Header from "./components/Header";
 import Main from "./components/Main";
+import Footer from "./components/Footer";
 
 
 const App = () => {
   return (
-    <div className="bg-lightyellow px-[135px]">
+    <div className="w-container mx-auto bg-light-yellow">
         <Header />
         <Main />
+        <Footer />
     </div>
   )
 }

@@ -63,7 +63,7 @@ const Main = () => {
                     <h1 className="font-sen font-bold text-[5.25rem] leading-none mb-6">Discover the Best Lovely Places</h1>
                     <p className="font-inter font-normal text-[1.125rem] leading-snug mb-[2.75rem] w-[31.25rem]">Plan and book your perfect trip with expert advice, travel tips, destination information and inspiration from us.</p>
                     <form className="bg-white flex items-center px-7 py-5 rounded-[100vw] w-[31.25rem]">
-                        <div className="pr-8 border-r border-lightgray">
+                        <div className="pr-8 border-r border-light-gray">
                             <h1 className="font-inter font-normal text-[1.125rem] leading-none mb-2">Where</h1>
                             <div className="flex">
                                 <input type="text" placeholder="Center Point, Lo..."
@@ -118,9 +118,9 @@ const Main = () => {
                 </div>
             </section>
             <section className="pb-8">
-                <div className="grid gap-28 md:grid-flow-col md:auto-cols-fr pt-[50px] pb-[58px]">
-                    <div className="relative mr-auto mb-auto">
-                        <img src={process.env.PUBLIC_URL + "/images/hero2.png"} alt="" />
+                <div className="grid text-center xl:gap-28 xl:grid-flow-col xl:auto-cols-fr xl:text-start [ pt-[50px] pb-[58px]">
+                    <div className="relative xl:mr-auto xl:mb-auto mx-auto">
+                        <img src={process.env.PUBLIC_URL + "/images/hero2.png"} alt=""/>
                         <div className="bg-white rounded-[14px] text-center px-[14px] py-[20px] 
                             absolute bottom-[80px] left-[-51px]">
                             <img src={process.env.PUBLIC_URL + "/images/star location icon.svg"} alt="" 
@@ -140,11 +140,11 @@ const Main = () => {
                     <div className="pt-14">
                         <h4 className="text-orange font-inter font-semibold text-[20px] leading-none tracking-wide mb-[20px]">Our Experience</h4>
                         <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-[20px]">Our Stories Have Adventures</h1>
-                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-[40px] w-3/4">We are experienced in bringing adventures to stay their journey, 
+                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-[40px] w-3/4 mx-auto">We are experienced in bringing adventures to stay their journey, 
                             with all outdoor destinations in the world as our specialties. 
                             Start your adventure now! Nature has already called you!
                         </p>
-                        <div className="grid gap-[20px] grid-flow-col auto-cols-fr">
+                        <div className="grid gap-[20px] xl:grid-flow-col xl:auto-cols-fr grid-cols-2">
                             <div className="bg-white bg-opacity-70 rounded-[14px] p-[30px]">
                                 <h2 className="text-orange font-inter font-semibold text-[46px] leading-none mb-[18px]">12K+</h2>
                                 <h4 className="text-regular-gray font-inter font-normal text-[21px] leading-normal">Succes Journey</h4>
@@ -174,7 +174,7 @@ const Main = () => {
                     </div>
                 </div>
                 <div className="flex gap-[30px] overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
-                    [&>*:last-child]:mr-[120px] pt-9 pb-[50px] w-[calc(100vw-152px)]"
+                    [&>*:last-child]:mr-[120px] pt-9 pb-[50px]"
                     ref={popularSlider}>
                         {popularDestination.map(destination => (
                             <PopularCard 
@@ -197,9 +197,9 @@ const Main = () => {
                         />
                     ))}
                 </div>
-                <div className="grid gap-x-[30px] grid-cols-gallery grid-rows-gallery w-min mx-auto
-                    [&>*:nth-child(2)]:row-start-4 [&>*:nth-child(3)]:row-[1/-1] [&>*:nth-child(4)]:col-[3/-1]
-                        [&>*:nth-child(5)]:row-[3/-1] [&>*:nth-child(6)]:row-[3/-1]">
+                <div className="grid gap-x-[30px] w-min mx-auto xl:grid-cols-gallery grid-cols-gallery-md xl:grid-rows-gallery grid-rows-gallery-md 
+                        [&>*:nth-child(2)]:row-start-4 [&>*:nth-child(3)]:row-[1/-1] [&>*:nth-child(4)]:col-[3/-1]
+                            [&>*:nth-child(5)]:row-[3/-1] [&>*:nth-child(6)]:row-[3/-1]">
                     {topDestinations.map((destination, index) => (
                         <TopDestinationCard
                             key={destination.id}
