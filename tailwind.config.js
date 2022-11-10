@@ -43,9 +43,9 @@ module.exports = {
       },
       width: {
         'container': 'min(1170px, 100% - 2rem)',
-        'slider-container': 'min(1350px, 100%)',
+        'slider-container': 'min(1320px, 100%)',
         'search-form': 'min(500px, 90%)',
-        'contact-form': '100%',
+        'contact-form': 'min(450px, 80%)',
       }
     },
   },

@@ -13,7 +13,7 @@ import reviews from "../data/reviews";
 import ReviewCard from "./ReviewCard";
 
 const Main = () => {
-    const categorySlider = useRef(null)
+    const categorySlider = useRef(null);
 
     const prevCategory = () => categorySlider.current.scrollBy(
         {
@@ -61,24 +61,24 @@ const Main = () => {
             <section className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-20 w-container mx-auto ">
                 <div className="mt-16">
                     <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6">Discover the Best Lovely Places</h1>
-                    <p className="font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto">Plan and book your perfect trip with expert advice, travel tips, destination information and inspiration from us.</p>
-                    <form className="bg-white flex flex-wrap md:flex-nowrap items-center px-7 py-5 rounded-[100vw] w-search-form mx-auto">
+                    <p className="font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto md:mx-0">Plan and book your perfect trip with expert advice, travel tips, destination information and inspiration from us.</p>
+                    <form className="bg-white flex items-center px-7 py-5 rounded-[100vw] w-search-form mx-auto md:mx-0">
                         <div className="mx-auto flex">
-                            <div className="md:pr-8 border-r border-light-gray">
+                            <div className="pr-1 md:pr-8 border-r border-light-gray">
                                 <h1 className="font-inter font-normal text-[1.125rem] leading-none mb-2 text-start">Where</h1>
                                 <div className="flex">
                                     <input type="text" placeholder="Center Point, Lo..."
-                                        className="w-32 font-inter font-normal text-xs leading-none focus:outline-0
+                                        className="w-full md:w-32 font-inter font-normal text-xs leading-none focus:outline-0
                                             placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
                                                 placeholder:font-inter"/>
                                     <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt="" />
                                 </div>
                             </div>
-                            <div className="md:pl-8">
+                            <div className="pl-1 md:pl-8">
                                 <h1 className="font-inter font-normal text-[1.125rem] leading-none mb-2 text-start">Date</h1>
                                 <div className="flex">
                                     <input type="text" placeholder="09th March,2021" 
-                                        className="w-32 font-inter font-normal text-xs leading-none focus:outline-0
+                                        className="w-full md:w-32 font-inter font-normal text-xs leading-none focus:outline-0
                                             placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
                                                 placeholder:font-inter"/>
                                     <img src={process.env.PUBLIC_URL + "/images/calendar icon.svg"} alt="" />
@@ -97,7 +97,7 @@ const Main = () => {
             </section>
             <section className="pb-[3.75rem] w-container mx-auto">
                 <div className="mb-6 flex justify-between text-center mx-auto">
-                    <h1 className="font-inter font-semibold text-[56px] leading-none">Categories</h1>
+                    <h1 className="font-inter font-semibold text-[3rem] md:text-[56px] mx-auto md:mx-0 leading-none">Categories</h1>
                     <div className="hidden md:flex gap-4">
                         <LeftButton 
                             handleClick={prevCategory}
@@ -107,7 +107,7 @@ const Main = () => {
                         />
                     </div>
                 </div>
-                <p className="font-inter font-normal text-base leading-snug text-dark-gray w-[370px] mb-[60px]">
+                <p className="font-inter font-normal text-base leading-snug text-dark-gray md:w-[370px] text-center md:text-start mb-[60px]">
                     Here are lots of interesting destinations to visit, but don’t be confused—they’re already grouped by category.
                 </p>
                 <div className="flex gap-[46px] items-center overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
@@ -126,26 +126,27 @@ const Main = () => {
                 <div className="grid text-center xl:gap-28 xl:grid-flow-col xl:auto-cols-fr xl:text-start pt-[50px] pb-[58px]">
                     <div className="relative xl:mr-auto xl:mb-auto mx-auto">
                         <img src={process.env.PUBLIC_URL + "/images/hero2.png"} alt=""/>
-                        <div className="bg-white rounded-[14px] text-center px-[14px] py-[20px] 
-                            absolute bottom-[80px] left-[-51px]">
+                        <div className="bg-white rounded-[14px] text-center px-1.5 py-2 md:px-[14px] md:py-[20px] 
+                            absolute bottom-[80px] left-[-10px] md:left-[-51px]">
                             <img src={process.env.PUBLIC_URL + "/images/star location icon.svg"} alt="" 
-                                className="mx-auto aspect-square w-20 mb-[20px]"/>
-                            <h2 className="text-orange font-poppins font-semibold text-[30px] leading-none mb-2">600%</h2>
-                            <h5 className="text-regular-gray font-inter font-normal text-[19px] leading-[30px]">Destinations</h5>
+                                className="mx-auto aspect-square w-12 md:w-20 mb-[20px]"/>
+                            <h2 className="text-orange font-poppins font-semibold text-base md:text-[30px] leading-none mb-2">600%</h2>
+                            <h5 className="text-regular-gray font-inter font-normal text-xs md:text-[19px] leading-[30px]">Destinations</h5>
                         </div>
-                        <div className="bg-white rounded-[10px] pl-16px pr-[21px] py-[20px]
+                        <div className="bg-white rounded-[10px] px-2 py-3 md:pl-[16px] md:pr-[21px] md:py-[20px]
                             absolute bottom-[-20px] right-[1rem] flex justify-between">
-                            <img src={process.env.PUBLIC_URL + "/images/connect icon.svg"} alt="" />
+                            <img src={process.env.PUBLIC_URL + "/images/connect icon.svg"} alt="" className="w-[2rem] md:w-full"/>
                             <div className="flex flex-col justify-between">
-                                <h2 className="text-very-dark-blue font-poppins font-semibold text-[30px] leading-none">5000+</h2>
-                                <h5 className="text-dark-gray font-poppins font-normal text-[12px] leading-none">Customers</h5>
+                                <h2 className="text-very-dark-blue font-poppins font-semibold text-base md:text-[30px] leading-none">5000+</h2>
+                                <h5 className="text-dark-gray font-poppins font-normal text-[8px] md:text-[12px] leading-none">Customers</h5>
                             </div>
                         </div>
                     </div>
                     <div className="pt-14">
                         <h4 className="text-orange font-inter font-semibold text-[20px] leading-none tracking-wide mb-[20px]">Our Experience</h4>
-                        <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-[20px]">Our Stories Have Adventures</h1>
-                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-[40px] w-3/4 mx-auto">We are experienced in bringing adventures to stay their journey, 
+                        <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] 
+                            mx-auto md:mx-0 leading-tight mb-[20px]">Our Stories Have Adventures</h1>
+                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-[40px] w-3/4 mx-auto md:mx-0">We are experienced in bringing adventures to stay their journey, 
                             with all outdoor destinations in the world as our specialties. 
                             Start your adventure now! Nature has already called you!
                         </p>
@@ -168,7 +169,9 @@ const Main = () => {
             </section>
             <section className="pt-[50px] mb-14">
                 <div className="flex justify-between items-center w-container mx-auto text-center">
-                    <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight w-[400px]">Find Popular Destination</h1>
+                    <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] mx-auto 
+                        md:mx-0 leading-tight md:w-[400px]">Find Popular Destination
+                    </h1>
                     <div className="hidden md:flex gap-4">
                         <LeftButton 
                             handleClick={prevPopular}
@@ -179,7 +182,7 @@ const Main = () => {
                     </div>
                 </div>
                 <div className="flex gap-[30px] overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
-                     pt-9 pb-[50px] w-slider-container ml-auto"
+                     pt-9 pb-[50px] w-slider-container md:ml-auto"
                     ref={popularSlider}>
                         {popularDestination.map(destination => (
                             <PopularCard 
@@ -193,7 +196,7 @@ const Main = () => {
                 </div>
             </section>
             <section className="text-center py-9 mb-9 w-container mx-auto ">
-                <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-4">Top Destinations</h1>
+                <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] mx-auto md:mx-0 leading-tight mb-4">Top Destinations</h1>
                 <p className="text-dark-gray font-inter font-normal text-base leading-none mb-7">Sost Brilliant reasons Entrada should be your one-stop-shop!</p>
                 <div className="flex flex-wrap md:flex-nowrap gap-3.5 mx-auto w-3/4 md:w-min mb-[50px]">
                     {tags.map(tag => (
@@ -219,7 +222,7 @@ const Main = () => {
             </section>
             <section className="grid md:grid-flow-col md:auto-cols-fr py-[66px] 
                 text-center md:text-start md:pl-[72px] mb-7 w-container mx-auto ">
-                <img src={process.env.PUBLIC_URL + "/images/hero3.png"} alt="" className="mx-auto"/>
+                <img src={process.env.PUBLIC_URL + "/images/hero3.png"} alt="" className="mx-auto md:mx-0"/>
                 <div className="pt-10">
                     <div className="w-16 h-2 bg-medium-yellow rounded mb-3"></div>
                     <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-6 capitalize">A customer said about us:</h1>
@@ -240,10 +243,11 @@ const Main = () => {
                     <div className="relative z-10">
                         <h1 className="text-very-dark-blue font-inter font-semibold text-[40px] leading-none mb-4">Sign up to our newsletter</h1>
                         <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-10">Reciev latest news, update, and many other things every week. </p>
-                        <form className="flex justify-between items-center bg-white rounded-xl p-2.5 w-contact-form mx-auto">
-                            <input type="email" placeholder="Enter Your Email Address"
-                                className="bg-transparent pl-4 text-very-dark-blue font-inter font-normal text-xl focus:outline-0
-                                placeholder:text-dark-gray placeholder:font-inter placeholder:font-normal placeholder:text-[14px] placeholder:leading-none"/>
+                        <form className="flex gap-1 justify-between items-center bg-white rounded-xl p-2.5 w-contact-form mx-auto">
+                            <input type="email" placeholder="Enter Your Email Address" required
+                                className="bg-transparent pl-4 text-very-dark-blue font-inter font-normal text-xl focus:outline-0 w-[80%] md:w-full
+                                placeholder:text-dark-gray placeholder:font-inter placeholder:font-normal 
+                                    placeholder:text-xs md:placeholder:text-[14px] placeholder:leading-none"/>
                             <input type="submit" className="hidden" id="email-sumbit__button"/>
                             <label htmlFor="email-sumbit__button">
                                 <img src={process.env.PUBLIC_URL + "/images/paper plane2.svg"} alt="submit button" 
