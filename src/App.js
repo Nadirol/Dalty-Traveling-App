@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div className="w-container mx-auto bg-light-yellow">
+    <div className="bg-light-yellow">
         <Header />
         <Main />
         <Footer />

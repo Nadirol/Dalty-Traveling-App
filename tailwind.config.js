@@ -39,10 +39,13 @@ module.exports = {
       gridTemplateRows: {
         'gallery': '250px 13px 13px 250px',
         'gallery-md': '125px 13px 13px 125px',
+
       },
       width: {
-        'container': 'min(1170px, 100% - 2rem)'
-
+        'container': 'min(1170px, 100% - 2rem)',
+        'slider-container': 'min(1350px, 100%)',
+        'search-form': 'min(500px, 90%)',
+        'contact-form': '100%',
       }
     },
   },

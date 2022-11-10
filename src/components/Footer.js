@@ -1,11 +1,11 @@
 const Footer = () => {
 
     return (
-        <footer className="flex justify-between py-[84px]">
-            <div className="flex flex-col justify-between">
+        <footer className="flex flex-col md:flex-row justify-between py-[84px] w-container mx-auto ">
+            <div className="flex flex-col justify-between items-center text-center mb-8 md:mb-0">
                 <div className="">
-                    <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo" className="mb-5"/>
-                    <h3 className="text-dark-gray font-inter font-normal text-base w-3/4">Enjoy the touring with Salty</h3>
+                    <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo" className="mb-5 mx-auto"/>
+                    <h3 className="text-dark-gray font-inter font-normal text-base md:w-3/4 mb-4 md:mb-0">Enjoy the touring with Salty</h3>
                 </div>
                 <div className="flex gap-[14px]">
                     <div className="px-[13px] py-2.5 aspect-square rounded-[50%] border border-dark-gray 
@@ -28,7 +28,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex xl:gap-[120px] gap-6">
+            <div className="flex xl:gap-[120px] gap-2">
                 <ul>
                     <h1 className="text-dark-gray font-inter font-medium text-lg leading-none mb-[22px]">Resources</h1>
                     <li className="text-semi-dark-gray font-inter font-normal text-[14px] leading-[34px]
