@@ -46,6 +46,9 @@ module.exports = {
         'slider-container': 'min(1320px, 100%)',
         'search-form': 'min(500px, 90%)',
         'contact-form': 'min(450px, 80%)',
+      },
+      screens: {
+        '-md': { 'max': '767px' } ,
       }
     },
   },

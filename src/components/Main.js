@@ -24,15 +24,16 @@ const Main = () => {
         }
     )
 
-    const nextCategory = () => {categorySlider.current.scrollBy(
-            {
-                top: 0,
-                left: 1
-                ,
-                behavior: "smooth"
-            }
-        );
-    }
+
+    const nextCategory = () => categorySlider.current.scrollBy(
+        {
+            top: 0,
+            left: 1
+            ,
+            behavior: "smooth"
+        }
+    );
+    
 
     const popularSlider = useRef(null)
 
@@ -61,8 +62,8 @@ const Main = () => {
             <section className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-20 w-container mx-auto ">
                 <div className="mt-16">
                     <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6">Discover the Best Lovely Places</h1>
-                    <p className="font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto md:mx-0">Plan and book your perfect trip with expert advice, travel tips, destination information and inspiration from us.</p>
-                    <form className="bg-white flex items-center px-7 py-5 rounded-[100vw] w-search-form mx-auto md:mx-0">
+                    <p className="font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto xl:mx-0">Plan and book your perfect trip with expert advice, travel tips, destination information and inspiration from us.</p>
+                    <form className="bg-white flex items-center px-7 py-5 rounded-[100vw] w-search-form mx-auto xl:mx-0">
                         <div className="mx-auto flex">
                             <div className="pr-1 md:pr-8 border-r border-light-gray">
                                 <h1 className="font-inter font-normal text-[1.125rem] leading-none mb-2 text-start">Where</h1>
@@ -146,7 +147,7 @@ const Main = () => {
                         <h4 className="text-orange font-inter font-semibold text-[20px] leading-none tracking-wide mb-[20px]">Our Experience</h4>
                         <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] 
                             mx-auto md:mx-0 leading-tight mb-[20px]">Our Stories Have Adventures</h1>
-                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-[40px] w-3/4 mx-auto md:mx-0">We are experienced in bringing adventures to stay their journey, 
+                        <p className="text-dark-gray font-inter font-normal text-base leading-normal mb-[40px] w-3/4 mx-auto xl:mx-0">We are experienced in bringing adventures to stay their journey, 
                             with all outdoor destinations in the world as our specialties. 
                             Start your adventure now! Nature has already called you!
                         </p>
