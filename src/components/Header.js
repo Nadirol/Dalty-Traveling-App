@@ -15,18 +15,18 @@ const Header = () => {
 
     return (
         <header className={`flex justify-between items-center py-6 w-container mx-auto
-            ${ navMenuOpen ? '-md:after:fixed' : '-md:after:hidden'} md:after:hidden after:w-screen after:h-screen after:bg-filter-dark after:top-0 after:left-0 after:z-[1]`}>
+            ${ navMenuOpen ? '-md:after:fixed' : '-md:after:hidden'} md:after:hidden after:w-screen after:h-screen after:bg-filter-dark after:top-0 after:left-0 after:z-[20]`}>
             { navMenuOpen ? 
-                <GrClose className='md:hidden fixed right-8 top-6 cursor-pointer z-10'
+                <GrClose className='md:hidden fixed right-8 top-6 cursor-pointer z-30'
                 style={{ width: 35, height: 35 }} onClick={closeNavMenu}/>
                 :
-                <FiMenu className='md:hidden fixed right-8 top-6 cursor-pointer z-10'
+                <FiMenu className='md:hidden fixed right-8 top-6 cursor-pointer z-30'
                 style={{ width: 35, height: 35 }} onClick={openNavMenu}/>
             }
 
             <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo"/>
             <div className={`${ navMenuOpen ? '-md:fixed' : '-md:hidden'} -md:bottom-1/2 -md:right-1/2 -md:translate-x-1/2 
-                -md:translate-y-1/2 z-20 md:flex items-center w-[75%]
+                -md:translate-y-1/2 z-30 md:flex items-center w-[75%]
                     md:w-full bg-white md:bg-transparent -md:p-9 -md:rounded-xl`}>
                 <ul className="flex flex-col md:flex-row items-center gap-9 md:ml-[4.5rem] mb-9 md:mb-0">
                     <li className="cursor-pointer font-poppins font-normal text-base leading-none 

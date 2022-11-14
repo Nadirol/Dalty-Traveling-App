@@ -1,18 +1,39 @@
-import { useRef } from "react";
-import locationCategories from "../data/categories";
-import popularDestination from "../data/popular"
-import CategoryCard from "./CategoryCard";
-import LeftButton from "./buttons/LeftButton";
-import RightButton from "./buttons/RightButton";
-import PopularCard from "./PopularCard";
-import tags from "../data/tags"
-import TagCard from "./TagCard";
-import topDestinations from "../data/topDestination"
-import TopDestinationCard from "./TopDestinationCard";
-import reviews from "../data/reviews";
-import ReviewCard from "./ReviewCard";
+import { useRef, useEffect, useState } from "react";
+
+import axios from "axios";
+
+import { LeftButton, RightButton } from "./buttons"
+
+import { locationCategories, popularDestination, destinationTags, topDestinations, reviews } from "../data"
+
+import { CategoryCard, PopularCard, ReviewCard, TagCard, TopDestinationCard } from "./"
 
 const Main = () => {
+    const [data, setData] = useState(null)
+
+    const apiKey = '5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9'
+
+    const apiGet = (method, query) => {
+        return new Promise(function(resolve, reject) {
+            var otmAPI =
+              "https://api.opentripmap.com/0.1/en/places/" +
+              method +
+              "?apikey=" +
+              apiKey;
+            if (query !== undefined) {
+              otmAPI += "&" + query;
+            }
+            axios.get(otmAPI)
+              .then(response => console.log(response.data))
+              .catch(error => console.log(error));
+        });
+    }
+    
+
+    useEffect(() => {
+
+    },[])
+
     const categorySlider = useRef(null);
 
     const prevCategory = () => categorySlider.current.scrollBy(
@@ -55,11 +76,10 @@ const Main = () => {
             }
         );
     }
-
     
     return (
         <main className="mt-[0.625rem]">
-            <section className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-20 w-container mx-auto ">
+            <section className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-20 w-container mx-auto">
                 <div className="mt-16">
                     <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6">Discover the Best Lovely Places</h1>
                     <p className="font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto xl:mx-0">Plan and book your perfect trip with expert advice, travel tips, destination information and inspiration from us.</p>
@@ -88,7 +108,7 @@ const Main = () => {
                         </div>
 
                         <input type="submit" name="" id="submit-button"  className="hidden"/>
-                        <label htmlFor="submit-button" className="cursor-pointer mx-auto md:ml-auto">
+                        <label htmlFor="submit-button" className="cursor-pointer mx-auto ml-2 md:ml-auto">
                             <img src={process.env.PUBLIC_URL + "/images/search icon.svg"} alt="search" />
                         </label>
                     </form>
@@ -125,7 +145,7 @@ const Main = () => {
             </section>
             <section className="pb-8 w-container mx-auto ">
                 <div className="grid text-center xl:gap-28 xl:grid-flow-col xl:auto-cols-fr xl:text-start pt-[50px] pb-[58px]">
-                    <div className="relative xl:mr-auto xl:mb-auto mx-auto">
+                    <div className="relative xl:mr-auto xl:mb-auto -xl:mx-auto">
                         <img src={process.env.PUBLIC_URL + "/images/hero2.png"} alt=""/>
                         <div className="bg-white rounded-[14px] text-center px-1.5 py-2 md:px-[14px] md:py-[20px] 
                             absolute bottom-[80px] left-[-10px] md:left-[-51px]">
@@ -169,7 +189,7 @@ const Main = () => {
                 </div>
             </section>
             <section className="pt-[50px] mb-14">
-                <div className="flex justify-between items-center w-container mx-auto text-center">
+                <div className="flex justify-between items-center text-center md:text-start w-container mx-auto">
                     <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] mx-auto 
                         md:mx-0 leading-tight md:w-[400px]">Find Popular Destination
                     </h1>
@@ -197,10 +217,10 @@ const Main = () => {
                 </div>
             </section>
             <section className="text-center py-9 mb-9 w-container mx-auto ">
-                <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] mx-auto md:mx-0 leading-tight mb-4">Top Destinations</h1>
+                <h1 className="text-very-dark-blue font-inter font-semibold -xs:text-[2rem] text-[3rem] md:text-[56px] mx-auto md:mx-0 leading-tight mb-4">Top Destinations</h1>
                 <p className="text-dark-gray font-inter font-normal text-base leading-none mb-7">Sost Brilliant reasons Entrada should be your one-stop-shop!</p>
                 <div className="flex flex-wrap md:flex-nowrap gap-3.5 mx-auto w-3/4 md:w-min mb-[50px]">
-                    {tags.map(tag => (
+                    {destinationTags.map(tag => (
                         <TagCard 
                             name={tag}
                         />
@@ -221,12 +241,12 @@ const Main = () => {
                     ))}
                 </div>
             </section>
-            <section className="grid md:grid-flow-col md:auto-cols-fr py-[66px] 
-                text-center md:text-start md:pl-[72px] mb-7 w-container mx-auto ">
-                <img src={process.env.PUBLIC_URL + "/images/hero3.png"} alt="" className="mx-auto md:mx-0"/>
+            <section className="grid xl:grid-flow-col xl:auto-cols-fr py-[66px] 
+                text-center md:text-start xl:pl-[72px] mb-7 w-container mx-auto ">
+                <img src={process.env.PUBLIC_URL + "/images/hero3.png"} alt="" className="mx-auto xl:mx-0"/>
                 <div className="pt-10">
                     <div className="w-16 h-2 bg-medium-yellow rounded mb-3"></div>
-                    <h1 className="text-very-dark-blue font-inter font-semibold text-[56px] leading-tight mb-6 capitalize">A customer said about us:</h1>
+                    <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] leading-tight mb-6 capitalize">A customer said about us:</h1>
                     {reviews.map(review => (
                         <ReviewCard
                             key={review.id}

@@ -7,7 +7,7 @@ const TopDestinationCard = ({ rating, name, location, image }) => (
             className="absolute inset-0 z-0 h-full w-full"/>
         <div className="relative z-10 flex flex-col justify-between items-start text-start w-full h-full">
             <span className="text-very-dark-blue font-inter font-medium text-[14px] leading-none
-                 px-2.5 py-[5px] bg-white rounded-xl transition-all duration-300">{rating}</span>
+                 px-2.5 py-[5px] bg-white rounded-xl transition-all duration-300 hidden md:block">{rating}</span>
             <div className="">
                 <h3 className="text-white hover:text-orange font-inter font-semibold text-[20px] leading-none mb-2.5">{name}</h3>
                 <h4 className="text-white hover:text-orange font-inter font-normal text-[14px] leading-none">{location}</h4>

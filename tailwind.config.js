@@ -48,7 +48,9 @@ module.exports = {
         'contact-form': 'min(450px, 80%)',
       },
       screens: {
+        '-xl': { 'max': '1279px' } ,
         '-md': { 'max': '767px' } ,
+        '-xs': { 'max': '300px' } ,
       }
     },
   },
