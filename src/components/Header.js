@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi'
 import { GrClose } from 'react-icons/gr'
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [ navMenuOpen, setNavMenuOpen ] = useState(false);
@@ -23,8 +24,9 @@ const Header = () => {
                 <FiMenu className='md:hidden fixed right-8 top-6 cursor-pointer z-30'
                 style={{ width: 35, height: 35 }} onClick={openNavMenu}/>
             }
-
-            <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo"/>
+            <Link to='/'>
+                <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo"/>
+            </Link>
             <div className={`${ navMenuOpen ? '-md:fixed' : '-md:hidden'} -md:bottom-1/2 -md:right-1/2 -md:translate-x-1/2 
                 -md:translate-y-1/2 z-30 md:flex items-center w-[75%]
                     md:w-full bg-white md:bg-transparent -md:p-9 -md:rounded-xl`}>

@@ -3,6 +3,7 @@ import PopularCard from './PopularCard';
 import ReviewCard from './ReviewCard';
 import TagCard from './TagCard';
 import TopDestinationCard from './TopDestinationCard';
+import ResultCard from './ResultCard'
 
 export {
     CategoryCard,
@@ -10,5 +11,6 @@ export {
     ReviewCard,
     TagCard,
     TopDestinationCard,
+    ResultCard,
 }
 
