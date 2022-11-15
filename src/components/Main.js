@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 import axios from "axios";
 
@@ -11,6 +11,8 @@ import {
   topDestinations,
   reviews,
 } from "../data";
+
+import countryCodes from "../data/countryCodes.json";
 
 import {
   CategoryCard,
@@ -34,7 +36,7 @@ const Main = () => {
     );
   };
 
-  const pageLength = 3;
+  const pageLength = 6;
 
   const [offset, setOffset] = useState(0); // offset from first object in the list
   const [count, setCount] = useState(null); // total objects count
@@ -54,7 +56,7 @@ const Main = () => {
     data.then(res => {
         setSearchTitle("Name not found");
         if (res.data.status === 'OK') {
-            setSearchTitle(res.data.name + ", " + (res.data.country))
+            setSearchTitle(capitalizeFirstLetter(res.data.name) + ", " + (countryCodes[res.data.country]))
         }
         apiGet(
             "radius",
@@ -109,6 +111,11 @@ const Main = () => {
       left: 10,
       behavior: "smooth",
     });
+
+  function capitalizeFirstLetter(string) {
+    let newString = string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    return newString.join(' ');
+  }
 
   return (
     <main className="mt-[0.625rem]">
@@ -189,27 +196,30 @@ const Main = () => {
         </div>
       </section>
       <section className="mb-[3.75rem]">
-        <div className="w-container text-center xl:text-start mx-auto">
+        <div className="w-container text-center xl:text-start mx-auto mb-6">
           <h1 className="font-inter font-semibold text-[1.5rem] md:text-[3rem] leading-none">
             {searchTitle}
           </h1>
         </div>
         {searchResults && (
-          <div
-            className="flex gap-[30px] overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
-                    pt-9 pb-[50px] w-slider-container md:ml-auto"
-            ref={resultSlider}
-          >
-            {searchResults.map(result => (
-              <ResultCard
-                key={result.xid}
-                xid={result.xid}
-                preview={result.preview?.source}
-                name={result.name}
-                kinds={result.kinds}
-              />
-            ))}
-          </div>
+          <>
+            <h3 className="font-inter font-normal text-base md:text-2xl leading-none w-container text-start mx-auto">Found {count} Results</h3>
+            <div
+              className="grid gap-4 auto-cols-fr md:grid-cols-3
+                      pt-9 pb-[50px] w-container mx-auto"
+              ref={resultSlider}
+            >
+              {searchResults.map(result => (
+                <ResultCard
+                  key={result.xid}
+                  xid={result.xid}
+                  preview={result.preview?.source}
+                  name={result.name}
+                  kinds={result.kinds}
+                />
+              ))}
+            </div>
+          </>
         )}
       </section>
       <section className="pb-[3.75rem] w-container mx-auto">
@@ -361,7 +371,7 @@ const Main = () => {
         </p>
         <div className="flex flex-wrap md:flex-nowrap gap-3.5 mx-auto w-3/4 md:w-min mb-[50px]">
           {destinationTags.map((tag) => (
-            <TagCard name={tag} />
+            <TagCard name={tag} key={tag}/>
           ))}
         </div>
         <div
