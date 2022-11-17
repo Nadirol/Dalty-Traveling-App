@@ -32,6 +32,7 @@ module.exports = {
       boxShadow: {
         'card': '0px 24px 36px rgba(192, 188, 161, 0.32)',
         'card-bold': '0px 24px 36px rgba(192, 188, 161, 0.68)',
+        'image': '0 0 50px rgba(0, 0, 0, 0.3)',
       },
       gridTemplateColumns: {
         'gallery': '270px 370px 170px 270px',

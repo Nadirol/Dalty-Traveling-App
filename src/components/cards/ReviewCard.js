@@ -1,5 +1,5 @@
-import LeftButton from "./buttons/LeftButton"
-import RightButton from "./buttons/RightButton"
+import LeftButton from "../buttons/LeftButton"
+import RightButton from "../buttons/RightButton"
 
 import { useState } from "react";
 

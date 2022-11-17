@@ -1,27 +1,13 @@
 import { useRef, useState } from "react";
-
 import axios from "axios";
-
-import { LeftButton, RightButton } from "./buttons";
-
-import {
-  locationCategories,
-  popularDestination,
-  destinationTags,
-  topDestinations,
-  reviews,
-} from "../data";
-
+import { CategoryCard, SpecialTourCard, ReviewCard, TagCard, TopDestinationCard, ResultCard } from "../components/cards";
+import { LeftButton, RightButton } from "../components/buttons";
+import { locationCategories, SpecialTours, destinationTags, topDestinations, reviews } from "../data";
 import countryCodes from "../data/countryCodes.json";
 
-import {
-  CategoryCard,
-  PopularCard,
-  ReviewCard,
-  TagCard,
-  TopDestinationCard,
-  ResultCard,
-} from "./";
+let offset = 0;
+let lon;
+let lat;
 
 const Main = () => {
   const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
@@ -36,10 +22,15 @@ const Main = () => {
     );
   };
 
+  const [searchResults, setSearchResults] = useState("");
+
+  const resultSlider = useRef(null);
+
+  const categorySlider = useRef(null);
+
   const pageLength = 6;
 
-  const [offset, setOffset] = useState(0); // offset from first object in the list
-  const [count, setCount] = useState(null); // total objects count
+  const [count, setCount] = useState(null); 
 
   const [searchTitle, setSearchTitle] = useState("");
 
@@ -53,34 +44,42 @@ const Main = () => {
     e.preventDefault();
     let data =  apiGet("geoname", "name=" + searchValue);
    
-    data.then(res => {
+    data.then(async res => {
         setSearchTitle("Name not found");
         if (res.data.status === 'OK') {
-            setSearchTitle(capitalizeFirstLetter(res.data.name) + ", " + (countryCodes[res.data.country]))
+            setSearchTitle(capitalizeFirstLetter(res.data.name) + ", " + (countryCodes[res.data.country]));
         }
+        lon = await res.data.lon
+        lat = await res.data.lat
         apiGet(
             "radius",
-            `radius=1000&limit=${pageLength}&offset=${offset}&lon=${res.data.lon}&lat=${res.data.lat}&rate=2&format=count`
+            `radius=1000&limit=${pageLength}&offset=${offset}&lon=${lon}&lat=${lat}&rate=2&format=count`
         ).then(res => {
               setCount(res.data.count);
-              setOffset(0);
+              offset = 0;
           })
         .catch(() => setSearchTitle("Error"));
         apiGet(
-            "radius",
-            `radius=1000&limit=${pageLength}&offset=${offset}&lon=${res.data.lon}&lat=${res.data.lat}&rate=2&format=json`
-          )
-            .then(async res => {
-                setSearchResults(await res.data)
-            })
-            .catch(() => setSearchTitle("Error"));
+          "radius",
+          `radius=1000&limit=${pageLength}&offset=${offset}&lon=${lon}&lat=${lat}&rate=2&format=json`
+        )
+        .then(async res => {
+            setSearchResults(await res.data)
+        })
+        .catch(() => setSearchTitle("Error"));
     })
   };
-  const [searchResults, setSearchResults] = useState("");
 
-  const resultSlider = useRef(null);
-
-  const categorySlider = useRef(null);
+  const moreResults = () => {
+    offset += pageLength
+    apiGet(
+      "radius",
+      `radius=1000&limit=${pageLength}&offset=${offset}&lon=${lon}&lat=${lat}&rate=2&format=json`
+    )
+    .then(res => {
+        setSearchResults((prevResults) => prevResults.concat(res.data))
+    })
+  }
 
   const prevCategory = () =>
     categorySlider.current.scrollBy({
@@ -89,12 +88,13 @@ const Main = () => {
       behavior: "smooth",
     });
 
-  const nextCategory = () =>
+  const nextCategory = () => {
     categorySlider.current.scrollBy({
       top: 0,
-      left: 10,
+      left: 100,
       behavior: "smooth",
     });
+  }
 
   const popularSlider = useRef(null);
 
@@ -120,11 +120,7 @@ const Main = () => {
   return (
     <main className="mt-[0.625rem]">
       <section className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-20 w-container mx-auto">
-        <img
-          src={process.env.PUBLIC_URL + "/images/hero1.png"}
-          alt=""
-          className="xl:ml-auto mx-auto"
-        />
+        <img src={process.env.PUBLIC_URL + "/images/hero1.png"} alt="" className="xl:ml-auto mx-auto"/>
         <div className="mt-16">
           <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6">
             Discover the Best Lovely Places
@@ -152,10 +148,7 @@ const Main = () => {
                         placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
                             placeholder:font-inter"
                   />
-                  <img
-                    src={process.env.PUBLIC_URL + "/images/location icon.svg"}
-                    alt=""
-                  />
+                  <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt=""/>
                 </div>
               </div>
               <div className="pl-1 md:pl-8">
@@ -167,13 +160,9 @@ const Main = () => {
                     type="text"
                     placeholder="09th March,2021"
                     className="w-full md:w-32 font-inter font-normal text-xs leading-none focus:outline-0
-                                            placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
-                                                placeholder:font-inter"
-                  />
-                  <img
-                    src={process.env.PUBLIC_URL + "/images/calendar icon.svg"}
-                    alt=""
-                  />
+                      placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
+                        placeholder:font-inter"/>
+                  <img src={process.env.PUBLIC_URL + "/images/calendar icon.svg"} alt=""/>
                 </div>
               </div>
             </div>
@@ -203,22 +192,25 @@ const Main = () => {
         </div>
         {searchResults && (
           <>
-            <h3 className="font-inter font-normal text-base md:text-2xl leading-none w-container text-start mx-auto">Found {count} Results</h3>
-            <div
-              className="grid gap-4 auto-cols-fr md:grid-cols-3
-                      pt-9 pb-[50px] w-container mx-auto"
-              ref={resultSlider}
-            >
+            <h3 className="font-inter font-normal text-base md:text-2xl leading-none w-container text-start mx-auto">Found {count} Results:</h3>
+            <div className="grid gap-4 auto-cols-fr md:grid-cols-3
+                      pt-9 pb-[50px] w-container mx-auto" ref={resultSlider}>
               {searchResults.map(result => (
                 <ResultCard
                   key={result.xid}
                   xid={result.xid}
-                  preview={result.preview?.source}
                   name={result.name}
                   kinds={result.kinds}
                 />
               ))}
             </div>
+            <div className="w-full text-center">
+              <button className="text-orange font-inter font-normal text-base md:text-xl leading-none mx-auto 
+                border-2 border-orange py-3 px-6 rounded-[27px] hover:bg-orange hover:text-white" onClick={moreResults}>
+                View More
+              </button>
+            </div>
+
           </>
         )}
       </section>
@@ -236,11 +228,9 @@ const Main = () => {
           Here are lots of interesting destinations to visit, but don’t be
           confused—they’re already grouped by category.
         </p>
-        <div
-          className="flex gap-[46px] items-center overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain
-                    [&>*:last-child]:pr-[46px]"
-          ref={categorySlider}
-        >
+        <div className="flex gap-[46px] items-center overflow-x-scroll scrollbar-hide snap-x 
+          snap-mandatory overscroll-x-contain [&>*:last-child]:pr-[46px] py-1"
+            ref={categorySlider}>
           {locationCategories.map((category) => (
             <CategoryCard
               key={category.id}
@@ -339,7 +329,7 @@ const Main = () => {
             className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] mx-auto 
                         md:mx-0 leading-tight md:w-[400px]"
           >
-            Find Popular Destination
+            Special Tours
           </h1>
           <div className="hidden md:flex gap-4">
             <LeftButton handleClick={prevPopular}  key='-1'/>
@@ -351,11 +341,10 @@ const Main = () => {
                      pt-9 pb-[50px] w-slider-container md:ml-auto"
           ref={popularSlider}
         >
-          {popularDestination.map((destination) => (
-            <PopularCard
+          {SpecialTours.map((destination) => (
+            <SpecialTourCard
               key={destination.id}
               name={destination.name}
-              location={destination.location}
               price={destination.price}
               image={destination.image}
             />
