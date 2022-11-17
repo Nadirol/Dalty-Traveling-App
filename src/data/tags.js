@@ -1,9 +1,15 @@
 const destinationTags = [
     'London',
     'Bangkok',
-    'England',
+    'Rome',
     'Singapore',
-    'Italy',
+    'Venice',
+    'Chicago',
+    'Glasgow',
+    'Osaka',
+    'Barcelona',
+    'Dubai',
+    'Agra',
 ]
 
 export default destinationTags;

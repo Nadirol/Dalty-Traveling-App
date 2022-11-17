@@ -8,6 +8,14 @@ const ResultCard = ({ xid, name, kinds }) => {
 
     const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
 
+    useEffect(() => {
+        axios.get(`https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=${apiKey}`)
+        .then(async res => {
+            setImage(await res.data.preview?.source)
+        })
+        .catch((err) => console.log(err));
+    },[])
+
     const formatCategories = (ctg) => {
         let arr = ctg.split(',')
         arr = arr.map(item => {
@@ -19,14 +27,6 @@ const ResultCard = ({ xid, name, kinds }) => {
     }
 
     const resultCategories = formatCategories(kinds)
-
-    useEffect(() => {
-        axios.get(`https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=${apiKey}`)
-        .then(async res => {
-            setImage(await res.data.preview?.source)
-        })
-        .catch((err) => console.log(err));
-    },[])
     
     return (
     <div className="cursor-pointer border-2 border-regular-gray rounded-2xl p-6 snap-start 
@@ -56,9 +56,6 @@ const ResultCard = ({ xid, name, kinds }) => {
                 ))}
             </div>
         </div>
-        {/* <h3 className="text-dark-gray font-inter font-normal text-[10px] leading-none text-center
-             mt-8 decoration-light-yellow decoration-1 underline-offset-[6px] hover:underline hover:decoration-orange
-             transition-textdecoration duration-100">Click To View More</h3> */}
     </div>
 )}
 

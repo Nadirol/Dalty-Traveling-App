@@ -2,14 +2,27 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { CategoryCard, SpecialTourCard, ReviewCard, TagCard, TopDestinationCard, ResultCard } from "../components/cards";
 import { LeftButton, RightButton } from "../components/buttons";
-import { locationCategories, SpecialTours, destinationTags, topDestinations, reviews } from "../data";
+import { locationCategories, SpecialTours, destinationTags, reviews } from "../data";
 import countryCodes from "../data/countryCodes.json";
+import { useEffect } from "react";
 
 let offset = 0;
 let lon;
 let lat;
 
 const Main = () => {
+
+  const [searchValue, setSearchValue] = useState("");
+  const [searchTitle, setSearchTitle] = useState("");
+  const [searchResults, setSearchResults] = useState("");
+
+  const resultSection = useRef(null);
+  const resultSlider = useRef(null);
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
 
   const apiGet = (method, query) => {
@@ -22,23 +35,8 @@ const Main = () => {
     );
   };
 
-  const [searchResults, setSearchResults] = useState("");
-
-  const resultSlider = useRef(null);
-
-  const categorySlider = useRef(null);
-
   const pageLength = 6;
-
   const [count, setCount] = useState(null); 
-
-  const [searchTitle, setSearchTitle] = useState("");
-
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleSearchChange = (e) => {
-    setSearchValue(e.target.value);
-  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -66,6 +64,9 @@ const Main = () => {
         .then(async res => {
             setSearchResults(await res.data)
         })
+        .then(() => {
+          resultSection.current.scrollIntoView({behavior: "smooth"})
+        })
         .catch(() => setSearchTitle("Error"));
     })
   };
@@ -81,6 +82,9 @@ const Main = () => {
     })
   }
 
+  const categorySlider = useRef(null);
+  const popularSlider = useRef(null);
+
   const prevCategory = () =>
     categorySlider.current.scrollBy({
       top: 0,
@@ -94,9 +98,7 @@ const Main = () => {
       left: 100,
       behavior: "smooth",
     });
-  }
-
-  const popularSlider = useRef(null);
+  };
 
   const prevPopular = () =>
     popularSlider.current.scrollBy({
@@ -115,11 +117,40 @@ const Main = () => {
   function capitalizeFirstLetter(string) {
     let newString = string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1))
     return newString.join(' ');
+  };
+
+  const [topDesData, setTopDesData] = useState("");
+
+  useEffect(() => {
+    apiGet("geoname", `name=${destinationTags[0]}`)
+    .then(async res => {
+      apiGet(
+        'radius',
+        `radius=1000&limit=6&offset=0&lon=${await res.data.lon}&lat=${await res.data.lat}&rate=3&format=json`
+      )
+      .then(async res => {
+        setTopDesData(await res.data)
+      })
+    })
+  },[])
+
+  const loadTopDesData = (tag) => {
+    setTopDesData("")
+    apiGet("geoname", `name=${tag}`)
+    .then(async res => {
+      apiGet(
+        'radius',
+        `radius=1000&limit=6&offset=0&lon=${await res.data.lon}&lat=${await res.data.lat}&rate=3&format=json`
+      )
+      .then(async res => {
+        setTopDesData(await res.data)
+      })
+    })
   }
 
   return (
     <main className="mt-[0.625rem]">
-      <section className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-20 w-container mx-auto">
+      <section className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-16 xl:mb-[124px] w-container mx-auto">
         <img src={process.env.PUBLIC_URL + "/images/hero1.png"} alt="" className="xl:ml-auto mx-auto"/>
         <div className="mt-16">
           <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6">
@@ -184,7 +215,7 @@ const Main = () => {
           </form>
         </div>
       </section>
-      <section className="mb-[3.75rem]">
+      <section className="mb-[3.75rem] text-center" ref={resultSection}>
         <div className="w-container text-center xl:text-start mx-auto mb-6">
           <h1 className="font-inter font-semibold text-[1.5rem] md:text-[3rem] leading-none">
             {searchTitle}
@@ -358,17 +389,33 @@ const Main = () => {
         <p className="text-dark-gray font-inter font-normal text-base leading-none mb-7">
           Sost Brilliant reasons Entrada should be your one-stop-shop!
         </p>
-        <div className="flex flex-wrap md:flex-nowrap gap-3.5 mx-auto w-3/4 md:w-min mb-[50px]">
+        <div className="flex flex-wrap justify-center gap-3.5 mx-auto w-3/4 md:w-[60%] mb-[50px]">
           {destinationTags.map((tag) => (
-            <TagCard name={tag} key={tag}/>
+            <TagCard
+              key={tag}
+              name={tag}
+              handleClick={() => loadTopDesData(tag)}/>
           ))}
         </div>
-        <div
-          className="grid gap-x-1 md:gap-x-[30px] gap-y-2 md:gap-y-0 md:w-min mx-auto grid-cols-2 auto-rows-auto
-                    xl:grid-cols-gallery md:grid-cols-gallery-md xl:grid-rows-gallery md:grid-rows-gallery-md         
-                        md:[&>*:nth-child(2)]:row-start-4 md:[&>*:nth-child(3)]:row-[1/-1] md:[&>*:nth-child(4)]:col-[3/-1]
-                        md:[&>*:nth-child(5)]:row-[3/-1] md:[&>*:nth-child(6)]:row-[3/-1]"
-        >
+        {topDesData && (
+          <>
+            <div className="grid gap-4 auto-cols-fr md:grid-cols-3
+                      pt-9 pb-[50px] w-container mx-auto">
+              {topDesData.map(result => (
+                <TopDestinationCard
+                  key={result.xid}
+                  xid={result.xid}
+                  name={result.name}
+                  kinds={result.kinds}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        {/* <div className="grid gap-x-1 md:gap-x-[30px] gap-y-2 md:gap-y-0 md:w-min mx-auto grid-cols-2 auto-rows-auto
+            xl:grid-cols-gallery md:grid-cols-gallery-md xl:grid-rows-gallery md:grid-rows-gallery-md         
+                md:[&>*:nth-child(2)]:row-start-4 md:[&>*:nth-child(3)]:row-[1/-1] md:[&>*:nth-child(4)]:col-[3/-1]
+                  md:[&>*:nth-child(5)]:row-[3/-1] md:[&>*:nth-child(6)]:row-[3/-1]">
           {topDestinations.map((destination) => (
             <TopDestinationCard
               key={destination.id}
@@ -378,7 +425,7 @@ const Main = () => {
               image={destination.image}
             />
           ))}
-        </div>
+        </div> */}
       </section>
       <section
         className="grid xl:grid-flow-col xl:auto-cols-fr py-[66px] 
