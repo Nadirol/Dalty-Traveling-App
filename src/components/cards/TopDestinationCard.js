@@ -36,7 +36,7 @@ const TopDestinationCard = ({ xid, name, kinds }) => {
             className="absolute z-0 inset-0 h-full w-full object-cover"/>
         <div className="relative z-10 flex flex-col justify-between items-start text-start w-full h-full">
             <span className="text-very-dark-blue font-inter font-medium text-[14px] leading-none
-                 px-2.5 py-[5px] bg-white rounded-xl transition-all duration-300 hidden md:block">5.0</span>
+                 px-2.5 py-[5px] bg-white rounded-xl transition-all duration-300">5.0</span>
             <div className="flex flex-col">
                 <Link to={`/destination/${xid}`}  
                     className="text-white hover:text-orange font-inter font-semibold text-[20px] leading-none mb-2.5">

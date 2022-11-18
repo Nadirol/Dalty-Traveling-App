@@ -2,7 +2,7 @@ const SpecialTourCard = ({ name, price, image }) => {
     return (
         <div className="cursor-pointer border-2 border-white rounded-2xl p-3 snap-start 
             hover:shadow-card transition-shadow duration-500">
-            <img src={image} alt="destination preview" className="mb-6 object-cover rounded-[14px] w-[450px] max-w-[450px] h-[300px]"/>
+            <img src={image} alt="destination preview" className="mb-6 object-cover rounded-[14px] w-screen-card md:w-[450px] max-w-[450px] h-[300px]"/>
             <h1 className="text-very-dark-blue font-inter font-semibold text-2xl leading-none mb-[14px]">{name}</h1>
             <div className="flex justify-between items-center mb-[14px]">
                 <h1 className="text-very-dark-blue font-inter font-semibold text-2xl leading-none">{price}$ 

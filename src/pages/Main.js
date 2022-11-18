@@ -120,6 +120,7 @@ const Main = () => {
   };
 
   const [topDesData, setTopDesData] = useState("");
+  const [activeTagIndex, setActiveTagIndex] = useState(0)
 
   useEffect(() => {
     apiGet("geoname", `name=${destinationTags[0]}`)
@@ -134,8 +135,9 @@ const Main = () => {
     })
   },[])
 
-  const loadTopDesData = (tag) => {
-    setTopDesData("")
+  const loadTopDesData = (tag, index) => {
+    setTopDesData("");
+    setActiveTagIndex(index);
     apiGet("geoname", `name=${tag}`)
     .then(async res => {
       apiGet(
@@ -144,9 +146,19 @@ const Main = () => {
       )
       .then(async res => {
         setTopDesData(await res.data)
-      })
+      });
     })
   }
+
+  const [activeReviewIndex, setActiveReviewIndex] = useState(0)
+
+  const prevReview = (index) => {
+    setActiveReviewIndex(index - 1)
+  };
+
+  const nextReview = (index) => {
+    setActiveReviewIndex(index + 1)
+  };
 
   return (
     <main className="mt-[0.625rem]">
@@ -390,11 +402,13 @@ const Main = () => {
           Sost Brilliant reasons Entrada should be your one-stop-shop!
         </p>
         <div className="flex flex-wrap justify-center gap-3.5 mx-auto w-3/4 md:w-[60%] mb-[50px]">
-          {destinationTags.map((tag) => (
+          {destinationTags.map((tag, index) => (
             <TagCard
-              key={tag}
+              key={index}
+              id={index}
               name={tag}
-              handleClick={() => loadTopDesData(tag)}/>
+              handleClick={() => loadTopDesData(tag, index)}
+              activeTagIndex={activeTagIndex}/>
           ))}
         </div>
         {topDesData && (
@@ -412,20 +426,6 @@ const Main = () => {
             </div>
           </>
         )}
-        {/* <div className="grid gap-x-1 md:gap-x-[30px] gap-y-2 md:gap-y-0 md:w-min mx-auto grid-cols-2 auto-rows-auto
-            xl:grid-cols-gallery md:grid-cols-gallery-md xl:grid-rows-gallery md:grid-rows-gallery-md         
-                md:[&>*:nth-child(2)]:row-start-4 md:[&>*:nth-child(3)]:row-[1/-1] md:[&>*:nth-child(4)]:col-[3/-1]
-                  md:[&>*:nth-child(5)]:row-[3/-1] md:[&>*:nth-child(6)]:row-[3/-1]">
-          {topDestinations.map((destination) => (
-            <TopDestinationCard
-              key={destination.id}
-              rating={destination.rating}
-              name={destination.name}
-              location={destination.location}
-              image={destination.image}
-            />
-          ))}
-        </div> */}
       </section>
       <section
         className="grid xl:grid-flow-col xl:auto-cols-fr py-[66px] 
@@ -441,14 +441,16 @@ const Main = () => {
           <h1 className="text-very-dark-blue font-inter font-semibold text-[3rem] md:text-[56px] leading-tight mb-6 capitalize">
             A customer said about us:
           </h1>
-          {reviews.map((review) => (
-            <ReviewCard
-              key={review.id}
-              content={review.content}
-              name={review.name}
-              title={review.title}
-            />
-          ))}
+          <ReviewCard
+            key={reviews[activeReviewIndex].id}
+            id={reviews[activeReviewIndex].id}
+            content={reviews[activeReviewIndex].content}
+            name={reviews[activeReviewIndex].name}
+            title={reviews[activeReviewIndex].title}
+            prevReview={() => prevReview(reviews[activeReviewIndex].id)}
+            nextReview={() => nextReview(reviews[activeReviewIndex].id)}
+            dataLength={reviews.length}
+          />
         </div>
       </section>
       <section className="py-[46px] mb-4 w-container mx-auto ">

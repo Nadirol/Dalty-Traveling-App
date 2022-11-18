@@ -48,11 +48,21 @@ module.exports = {
         'slider-container': 'min(1320px, 100%)',
         'search-form': 'min(500px, 90%)',
         'contact-form': 'min(450px, 80%)',
+        'screen-card': 'calc(100vw - 1.5rem)',
       },
       screens: {
         '-xl': { 'max': '1279px' } ,
         '-md': { 'max': '767px' } ,
         '-xs': { 'max': '300px' } ,
+      },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: 0, transform: 'translateY(15%)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' }
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.6s ease-out'
       }
     },
   },
