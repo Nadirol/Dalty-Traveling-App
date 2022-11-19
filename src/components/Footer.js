@@ -1,7 +1,7 @@
 const Footer = () => {
 
     return (
-        <footer className="flex flex-col md:flex-row justify-between py-[84px] w-container mx-auto">
+        <footer className="flex flex-col md:flex-row justify-between py-12 md:py-[84px] w-container mx-auto">
             <div className="flex flex-col justify-between items-center md:items-start mb-8 md:mb-0">
                 <div className="">
                     <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo" className="mb-5 mx-auto md:mx-0"/>

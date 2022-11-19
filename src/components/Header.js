@@ -66,7 +66,7 @@ const Header = () => {
                         </svg>                
                     </button>
                     <button className="flex gap-3 items-center py-5 px-4 xl:px-6 rounded-[27px] 
-                          border-2 border-very-dark-blue [&:hover>h5]:text-white hover:bg-very-dark-blue">
+                          border border-very-dark-blue [&:hover>h5]:text-white hover:bg-very-dark-blue">
                         <h5 className="text-very-dark-blue font-poppins font-medium text-sm leading-none">Sign In</h5>             
                     </button>
                 </div>
