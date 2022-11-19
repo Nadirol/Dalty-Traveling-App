@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { BsBookmarkFill } from "react-icons/bs"
-import { AiFillCheckCircle } from "react-icons/ai"
+import { AiFillCheckCircle, AiOutlineDoubleRight } from "react-icons/ai"
+import { DestinationCard } from "../components/cards";
+import { LeftButton, RightButton } from "../components/buttons"
+
+let offset = 0;
 
 const Details = () => {
     const { id: destinationId } = useParams();
@@ -21,13 +25,37 @@ const Details = () => {
 
     const [isLoading, setIsLoading] = useState(true)
     const [destinationData, setDestinationData] = useState('')
+    const [nearbyDestData, setNearbyDestData] = useState('')
+    const pageLength = 4;
 
     useEffect(() => {
         apiGet(`xid/${destinationId}`)
-        .then(async res => setDestinationData( await res.data))
-        .finally(() => setIsLoading(false))
-        console.log(destinationData)
+        .then(async res => {
+            setDestinationData( await res.data)
+            return res.data
+        })
+        .then(data => {
+            apiGet(
+                "radius",
+                `radius=3000&limit=${pageLength}&offset=${offset}&lon=${data?.point?.lon}&lat=${data?.point?.lat}&rate=2&format=json`
+            )
+            .then(async res => setNearbyDestData(await res.data))
+        })
+        .finally(() => setIsLoading(false));
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
+
+    const expandNearbyDest = () => {
+        offset += pageLength
+
+        apiGet(
+            "radius",
+            `radius=3000&limit=${pageLength}&offset=${offset}&lon=${destinationData?.point?.lon}&lat=${destinationData?.point?.lat}&rate=2&format=json`
+        )
+        .then(res => setNearbyDestData((prevResults) => prevResults.concat(res.data)));
+        console.log(nearbyDestData)
+    }
 
     const formatCategories = (ctg) => {
         let arr = ctg.split(',')
@@ -45,7 +73,23 @@ const Details = () => {
         setDetailsMinimized(state => !state)
     }
 
-    console.log(isLoading)
+    const suggestionSlider = useRef(null);
+
+    const prevSuggestion = () =>
+    suggestionSlider.current.scrollBy({
+      top: 0,
+      left: -10,
+      behavior: "smooth",
+    });
+
+    const nextSuggestion = () => {
+    suggestionSlider.current.scrollBy({
+        top: 0,
+        left: 100,
+        behavior: "smooth",
+        });
+    };
+
     if (!isLoading) {
         return (
             <div className="w-container mx-auto">
@@ -58,7 +102,7 @@ const Details = () => {
                             <button className="flex items-center cursor-pointer 
                                 text-semi-dark-gray font-inter font-medium text-sm md:text-base leading-normal">
                                 <AiFillCheckCircle style={{ width: 32, height: 32 }} className="mr-1"/>
-                                Visited
+                                Not Visited
                             </button>
                             <div  className="flex items-center cursor-pointer
                                 text-very-dark-blue font-inter font-medium text-sm md:text-base leading-normal">
@@ -74,15 +118,16 @@ const Details = () => {
                         </h1>
                         <div className="flex gap-3 mx-auto xl:mx-0">
                             <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt=""/>
-                            <h5 className="text-orange font-inter font-normal text-xs md:text-base leading-normal 
-                                w-max cursor-pointer">
-                                {`${destinationData?.address?.pedestrian ? destinationData?.address?.pedestrian : ''}, 
+                            <a href={`https://maps.google.com/?ll=${destinationData?.point.lat},${destinationData?.point.lon}`}
+                                className="text-orange font-inter font-normal text-xs md:text-base leading-normal 
+                                    w-max cursor-pointer" target="_blank" rel="noreferrer">
+                                {`${destinationData?.address?.pedestrian ? `${destinationData?.address?.pedestrian},` : ''} 
                                     ${destinationData?.address?.neighbourhood ? destinationData?.address?.neighbourhood : ''}, 
                                     ${destinationData?.address?.city ? destinationData?.address?.city : ''}, 
                                     ${destinationData?.address?.country ? destinationData?.address?.country : ''}`}
-                            </h5>
+                            </a>
                         </div>
-                        <div className="mt-[14px] flex gap-x-1 gap-y-2 flex-wrap max-w-full xl:max-w-[90%] break-words 
+                        <div className="mt-[14px] flex gap-x-2 gap-y-2 flex-wrap max-w-full xl:max-w-[90%] break-words 
                             [&>div:last-child>span]:hidden mx-auto xl:mx-0 mb-4">
                             {formatCategories(destinationData.kinds).map(ctg => (
                                     <Link to={`/browse/${ctg}`}
@@ -97,19 +142,21 @@ const Details = () => {
                             <p className={`text-dark-gray font-inter font-normal text-sm md:text-base leading-normal 
                                 mx-auto xl:mx-0 overflow-hidden relative before:hidden before:absolute before:h-full before:w-full
                                     before:bg-gradient-to-b before:from-transparent before:to-light-yellow
-                                        ${detailsMinimized ? 'xl:h-full xl:before:block' : 'xl:h-max xl:before:hidden'}`}>                
+                                        ${detailsMinimized && destinationData?.wikipedia_extracts ? 'xl:h-full xl:before:block' : 'xl:h-max xl:before:hidden'}`}>                
                                 {destinationData?.wikipedia_extracts
                                     ? destinationData.wikipedia_extracts.text
                                     : "No description."
                                 }
                             </p>
                         </div>
-                        <div className="text-center hidden xl:block w-[90%] mx-auto xl:mx-0 mb-4">
+                        {destinationData?.wikipedia_extracts && (
+                            <div className="text-center hidden xl:block w-[90%] mx-auto xl:mx-0 mb-4">
                                 <button onClick={toggleDetailsSize}
                                     className='text-dark-gray font-inter font-medium text-xs md:text-base leading-normal cursor-pointer underline'>
                                     {detailsMinimized ? 'See More' : 'Minimize'}
                                 </button>
                             </div>
+                        )}
                         <div className="w-[90%] mx-auto xl:mx-0 flex justify-between">
                             <a href={destinationData?.wikipedia} target="_blank" rel="noreferrer"
                                 className="text-orange font-inter font-normal text-xs md:text-base leading-normal cursor-pointer">
@@ -123,7 +170,39 @@ const Details = () => {
                     </div>
                 </div>
                 <div className="">
-                    <h1>Nearby Destinations:</h1>
+                    <div className="flex justify-between items-center mb-8">
+                        <h1 className="font-inter font-semibold text-base md:text-[2rem] text-center xl:text-start leading-none">
+                            Nearby Destinations
+                        </h1>
+                        <div className="hidden md:flex gap-4">
+                                <LeftButton handleClick={prevSuggestion} key='-1'/>
+                                <RightButton handleClick={nextSuggestion} key='1'/>
+                        </div>
+                    </div>
+                    { nearbyDestData && (
+                        <div className="flex gap-6 overflow-x-scroll scrollbar-hide snap-x 
+                            snap-mandatory overscroll-x-contain py-1" ref={suggestionSlider}>
+                            {nearbyDestData.map(item => {
+                                if (item.name !== destinationData.name) {
+                                    return (
+                                        <DestinationCard
+                                            name={item.name}
+                                            kinds={item.kinds}
+                                            xid={item.xid}
+                                        />
+                                    )
+                                }
+                                return <></>
+                            })}
+                            <button onClick={expandNearbyDest} className="outline-0">
+                                <AiOutlineDoubleRight
+                                    style={{ width: 32, height: 32 }}
+                                    className="text-very-dark-blue"
+                                />
+                            </button>
+
+                        </div>
+                    )}
                 </div>
             </div>
         )
