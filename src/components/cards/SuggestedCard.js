@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const DestinationCard = ({ name, kinds, xid }) => {
+const SuggestedCard = ({ name, kinds, xid }) => {
     const [image, setImage] = useState('');
 
     const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
@@ -44,7 +44,7 @@ const DestinationCard = ({ name, kinds, xid }) => {
                     hover:text-orange">
                     {name}
                 </Link>
-                <Link to={`/browse/${mainCategory}`}
+                <Link to={`/discover/${mainCategory}`}
                     className="text-very-dark-blue font-inter font-normal text-sm leading-normal w-max hover:text-orange">
                     {mainCategory}
                 </Link>
@@ -54,4 +54,4 @@ const DestinationCard = ({ name, kinds, xid }) => {
     )
 }
 
-export default DestinationCard;
+export default SuggestedCard;

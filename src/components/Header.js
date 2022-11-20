@@ -34,12 +34,16 @@ const Header = () => {
                     <li className="cursor-pointer font-poppins font-normal text-base leading-none 
                     decoration-light-yellow decoration-2 underline-offset-[6px] hover:underline hover:decoration-orange
                         transition-textdecoration duration-300">
-                        Home
+                        <Link to='/'>
+                            Home
+                        </Link>
                     </li>
                     <li className="cursor-pointer font-poppins font-normal text-base leading-none 
                     decoration-light-yellow decoration-2 underline-offset-[6px] hover:underline hover:decoration-orange
                         transition-textdecoration duration-100">
-                        Browse
+                        <Link to='/discover'>
+                            Discover
+                        </Link>
                     </li>
                     <li className="cursor-pointer font-poppins font-normal text-base leading-none 
                     decoration-light-yellow decoration-2 underline-offset-[6px] hover:underline hover:decoration-orange

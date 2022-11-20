@@ -48,7 +48,7 @@ const ResultCard = ({ xid, name, kinds }) => {
                 <div className="mt-[14px] inline-block max-w-full break-words [&>div:last-child>span]:hidden">
                     {resultCategories.map(ctg => (
                         <div className="inline-block">
-                            <Link to={`/browse/${ctg}`}
+                            <Link to={`/discover/${ctg}`}
                                 className="text-dark-gray font-inter font-normal text-[12px] leading-normal w-max hover:text-orange">
                                 {ctg}
                             </Link>

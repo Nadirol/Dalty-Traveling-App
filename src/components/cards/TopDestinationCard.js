@@ -14,6 +14,8 @@ const TopDestinationCard = ({ xid, name, kinds }) => {
             setImage(await res.data.preview?.source)
         })
         .catch((err) => console.log(err));
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const formatCategories = (ctg) => {
@@ -42,7 +44,7 @@ const TopDestinationCard = ({ xid, name, kinds }) => {
                     className="text-white hover:text-orange font-inter font-semibold text-[20px] leading-none mb-2.5">
                     {name}
                 </Link>
-                <Link to={`/browse/${mainCategory}`}
+                <Link to={`/discover/${mainCategory}`}
                     className="text-white hover:text-orange font-inter font-normal text-[14px] leading-none">
                     {mainCategory}
                 </Link>

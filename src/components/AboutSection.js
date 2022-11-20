@@ -1,5 +1,5 @@
 const AboutSection = () => (
-    <section className="pb-8 w-container mx-auto ">
+    <section className="pb-8 w-container mx-auto">
         <div className="grid text-center xl:gap-28 xl:grid-flow-col xl:auto-cols-fr xl:text-start pt-[50px] pb-[58px]">
         <div className="relative xl:mr-auto xl:mb-auto -xl:mx-auto">
             <img src={process.env.PUBLIC_URL + "/images/hero2.png"} alt="" />

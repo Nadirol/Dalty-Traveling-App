@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { BsBookmarkFill } from "react-icons/bs"
+import { BsBookmarkFill, BsFillBookmarkCheckFill } from "react-icons/bs"
 import { AiFillCheckCircle, AiOutlineDoubleRight } from "react-icons/ai"
-import { DestinationCard } from "../components/cards";
+import { SuggestedCard } from "../components/cards";
 import { LeftButton, RightButton } from "../components/buttons"
 
 let offset = 0;
@@ -23,9 +23,9 @@ const Details = () => {
         );
     };
 
-    const [isLoading, setIsLoading] = useState(true)
-    const [destinationData, setDestinationData] = useState('')
-    const [nearbyDestData, setNearbyDestData] = useState('')
+    const [isLoading, setIsLoading] = useState(true);
+    const [destinationData, setDestinationData] = useState('');
+    const [nearbyDestData, setNearbyDestData] = useState('');
     const pageLength = 4;
 
     useEffect(() => {
@@ -90,6 +90,18 @@ const Details = () => {
         });
     };
 
+    const [isVisited, setIsVisited] = useState(false);
+
+    const handleVisitedClick = () => {
+        setIsVisited(state => !state)
+    }
+
+    const [isBookmarked, setIsBookmarked] = useState(false);
+
+    const handleBookmarkClick = () => {
+        setIsBookmarked(state => !state)
+    }
+
     if (!isLoading) {
         return (
             <div className="w-container mx-auto">
@@ -98,22 +110,30 @@ const Details = () => {
                         <img src={destinationData.preview ? destinationData.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"} alt="" 
                             className="mx-auto shadow-image-xl"/>
                         <div className="flex gap-16 justify-center items-center mx-auto mt-8">
-
-                            <button className="flex items-center cursor-pointer 
-                                text-semi-dark-gray font-inter font-medium text-sm md:text-base leading-normal">
+                            <button className={`flex items-center cursor-pointer
+                                ${isVisited ? 'text-green' : 'text-semi-dark-gray'} font-inter font-medium text-sm md:text-base leading-normal
+                                    ${ isVisited ? 'animate-pop' : 'animate-pop-reversed'} transition-colors duration-400`}
+                                    onClick={handleVisitedClick}>
                                 <AiFillCheckCircle style={{ width: 32, height: 32 }} className="mr-1"/>
-                                Not Visited
+                                {`${isVisited ? '' : 'Not'} Visited`}
                             </button>
-                            <div  className="flex items-center cursor-pointer
-                                text-very-dark-blue font-inter font-medium text-sm md:text-base leading-normal">
-                                <BsBookmarkFill style={{ width: 36, height: 36 }} className="mr-1"/>
-                                Save
+                            <div  className={`flex items-center cursor-pointer ${ isBookmarked ? 'animate-pop' : 'animate-pop-reversed'}
+                                text-very-dark-blue font-inter font-medium text-sm md:text-base leading-normal`}
+                                    onClick={handleBookmarkClick}>
+                                {isBookmarked 
+                                    ? (<BsFillBookmarkCheckFill style={{ width: 36, height: 36 }} className="mr-1"/>)
+                                    : (<BsBookmarkFill style={{ width: 36, height: 36 }} className="mr-1"/>)
+                                }
+                                
+                                {isBookmarked 
+                                ? 'Saved' : 'Save'}
                             </div>
 
                         </div>
                     </div>
                     <div className="px-2 py-4 xl:px-4 flex flex-col -xl:justify-between">
-                        <h1 className="font-inter font-semibold text-[3rem] md:text-[56px] text-center xl:text-start leading-none mb-2">
+                        <h1 className="font-inter font-semibold text-[3rem] md:text-[56px] text-center xl:text-start leading-none mb-2
+                            md:max-h-[168px]">
                             {destinationData.name}
                         </h1>
                         <div className="flex gap-3 mx-auto xl:mx-0">
@@ -130,7 +150,7 @@ const Details = () => {
                         <div className="mt-[14px] flex gap-x-2 gap-y-2 flex-wrap max-w-full xl:max-w-[90%] break-words 
                             [&>div:last-child>span]:hidden mx-auto xl:mx-0 mb-4">
                             {formatCategories(destinationData.kinds).map(ctg => (
-                                    <Link to={`/browse/${ctg}`}
+                                    <Link to={`/discover/${ctg}`}
                                         className="text-very-dark-blue font-inter font-normal text-sm md:text-base leading-normal w-max
                                             px-2 py-1 rounded-[27px] border border-very-dark-blue hover:bg-very-dark-blue hover:text-white">
                                         {ctg}
@@ -185,7 +205,7 @@ const Details = () => {
                             {nearbyDestData.map(item => {
                                 if (item.name !== destinationData.name) {
                                     return (
-                                        <DestinationCard
+                                        <SuggestedCard
                                             name={item.name}
                                             kinds={item.kinds}
                                             xid={item.xid}

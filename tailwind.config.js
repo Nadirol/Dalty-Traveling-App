@@ -27,6 +27,7 @@ module.exports = {
         'filter-dark': 'rgba(0, 0, 0, 0.3)',
         'filter-very-dark': 'rgba(0, 0, 0, 0.6)',
         'blue': 'rgb(51,102,204)',
+        'green': 'rgba(80, 206, 80, 1)',
       },
       transitionProperty: {
         'textdecoration': 'text-decoration-color'
@@ -50,6 +51,7 @@ module.exports = {
         'container': 'min(1170px, 100% - 2rem)',
         'slider-container': 'min(1320px, 100%)',
         'search-form': 'min(500px, 90%)',
+        'discover-search-form': 'min(900px, 80%)',
         'contact-form': 'min(450px, 80%)',
         'screen-card': 'calc(100vw - 1.5rem)',
       },
@@ -60,12 +62,22 @@ module.exports = {
       },
       keyframes: {
         'fade-in': {
-          '0%': { opacity: 0, transform: 'translateY(15%)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' }
+          '0%': { 'opacity': 0, transform: 'translateY(15%)' },
+          '100%': { 'opacity': 1, transform: 'translateY(0)' }
+        },
+        'pop': {
+          '50%': { 'transform': 'scale(1.1)'},
+          '100%': { 'transform': 'scale(1)' },
+        },
+        'pop-reversed': {
+          '50%': { 'transform': 'scale(1.1)'},
+          '100%': { 'transform': 'scale(1)' },
         },
       },
       animation: {
-        'fade-in': 'fade-in 0.6s ease-out'
+        'fade-in': 'fade-in 0.6s ease-out',
+        'pop': 'pop 0.4s ease-out',
+        'pop-reversed': 'pop-reversed 0.4s ease-out',
       },
     },
   },
