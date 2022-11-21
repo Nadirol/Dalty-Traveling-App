@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         ...colors,
         'light-yellow': 'rgba(250, 248, 237, 1)',
+        'blur-light-yellow': 'rgba(250, 248, 237, 0.2)',
         'medium-yellow': 'rgba(255, 212, 130, 1)',
         'orange': 'rgba(246, 111, 77, 1)',
         'dark-orange': 'rgba(226, 75, 37, 1)',
@@ -36,6 +37,7 @@ module.exports = {
         'card': '0px 24px 36px rgba(192, 188, 161, 0.32)',
         'card-bold': '0px 24px 36px rgba(192, 188, 161, 0.68)',
         'image': '0 0 50px rgba(0, 0, 0, 0.3)',
+        'image-lg': '3px 5px 10px rgba(0, 0, 0, 0.2)',
         'image-xl': '6px 10px 20px rgba(0, 0, 0, 0.3)',
       },
       gridTemplateColumns: {

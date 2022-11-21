@@ -85,7 +85,7 @@ const Details = () => {
     const nextSuggestion = () => {
     suggestionSlider.current.scrollBy({
         top: 0,
-        left: 100,
+        left: 10,
         behavior: "smooth",
         });
     };
@@ -142,7 +142,7 @@ const Details = () => {
                                 className="text-orange font-inter font-normal text-xs md:text-base leading-normal 
                                     w-max cursor-pointer" target="_blank" rel="noreferrer">
                                 {`${destinationData?.address?.pedestrian ? `${destinationData?.address?.pedestrian},` : ''} 
-                                    ${destinationData?.address?.neighbourhood ? destinationData?.address?.neighbourhood : ''}, 
+                                    ${destinationData?.address?.neighbourhood ? `${destinationData?.address?.neighbourhood},` : ''} 
                                     ${destinationData?.address?.city ? destinationData?.address?.city : ''}, 
                                     ${destinationData?.address?.country ? destinationData?.address?.country : ''}`}
                             </a>
@@ -206,6 +206,7 @@ const Details = () => {
                                 if (item.name !== destinationData.name) {
                                     return (
                                         <SuggestedCard
+                                            key={item.xid}
                                             name={item.name}
                                             kinds={item.kinds}
                                             xid={item.xid}
