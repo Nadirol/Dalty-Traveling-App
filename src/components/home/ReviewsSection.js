@@ -1,6 +1,6 @@
 import { useState} from "react";
-import { ReviewCard } from "../components/cards";
-import { reviews } from "../data";
+import { ReviewCard } from "../cards";
+import { reviews } from "../../data";
 
 const ReviewsSection = () => {
     const [activeReviewIndex, setActiveReviewIndex] = useState(0)

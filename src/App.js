@@ -17,7 +17,7 @@ const App = () => {
           <Route path='discover/:filter' element={<Discover/>} />
           <Route path='/*' element={<Error/>}/>
         </Routes>
-        <Footer />
+        <Footer/>
     </div>
   )
 }

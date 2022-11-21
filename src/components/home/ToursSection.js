@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { LeftButton, RightButton } from "../components/buttons";
-import { SpecialTourCard } from "../components/cards";
-import { SpecialTours } from "../data";
+import { LeftButton, RightButton } from "../buttons";
+import { SpecialTourCard } from "../cards";
+import { SpecialTours } from "../../data";
 
 const ToursSection = () => {
     const popularSlider = useRef(null);

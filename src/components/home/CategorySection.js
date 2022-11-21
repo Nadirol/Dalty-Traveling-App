@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { LeftButton, RightButton } from "../components/buttons";
-import { CategoryCard } from "../components/cards";
-import { locationCategories } from "../data";
+import { LeftButton, RightButton } from "../buttons";
+import { CategoryCard } from "../cards";
+import { locationCategories } from "../../data";
 
 const CategorySection = () => {
     const categorySlider = useRef(null);

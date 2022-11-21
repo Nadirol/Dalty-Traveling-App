@@ -43,11 +43,11 @@ module.exports = {
       gridTemplateColumns: {
         'gallery': '270px 370px 170px 270px',
         'gallery-md': '135px 185px 85px 135px',
+        'gallery-fit': '1fr auto'
       },
       gridTemplateRows: {
         'gallery': '250px 13px 13px 250px',
         'gallery-md': '125px 13px 13px 125px',
-
       },
       width: {
         'container': 'min(1170px, 100% - 2rem)',
@@ -80,6 +80,7 @@ module.exports = {
         'fade-in': 'fade-in 0.6s ease-out',
         'pop': 'pop 0.4s ease-out',
         'pop-reversed': 'pop-reversed 0.4s ease-out',
+        'pulse-fast': 'pulse 0.6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
     },
   },

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { TagCard, TopDestinationCard } from "../components/cards";
-import { destinationTags } from "../data";
+import { TagCard, TopDestinationCard } from "../cards";
+import { destinationTags } from "../../data";
 
 const TopDestSection = () => {
 

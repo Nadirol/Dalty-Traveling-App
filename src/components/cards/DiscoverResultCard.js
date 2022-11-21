@@ -16,7 +16,7 @@ const DiscoverResultCard = ({ image, name, xid, distance }) => {
                  hover:text-orange mb-4">
                 {capitalizeFirstLetter(name)}
             </Link>
-            <h1 className="text-very-dark-blue font-inter font-normal text-xs text-center xl:text-start leading-none">
+            <h1 className="text-very-dark-blue font-inter font-normal text-xs text-start leading-none">
                 <span className="text-blue">{Math.round(distance)}m</span> Away
             </h1>
         </div>

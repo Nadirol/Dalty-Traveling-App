@@ -1,4 +1,4 @@
-import { SearchSection, CategorySection, AboutSection, ToursSection, TopDestSection, ReviewsSection, FormSection } from "../components";
+import { SearchSection, CategorySection, AboutSection, ToursSection, TopDestSection, ReviewsSection, FormSection } from "../components/home";
 
 
 const Main = () => {

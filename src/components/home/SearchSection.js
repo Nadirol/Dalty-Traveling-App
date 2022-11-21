@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import axios from "axios";
-import { ResultCard } from "./cards"; 
-import countryCodes from "../data/countryCodes.json";
+import { ResultCard } from "../cards"; 
+import countryCodes from "../../data/countryCodes.json";
 
 let offset = 0;
 let lon;
@@ -150,24 +150,26 @@ const SearchSection = () => {
             </div>
             {searchResults && (
                 <>
-                <h3 className="font-inter font-normal text-base md:text-2xl leading-none text-start">Found {count} Results:</h3>
-                <div className="grid gap-4 auto-cols-fr md:grid-cols-3
-                            pt-9 pb-[50px]" ref={resultSlider}>
-                    {searchResults.map(result => (
-                    <ResultCard
-                        key={result.xid}
-                        xid={result.xid}
-                        name={result.name}
-                        kinds={result.kinds}
-                    />
-                    ))}
-                </div>
-                <div className="w-full text-center">
-                    <button className="text-orange font-inter font-normal text-base md:text-xl leading-none mx-auto 
-                    border-2 border-orange py-3 px-6 rounded-[27px] hover:bg-orange hover:text-white" onClick={moreResults}>
-                    View More
-                    </button>
-                </div>
+                    <h3 className="font-inter font-normal text-base md:text-2xl leading-none text-start">Found {count} Results:</h3>
+                    <div className="grid gap-4 auto-cols-fr md:grid-cols-3
+                                pt-9 pb-[50px]" ref={resultSlider}>
+                        {searchResults.map(result => (
+                        <ResultCard
+                            key={result.xid}
+                            xid={result.xid}
+                            name={result.name}
+                            kinds={result.kinds}
+                        />
+                        ))}
+                    </div>
+                    {searchResults.length < count && 
+                        <div className="w-full text-center">
+                            <button className="text-orange font-inter font-normal text-base md:text-xl leading-none mx-auto 
+                            border-2 border-orange py-3 px-6 rounded-[27px] hover:bg-orange hover:text-white" onClick={moreResults}>
+                            View More
+                            </button>
+                        </div>
+                    }
 
                 </>
             )}
