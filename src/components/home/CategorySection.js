@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { LeftButton, RightButton } from "../buttons";
 import { CategoryCard } from "../cards";
-import { locationCategories } from "../../data";
+import { mainCategories } from "../../data";
 
 const CategorySection = () => {
     const categorySlider = useRef(null);
@@ -39,7 +39,7 @@ const CategorySection = () => {
             <div className="flex gap-[46px] items-center overflow-x-scroll scrollbar-hide snap-x 
             snap-mandatory overscroll-x-contain [&>*:last-child]:pr-[46px] py-1"
                 ref={categorySlider}>
-            {locationCategories.map((category) => (
+            {mainCategories.map((category) => (
                 <CategoryCard
                 key={category.id}
                 name={category.name}

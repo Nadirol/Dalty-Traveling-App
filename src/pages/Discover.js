@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
-import { CategoryTagCard, DiscoverResultCard } from "../components/cards";
+import { DiscoverResultCard } from "../components/cards";
 import { categoriesList } from "../data"
-import { LeftButton, RightButton } from "../components/buttons";
 import Loader from "../components/Loader";
-import { GrClose } from "react-icons/gr"
 import { AiOutlineReload } from "react-icons/ai"
+
+import { DiscoverHeader, DiscoverFilters } from "../components/discover"
 
 let radius= 3000;
 let offset = 0;
@@ -14,9 +14,11 @@ let pageLength = 24;
 let lon;
 let lat;
 let filters;
+let outOfResults = false;
 const defaultLat = 34.0083;
 const defaultLon = -118.4988;
 const noFilters = "accomodations,amusements,interesting_places,sport,tourist_facilities"
+
 
 const Discover = () => {
     const { filter } = useParams();
@@ -57,15 +59,16 @@ const Discover = () => {
 
     const apiGetImage = async () => {
         setIsLoadingImg(true);
-        return await axios.get(`https://pixabay.com/api/?key=${pbApiKey}&category=travel&image_type=photo&page=${getRandomInt(10)}&per_page=100`)
+        return await axios.get(`https://pixabay.com/api/?key=${pbApiKey}&category=travel&image_type=photo&page=${getRandomInt(10)}&per_page=50`)
         .then(async res => {
             setImageData(await res.data.hits)
         })
+        .catch(err => console.log(err))
         .finally(() => setIsLoadingImg(false));
     }
 
     const reduceNum = (num) => {
-        while (num > imageData.length - 1) { num -= 100}
+        while (num > imageData.length - 1) { num -= imageData.length}
         return num
     }
 
@@ -122,7 +125,7 @@ const Discover = () => {
         }
         apiGet(
             "radius",
-            `radius=${radius}&limit=${pageLength}&offset=${offset}&lon=${lon ? lon : defaultLon}&lat=${lat ? lat :defaultLat}&kinds=${filters.length > 0 ? filters.toString() : noFilters}&rate=2&format=json`
+            `radius=3000&limit=${pageLength}&offset=0&lon=${lon ? lon : defaultLon}&lat=${lat ? lat :defaultLat}&kinds=${filters.length > 0 ? filters.toString() : noFilters}&rate=2&format=json`
         ).then(async res => {
             setDiscoverData(await res.data);
             checkResultsCount(await res.data);
@@ -186,87 +189,45 @@ const Discover = () => {
         });
     };
 
-    const [outOfResults, setOutOfResults] = useState(false);
     const checkResultsCount = (data) => {
         if (data.length < 24 ) {
-            setOutOfResults(true)
-        }
+            outOfResults = true
+        } else { outOfResults = false }
     };
 
     const loadMore = () => {
         if ( outOfResults ) {
             radius += 5000
         }
-        offset += pageLength
+        offset += discoverData.length
         apiGet(
             "radius",
             `radius=${radius}&limit=${pageLength}&offset=${offset}&lon=${lon ? lon : defaultLon}&lat=${lat ? lat :defaultLat}&kinds=${filters.length > 0 ? filters.toString() : noFilters}&rate=2&format=json`
         )
         .then(async res => {
             setDiscoverData(prevData => prevData.concat(res.data))
+            checkResultsCount(await res.data);
         })
     }
 
     return (
         <div className=" my-8">
-            <div className="w-container mx-auto">
-                <form onSubmit={(e) => handleSearchSubmit(e)}
-                    className="bg-white flex items-center px-4 md:px-7 py-2 rounded-[100vw] w-discover-search-form mx-auto">
-                    <input type="text" placeholder="Search for destinations" value={searchValue} onChange={(e) => handleSearchChange(e)}
-                        className="w-full text-dark-gray font-inter font-normal text-base leading-none focus:outline-0
-                        placeholder:text-mediumgray placeholder:text-sm placeholder:leading-none placeholder:font-normal
-                            placeholder:font-inter"/>
-                    <input type="submit" name="" id="submit-button" className="hidden"/>
-                    <div className={`hover:bg-light-gray rounded-[50%] p-3 ${searchValue ? 'block' : 'hidden'}`}
-                        onClick={clearSearchValue}>
-                        <GrClose style={{ width: 22, height: 22 }} />
-                    </div>
-                    <label
-                        htmlFor="submit-button"
-                        className="cursor-pointer mx-auto ml-2 md:ml-6"
-                    >
-                        <img src={process.env.PUBLIC_URL + "/images/search icon.svg"} alt="search"/>
-                    </label>
-                </form>
-                <div className="relative border-b border-very-dark-blue">
-                    <div className="flex gap-5 shrink-0 overflow-x-scroll scrollbar-hide snap-x snap-mandatory overscroll-x-contain py-6" 
-                        ref={tagSlider} onScroll={handleScroll}>
-                        {categoriesList.map((category, index) => (
-                                <CategoryTagCard 
-                                    key={index}
-                                    name={category}
-                                    activeFilters={activeFilters}
-                                    handleClick={() => toggleFilter(category)}
-                                />
-                            )
-                        )}
-                    </div>
-                    <div className={`absolute z-20 inset-0 h-full w-[10%] mr-auto 
-                        ${tagsScrollPos > 0 ? 'md:flex' : 'md:hidden'} items-center hidden
-                            after:h-full after:w-full after:bg-gradient-to-l after:from-transparent
-                             after:to-light-yellow after:pointer-events-none`}>
-                        <div className="bg-light-yellow w-min mr-auto">
-                            <LeftButton
-                                key={-1}
-                                padding='p-[10px]'
-                                handleClick={prevTag}
-                            />
-                        </div>
-                    </div>
-                    <div className={`absolute z-20 inset-0 h-full w-[10%] ml-auto 
-                        ${atSliderEnd ? 'md:hidden' : 'md:flex' } items-center hidden
-                            before:h-full before:w-full before:bg-gradient-to-r before:from-transparent
-                             before:to-light-yellow before:pointer-events-none`}>
-                        <div className="bg-light-yellow w-min ml-auto">
-                            <RightButton
-                                key={1}
-                                padding='p-[10px]'
-                                handleClick={nextTag}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <DiscoverHeader 
+                handleSearchSubmit={handleSearchSubmit}
+                searchValue={searchValue}
+                handleSearchChange={handleSearchChange}
+                clearSearchValue={clearSearchValue}
+            />
+            <DiscoverFilters 
+                tagSlider={tagSlider}
+                handleScroll={handleScroll}
+                activeFilters={activeFilters}
+                toggleFilter={toggleFilter}
+                tagsScrollPos={tagsScrollPos}
+                atSliderEnd={atSliderEnd}
+                prevTag={prevTag}
+                nextTag={nextTag}
+            />
             { !isLoading && !isLoadingImg && discoverData
                 ? (
                     <div className="px-4">

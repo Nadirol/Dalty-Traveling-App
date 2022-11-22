@@ -12,7 +12,7 @@ const CategoryCard = ({ name, image }) => {
                     </div>
                 </div>
             </Link>
-            <h1 className="font-inter font-medium text-[26px] leading-none">{name}</h1>
+            <h1 className="font-inter font-medium text-[20px] leading-none">{name}</h1>
         </div>
     )
 }
