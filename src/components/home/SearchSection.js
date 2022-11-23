@@ -90,11 +90,11 @@ const SearchSection = () => {
             <img src={process.env.PUBLIC_URL + "/images/hero1.png"} alt="" className="xl:ml-auto mx-auto"/>
             <div className="mt-16">
                 <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6">
-                Discover the Best Lovely Places
+                    Discover the Best Lovely Places
                 </h1>
                 <p className="font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto xl:mx-0">
-                Plan and book your perfect trip with expert advice, travel tips,
-                destination information and inspiration from us.
+                    Plan and book your perfect trip with expert advice, travel tips,
+                    destination information and inspiration from us.
                 </p>
                 <form
                 onSubmit={(e) => handleSearchSubmit(e)}

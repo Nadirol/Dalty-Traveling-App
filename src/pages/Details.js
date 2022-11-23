@@ -8,7 +8,6 @@ import { AiFillCheckCircle } from "react-icons/ai"
 import { useQuery } from "@tanstack/react-query"
 import Loader from "../components/Loader";
 import Suggestion from "../components/details/Suggestion";
-import { useEffect } from "react";
 
 const Details = () => {
     const { id: destinationId } = useParams();
@@ -28,37 +27,6 @@ const Details = () => {
         return apiGet(`xid/${destinationId}`)
         .then(res => res.data)
     })
-
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [destinationData, setDestinationData] = useState('');
-
-    // useEffect(() => {
-    //     apiGet(`xid/${destinationId}`)
-    //     .then(async res => {
-    //         setDestinationData( await res.destinationData)
-    //         return res.destinationData
-    //     })
-    //     .then(destinationData => {
-    //         apiGet(
-    //             "radius",
-    //             `radius=3000&limit=${pageLength}&offset=${offset}&lon=${destinationData?.point?.lon}&lat=${destinationData?.point?.lat}&rate=2&format=json`
-    //         )
-    //         .then(async res => setNearbyDestData(await res.destinationData))
-    //     })
-    //     .finally(() => setIsLoading(false));
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // },[])
-
-    // const expandNearbyDest = () => {
-    //     offset += pageLength
-
-    //     apiGet(
-    //         "radius",
-    //         `radius=3000&limit=${pageLength}&offset=${offset}&lon=${destinationData?.point?.lon}&lat=${destinationData?.point?.lat}&rate=2&format=json`
-    //     )
-    //     .then(res => suggested.data.concat(res.data));
-    // }
 
     const formatCategories = (ctg) => {
         let arr = ctg.split(',')

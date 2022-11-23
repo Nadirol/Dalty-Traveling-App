@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { useRef } from "react";
 import { SuggestedCard } from "../cards";
 import { LeftButton, RightButton } from "../buttons"
@@ -6,38 +6,45 @@ import { AiOutlineDoubleRight } from "react-icons/ai"
 import Loader from "../Loader";
 import axios from "axios";
 
-let offset = 0;
+const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
+const apiGet = (method, query) => { 
+    return axios.get(
+      "https://api.opentripmap.com/0.1/en/places/" +
+        method +
+        "?apikey=" +
+        apiKey +
+        (query ? "&" + query : '')
+    );
+  };
 
 const Suggestion = ({ destinationData }) => {
-    const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
-    const apiGet = (method, query) => {
-        return axios.get(
-        "https://api.opentripmap.com/0.1/en/places/" +
-            method +
-            "?apikey=" +
-            apiKey +
-            (query ? "&" + query : '')
-        );
+    const apiGetSuggestion = async ({ pageParam = 0 }) => {
+        console.log(pageParam)
+        return await apiGet(
+            'radius',
+            `radius=3000&limit=4&offset=${pageParam}&lon=${destinationData?.point.lon}&lat=${destinationData?.point.lat}&rate=2&format=json`
+        ).then(res => {
+            return res.data
+        })
     };    
-    const pageLength = 4;
 
-    const {isLoading: isLoadingSuggestion, data: suggestionData} = useQuery(['suggestion'], () => {
-        return apiGet(
-            "radius",
-            `radius=3000&limit=4&offset=0&lon=${destinationData?.point.lon}&lat=${destinationData?.point.lat}&rate=2&format=json`
-        )
-        .then(res => res.data)
-        .catch(err => console.log(err));
-    })
-
-    const expandSuggestion = () => {
-        offset += pageLength
-        apiGet(
-            "radius",
-            `radius=3000&limit=${pageLength}&offset=${offset}&lon=${destinationData?.point.lon}&lat=${destinationData?.point.lat}&rate=2&format=json`
-        )
-        .then(res => suggestionData.concat(res.data));
-    }
+    const {isLoading: isLoadingSuggestion, 
+            data: suggestionData, 
+            isError: isErrorSuggestion, 
+            error,
+            hasNextPage,
+            fetchNextPage
+            } = useInfiniteQuery(
+        ['suggestion',destinationData], 
+        apiGetSuggestion,
+        {
+            getNextPageParam: (lastPage, pages) => {
+                return lastPage.length >= 4 ? pages.reduce((accumulator, currentValue) => accumulator.concat(currentValue)).length : undefined
+            },
+            select: (data) => data.pages.reduce((accumulator, currentValue) => accumulator.concat(currentValue)),
+            refetchOnWindowFocus: false,
+        }
+    )
 
     const suggestionSlider = useRef(null);
     const prevSuggestion = () =>
@@ -56,6 +63,14 @@ const Suggestion = ({ destinationData }) => {
 
     if (isLoadingSuggestion) {
         return <Loader key='loader'/>
+    }
+
+    if (isErrorSuggestion) {
+        return (
+            <div className="mt-12 text-center">
+                <h1>{error.message}</h1>
+            </div>
+        )
     }
     
     return (
@@ -85,8 +100,9 @@ const Suggestion = ({ destinationData }) => {
                         }
                         return <></>
                     })}
-                    <button onClick={expandSuggestion} className="outline-0">
+                    <button disabled={!hasNextPage} onClick={() => fetchNextPage()} className="outline-0">
                         <AiOutlineDoubleRight
+                            key={'icon'}
                             style={{ width: 32, height: 32 }}
                             className="text-very-dark-blue"
                         />
