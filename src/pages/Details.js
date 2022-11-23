@@ -23,8 +23,8 @@ const Details = () => {
         );
     };
 
-    const {isLoading, data: destinationData} = useQuery(['destination', destinationId], () => {
-        return apiGet(`xid/${destinationId}`)
+    const {isLoading, data: destinationData} = useQuery(['destination', destinationId], async () => {
+        return await apiGet(`xid/${destinationId}`)
         .then(res => res.data)
     })
 

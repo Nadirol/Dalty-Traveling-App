@@ -61,15 +61,15 @@ const Header = () => {
                         Blogs
                     </li>
                 </ul>
-                <div className="flex gap-4 -md:mx-auto md:ml-auto">
-                    <button className="flex gap-3 items-center border-2 border-orange py-5 px-6 xl:px-9 rounded-[27px]  
+                <div className="flex -md:flex-col gap-4 -md:mx-auto md:ml-auto">
+                    <button className="flex gap-3 justify-center items-center border-2 border-orange py-5 px-6 xl:px-9 rounded-[27px]  
                         hover:bg-orange [&:hover>h5]:text-white [&:hover>svg>path]:fill-white">
                         <h5 className="text-orange font-poppins font-medium text-base leading-none">Sign Up</h5> 
                         <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 8.45744L4.04598 10.2128L13.4253 2.87235L6.06897 11.1702V15L8.82758 11.9681L13.4253 13.5638L16 0L0 8.45744Z" fill="#F66F4D"/>
                         </svg>                
                     </button>
-                    <button className="flex gap-3 items-center py-5 px-4 xl:px-6 rounded-[27px] 
+                    <button className="flex gap-3 justify-center items-center py-5 px-4 xl:px-6 rounded-[27px] 
                           border border-very-dark-blue [&:hover>h5]:text-white hover:bg-very-dark-blue">
                         <h5 className="text-very-dark-blue font-poppins font-medium text-sm leading-none">Sign In</h5>             
                     </button>
