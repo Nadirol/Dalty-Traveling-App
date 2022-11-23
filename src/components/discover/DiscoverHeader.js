@@ -9,7 +9,7 @@ const DiscoverHeader = ({ handleSearchSubmit, searchValue, handleSearchChange, c
                 <input type="text" placeholder="Search for destinations" value={searchValue} onChange={(e) => handleSearchChange(e)}
                     className="w-full text-dark-gray font-inter font-normal text-base leading-none focus:outline-0
                     placeholder:text-mediumgray placeholder:text-sm placeholder:leading-none placeholder:font-normal
-                        placeholder:font-inter"/>
+                        placeholder:font-inter bg-transparent"/>
                 <input type="submit" name="" id="submit-button" className="hidden"/>
                 <div className={`hover:bg-light-gray rounded-[50%] p-3 ${searchValue ? 'block' : 'hidden'}`}
                     onClick={clearSearchValue}>

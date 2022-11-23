@@ -1,32 +1,16 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { BsBookmarkFill, BsFillBookmarkCheckFill } from "react-icons/bs"
 import { AiFillCheckCircle } from "react-icons/ai"
-
-import { useQuery } from "@tanstack/react-query"
 import Loader from "../components/Loader";
 import Suggestion from "../components/details/Suggestion";
+import { useGetDestination } from "../hooks";
 
 const Details = () => {
     const { id: destinationId } = useParams();
 
-    const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
-    const apiGet = (method, query) => {
-        return axios.get(
-        "https://api.opentripmap.com/0.1/en/places/" +
-            method +
-            "?apikey=" +
-            apiKey +
-            (query ? "&" + query : '')
-        );
-    };
-
-    const {isLoading, data: destinationData} = useQuery(['destination', destinationId], async () => {
-        return await apiGet(`xid/${destinationId}`)
-        .then(res => res.data)
-    })
+    const { isLoading, data: destinationData } = useGetDestination(destinationId);
 
     const formatCategories = (ctg) => {
         let arr = ctg.split(',')

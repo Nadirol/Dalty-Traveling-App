@@ -1,48 +1,20 @@
 import { useRef, useState } from "react";
-import axios from "axios";
 import countryCodes from "../../data/countryCodes.json";
-
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import Loader from "../Loader";
 import SearchResults from "./SearchResults";
+import { useGetLocation, useGetResultsCount, useGetSearchResults } from "../../hooks";
 
 let lon;
 let lat;
 
-const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
-  
-const apiGet = (method, query) => {
-  return axios.get(
-    "https://api.opentripmap.com/0.1/en/places/" +
-      method +
-      "?apikey=" +
-      apiKey +
-      (query ? "&" + query : '')
-  );
-};
-
-const apiGetLocation = async (input) => {
-    return await apiGet("geoname", "name=" + input).then(res => res.data)
-}
-
-const apiGetResultsCount = async () => {
-    return await 
-    apiGet(
-        "radius",
-        `radius=1000&limit=6&offset=0&lon=${lon}&lat=${lat}&rate=2&format=count`
-    ).then(res => res.data)
-}
-
-const apiGetResults = async ({ pageParam = 0 }) => {
-    return await
-    apiGet(
-        "radius",
-        `radius=1000&limit=6&offset=${pageParam}&lon=${lon}&lat=${lat}&rate=2&format=json`
-    ).then(res => res.data)
+const onLocationSuccess = (data) => {
+    lon = data.lon;
+    lat = data.lat
 }
 
 const SearchSection = () => {
     const [searchValue, setSearchValue] = useState("");
+    const resultSection = useRef(null);
   
     const handleSearchChange = (e) => {
       setSearchValue(e.target.value);
@@ -53,56 +25,24 @@ const SearchSection = () => {
         fetchLocation();
     }
 
-    const { isLoading: isLoadingLocation, data: locationData, refetch: fetchLocation } = useQuery(
-        ['location'],
-        () => apiGetLocation(searchValue),
-        {
-            onSuccess: data => {
-                console.log(data.lon, data.lat)
-                lon = data.lon;
-                lat = data.lat
-            },
-            enabled: false,
-            refetchOnWindowFocus: false,
-        }
-    )
 
-    const { isLoading: isLoadingResultsCount, data: resultsCount } = useQuery(
-        ['resultsCount', lon],
-        apiGetResultsCount,
-        {
-            enabled: !!lon && !!lat,
-            refetchOnWindowFocus: false,
-            select: data => data.count,
-            onSuccess: () => resultSection.current.scrollIntoView({behavior: "smooth"}),
-        }
-    )
+    const scrollToResults = () => resultSection.current.scrollIntoView({behavior: "smooth"});
 
+    const { isLoading: isLoadingLocation, data: locationData, refetch: fetchLocation } = useGetLocation(searchValue, onLocationSuccess)
+
+    const { isLoading: isLoadingResultsCount, data: resultsCount } = useGetResultsCount(lon, lat, scrollToResults)
+
+    const searchQueryKey = ['searchResults', lon, lat]
     const { isLoading: isLoadingSearchResults,
         data: searchResults,
         hasNextPage,
         fetchNextPage,
-    } = useInfiniteQuery(
-        ['searchResults', lon, lat],
-        apiGetResults,
-        {
-            enabled: !!lon && !!lat,
-            getNextPageParam: (lastPage, pages) => {
-                return lastPage.length >= 6 ? pages.reduce((accumulator, currentValue) => accumulator.concat(currentValue)).length : undefined
-            },
-            select: (data) => data.pages.reduce((accumulator, currentValue) => accumulator.concat(currentValue)),
-            refetchOnWindowFocus: false,
-        }
-    )
-
-    const resultSection = useRef(null);
+    } = useGetSearchResults(lon, lat, 6, searchQueryKey)
 
     function capitalizeFirstLetter(string) {
         let newString = string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1))
         return newString.join(' ');
     };
-
-
 
     return (
         <section className=" w-container mx-auto">
@@ -127,7 +67,7 @@ const SearchSection = () => {
                                     <input type="text" placeholder="Center Point, Lo..." value={searchValue} onChange={(e) => handleSearchChange(e)}
                                     className="w-full md:w-32 text-dark-gray font-inter font-normal text-base leading-none focus:outline-0
                                         placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
-                                            placeholder:font-inter"/>
+                                            placeholder:font-inter bg-transparent"/>
                                     <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt=""/>
                                 </div>
                             </div>
@@ -141,7 +81,7 @@ const SearchSection = () => {
                                 placeholder="09th March,2021"
                                 className="w-full md:w-32 font-inter font-normal text-xs leading-none focus:outline-0
                                     placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
-                                    placeholder:font-inter"/>
+                                    placeholder:font-inter bg-transparent"/>
                                 <img src={process.env.PUBLIC_URL + "/images/calendar icon.svg"} alt=""/>
                             </div>
                             </div>
