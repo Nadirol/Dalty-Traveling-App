@@ -1,83 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
-import axios from "axios";
 import { DiscoverResultCard } from "../components/cards";
 import { categoriesList } from "../data"
 import Loader from "../components/Loader";
 import { AiOutlineReload } from "react-icons/ai"
-
 import { DiscoverHeader, DiscoverFilters } from "../components/discover"
+import { useGetLocation, useGetImages, getApi } from "../hooks";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-let radius= 3000;
-let offset = 0;
+let lat = 34.0083;
+let lon = -118.4988;
+let radius = 3000;
 let pageLength = 24;
-let lon;
-let lat;
+let rating = 2;
 let filters;
 let outOfResults = false;
-const defaultLat = 34.0083;
-const defaultLon = -118.4988;
 const noFilters = "accomodations,amusements,interesting_places,sport,tourist_facilities"
 
 
 const Discover = () => {
     const { filter } = useParams();
 
-    const pbApiKey = "31488120-64bdfca9e4ad103bf79d2f9f6";
-    const otmApiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
-    const apiGet = (method, query) => {
-        return axios.get(
-        "https://api.opentripmap.com/0.1/en/places/" +
-            method +
-            "?apikey=" +
-            otmApiKey +
-            (query ? "&" + query : '')
-        );
-    };
-
-    // const apiGetResults = (searchType) => {
-    //     if (searchType === 'location') {
-    //         setIsLoading(true)
-    //         apiGetImage(24);
-    //         apiGet(
-    //             "geoname", `name=${searchValue}`
-    //         ).then( async res => {
-    //             lon = await res.data.lon
-    //             lat = await res.data.lat
-    //             apiGet(
-    //                 "radius",
-    //                 `radius=3000&limit=24&offset=0&lon=${lon ? lon : defaultLon}&lat=${lat ? lat :defaultLat}&kinds=${filters.length > 0 ? filters.toString() : noFilters}&rate=2&format=json`
-    //               )
-    //               .then(async res => {
-    //                 setDiscoverData(await res.data);
-    //                 checkResultsCount(await res.data);
-    //               })
-    //               .finally(() => setIsLoading(false));
-    //         })
-    //     } 
-    // }
-
-    const apiGetImage = async () => {
-        setIsLoadingImg(true);
-        return await axios.get(`https://pixabay.com/api/?key=${pbApiKey}&category=travel&image_type=photo&page=${getRandomInt(10)}&per_page=50`)
-        .then(async res => {
-            setImageData(await res.data.hits)
-        })
-        .catch(err => console.log(err))
-        .finally(() => setIsLoadingImg(false));
-    }
-
-    const reduceNum = (num) => {
-        while (num > imageData.length - 1) { num -= imageData.length}
-        return num
-    }
-
     const [activeFilters, setActiveFilters] = useState([categoriesList[0].toLowerCase().replaceAll(' ','_')]);
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [isLoadingImg, setIsLoadingImg] = useState(true);
-    const [discoverData, setDiscoverData] = useState('');
-    const [imageData, setImageData] = useState('');
+    const [searchValue, setSearchValue] = useState("");
+    const handleSearchChange = (e) => {
+        setSearchValue(e.target.value);
+    };
 
     useEffect(() => {
         if ( filter ) {
@@ -88,75 +37,89 @@ const Discover = () => {
             } else { 
                 categoriesList.unshift(filter)
             };
-            setActiveFilters([filter.toLowerCase().replaceAll(' ','_')]);
-            filters = [filter.toLowerCase().replaceAll(' ','_')]
+            setActiveFilters([formatFilterName(filter)]);
+            filters = [formatFilterName(filter)]
         } else { 
-            setActiveFilters([categoriesList[0].toLowerCase().replaceAll(' ','_')])
-            filters = [categoriesList[0].toLowerCase().replaceAll(' ','_')]
-        }
-        apiGetImage();
-        apiGet(
-            "radius",
-            `radius=${radius}&limit=${pageLength}&offset=${offset}&lon=${defaultLon}&lat=${defaultLat}&kinds=${filters ? filters.toString() : noFilters}&rate=2&format=json`
-        ).then(async res => {
-            setDiscoverData(await res.data);
-            checkResultsCount(await res.data);
-        })
-        .finally(() => setIsLoading(false));
-        
+            setActiveFilters([formatFilterName(categoriesList[0])])
+            filters = [formatFilterName(categoriesList[0])]
+        }        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max) + 1;
+    const discoverQueryKey = ['discover', lon, lat, filters]
+
+    const apiGetSearchResults = async ({ pageParam = 0 }) => {
+        return await
+        getApi(
+            "radius",
+            `radius=${radius}&limit=${pageLength}&offset=${pageParam}&lon=${lon}&lat=${lat}&kinds=${filters ? filters : noFilters}&rate=${rating}&format=json`
+        ).then(res => {
+            return res.data
+        })
     }
+
+    const { isLoading: isLoadingDiscover, 
+        data: discoverData,
+        fetchNextPage: fetchMoreDiscover }  = useInfiniteQuery(
+            discoverQueryKey,
+            apiGetSearchResults,
+            {
+                enabled: !!lon && !!lat,
+                getNextPageParam: (lastPage, pages) => {
+                    if (lastPage.length < pageLength) {
+                        outOfResults = true
+                    } else { outOfResults = false }
+                    return pages.reduce((accumulator, currentValue) => accumulator.concat(currentValue)).length
+                },
+                select: (data) => data.pages.reduce((accumulator, currentValue) => accumulator.concat(currentValue)),
+                refetchOnWindowFocus: false,
+            }
+        )
+    // useGetSearchResults(lon, lat, radius, 24, discoverQueryKey, filters);
+
+    const loadMoreDiscover = () => {
+        console.log(outOfResults)
+        if (outOfResults) {
+            radius += 3000
+        }
+        fetchMoreDiscover()
+    }
+    
+    const onLocationSuccess = (data) => {
+        lon = data.lon;
+        lat = data.lat
+        console.log(lon, lat)
+
+    }
+
+    const { data: locationData, refetch: fetchLocation } = useGetLocation(searchValue, onLocationSuccess);
+
+    const { isLoading: isLoadingImages, data: imageData } = useGetImages(['images', locationData])
 
     const toggleFilter = (category) => {
-        setDiscoverData('');
-        setIsLoading(true)
-        if (activeFilters.includes(category.toLowerCase().replaceAll(' ','_'))) {
+        if (activeFilters.includes(formatFilterName(category))) {
             setActiveFilters(
-                prevFilters => prevFilters.filter(el => el !== category.toLowerCase().replaceAll(' ','_'))
+                prevFilters => prevFilters.filter(el => el !== formatFilterName(category))
             );
-            filters = filters.filter(el => el !== category.toLowerCase().replaceAll(' ','_'));
+            filters = filters.filter(el => el !== formatFilterName(category));
         } else {
-            setActiveFilters(prevFilters => prevFilters.concat(category.toLowerCase().replaceAll(' ','_')));
-            filters = filters.concat(category.toLowerCase().replaceAll(' ','_'));
+            setActiveFilters(prevFilters => prevFilters.concat(formatFilterName(category)));
+            filters = filters.concat(formatFilterName(category));
         }
-        apiGet(
-            "radius",
-            `radius=3000&limit=${pageLength}&offset=0&lon=${lon ? lon : defaultLon}&lat=${lat ? lat :defaultLat}&kinds=${filters.length > 0 ? filters.toString() : noFilters}&rate=2&format=json`
-        ).then(async res => {
-            setDiscoverData(await res.data);
-            checkResultsCount(await res.data);
-        })
-        .finally(() => setIsLoading(false));
     }
 
-    const [searchValue, setSearchValue] = useState("");
-
-    const handleSearchChange = (e) => {
-        setSearchValue(e.target.value);
+    const formatFilterName = (filter) => {
+        return filter.toLowerCase().replaceAll(' ','_')
     };
+
+    const reduceNum = (num) => {
+        while (num > imageData.length - 1) { num -= imageData.length}
+        return num
+    }
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
-        setIsLoading(true)
-        apiGet(
-            "geoname", `name=${searchValue}`
-        ).then( async res => {
-            lon = await res.data.lon
-            lat = await res.data.lat
-            apiGet(
-                "radius",
-                `radius=3000&limit=${pageLength}&offset=0&lon=${lon ? lon : defaultLon}&lat=${lat ? lat :defaultLat}&kinds=${filters.length > 0 ? filters.toString() : noFilters}&rate=2&format=json`
-              )
-              .then(async res => {
-                setDiscoverData(await res.data);
-                checkResultsCount(await res.data);
-              })
-              .finally(() => setIsLoading(false));
-        })
+        fetchLocation();
     }
 
     const clearSearchValue = () => {
@@ -189,27 +152,6 @@ const Discover = () => {
         });
     };
 
-    const checkResultsCount = (data) => {
-        if (data.length < 24 ) {
-            outOfResults = true
-        } else { outOfResults = false }
-    };
-
-    const loadMore = () => {
-        if ( outOfResults ) {
-            radius += 5000
-        }
-        offset += discoverData.length
-        apiGet(
-            "radius",
-            `radius=${radius}&limit=${pageLength}&offset=${offset}&lon=${lon ? lon : defaultLon}&lat=${lat ? lat :defaultLat}&kinds=${filters.length > 0 ? filters.toString() : noFilters}&rate=2&format=json`
-        )
-        .then(async res => {
-            setDiscoverData(prevData => prevData.concat(res.data))
-            checkResultsCount(await res.data);
-        })
-    }
-
     return (
         <div className=" my-8">
             <DiscoverHeader 
@@ -228,8 +170,9 @@ const Discover = () => {
                 prevTag={prevTag}
                 nextTag={nextTag}
             />
-            { !isLoading && !isLoadingImg && discoverData
-                ? (
+            { isLoadingDiscover || isLoadingImages
+                ? <Loader/>
+                : (
                     <div className="px-4">
                         <div className="my-6 animate-fade-in columns-2 md:columns-3 xl:columns-4">
                             {discoverData.map((item,index) => (
@@ -243,7 +186,7 @@ const Discover = () => {
                             ))}
                         </div>
                         <div className="hover:bg-very-dark-blue hover:text-white rounded-[50%] p-3 w-min mx-auto text-dark-gray animate-pop"
-                            onClick={loadMore}>
+                            onClick={loadMoreDiscover}>
                             <AiOutlineReload style={{ width: 28, height: 28 }} />
                         </div>
 
@@ -253,7 +196,6 @@ const Discover = () => {
                         </a>
                     </div>
                 )
-                : <Loader/>
             }
         </div>
 )}

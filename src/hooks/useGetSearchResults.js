@@ -1,13 +1,15 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import getApi from "./getApi";
 
-const useGetSearchResults = (lon, lat, pageLength, queryKey) => {
+const useGetSearchResults = (lon, lat, radius, pageLength, queryKey, rating = '2') => {
     const apiGetSearchResults = async ({ pageParam = 0 }) => {
         return await
         getApi(
             "radius",
-            `radius=1000&limit=${pageLength}&offset=${pageParam}&lon=${lon}&lat=${lat}&rate=2&format=json`
-        ).then(res => res.data)
+            `radius=${radius}&limit=${pageLength}&offset=${pageParam}&lon=${lon}&lat=${lat}&rate=${rating}&format=json`
+        ).then(res => {
+            return res.data
+        })
     }
 
     return useInfiniteQuery(

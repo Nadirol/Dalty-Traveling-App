@@ -51,7 +51,7 @@ const Details = () => {
             <div className=" grid gap-12 xl:grid-flow-col xl:auto-cols-fr pt-12 mb-12">
                 <div className="">
                     <img src={destinationData.preview ? destinationData.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"} alt="" 
-                        className="mx-auto shadow-image-xl"/>
+                        className={`mx-auto  ${destinationData.preview ? 'shadow-image-xl' : 'h-3/5'}`}/>
                     <div className="flex gap-16 justify-center items-center mx-auto mt-8">
                         <button className={`flex items-center cursor-pointer
                             ${isVisited ? 'text-green' : 'text-semi-dark-gray'} font-inter font-medium text-sm md:text-base leading-normal

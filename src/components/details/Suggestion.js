@@ -12,7 +12,7 @@ const Suggestion = ({ destinationData }) => {
             error,
             hasNextPage,
             fetchNextPage
-        } = useGetSearchResults(destinationData?.point.lon, destinationData?.point.lat, 4, ['suggestion',destinationData])
+        } = useGetSearchResults(destinationData?.point.lon, destinationData?.point.lat, 3000, 4, ['suggestion', destinationData])
 
     const suggestionSlider = useRef(null);
     const prevSuggestion = () =>

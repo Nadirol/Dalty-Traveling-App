@@ -25,19 +25,18 @@ const SearchSection = () => {
         fetchLocation();
     }
 
-
     const scrollToResults = () => resultSection.current.scrollIntoView({behavior: "smooth"});
 
-    const { isLoading: isLoadingLocation, data: locationData, refetch: fetchLocation } = useGetLocation(searchValue, onLocationSuccess)
+    const { isLoading: isLoadingLocation, data: locationData, refetch: fetchLocation } = useGetLocation(searchValue, onLocationSuccess);
 
-    const { isLoading: isLoadingResultsCount, data: resultsCount } = useGetResultsCount(lon, lat, scrollToResults)
+    const { isLoading: isLoadingResultsCount, data: resultsCount } = useGetResultsCount(lon, lat, scrollToResults);
 
     const searchQueryKey = ['searchResults', lon, lat]
     const { isLoading: isLoadingSearchResults,
         data: searchResults,
         hasNextPage,
         fetchNextPage,
-    } = useGetSearchResults(lon, lat, 6, searchQueryKey)
+    } = useGetSearchResults(lon, lat, 1000, 6, searchQueryKey)
 
     function capitalizeFirstLetter(string) {
         let newString = string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1))
