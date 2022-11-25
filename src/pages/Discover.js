@@ -27,6 +27,24 @@ const Discover = () => {
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
     };
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        fetchLocation();
+    };
+    const clearSearchValue = () => {
+        setSearchValue('')
+    };
+
+    const [radiusValue, setRadiusValue] = useState(3000)
+    const handleRadiusChange = (e) => {
+        setRadiusValue(e.target.value)
+        radius = e.target.value
+    }
+
+    const [nameValue, setNameValue] = useState('')
+    const handleNameChange = (e) => {
+        setNameValue(e.target.value)
+    }
 
     useEffect(() => {
         if ( filter ) {
@@ -52,7 +70,7 @@ const Discover = () => {
         return await
         getApi(
             "radius",
-            `radius=${radius}&limit=${pageLength}&offset=${pageParam}&lon=${lon}&lat=${lat}&kinds=${filters ? filters : noFilters}&rate=${rating}&format=json`
+            `radius=${radius}&limit=${pageLength}&offset=${pageParam}&lon=${lon}&lat=${lat}&kinds=${filters ? filters : noFilters}&rate=${rating}${nameValue ? `&name=${nameValue}` : ''}&format=json`
         ).then(res => {
             return res.data
         })
@@ -117,15 +135,6 @@ const Discover = () => {
         return num
     }
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        fetchLocation();
-    }
-
-    const clearSearchValue = () => {
-        setSearchValue('')
-    }
-
     const tagSlider = useRef(null);
     const [tagsScrollPos, setTagsScrollPos] = useState(0);
     const [atSliderEnd, setAtSliderEnd] = useState(false);
@@ -153,12 +162,16 @@ const Discover = () => {
     };
 
     return (
-        <div className=" my-8">
+        <div className="my-4">
             <DiscoverHeader 
                 handleSearchSubmit={handleSearchSubmit}
                 searchValue={searchValue}
                 handleSearchChange={handleSearchChange}
                 clearSearchValue={clearSearchValue}
+                radiusValue={radiusValue}
+                handleRadiusChange={handleRadiusChange}
+                nameValue={nameValue}
+                handleNameChange={handleNameChange}
             />
             <DiscoverFilters 
                 tagSlider={tagSlider}

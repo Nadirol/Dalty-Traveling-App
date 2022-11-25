@@ -30,7 +30,7 @@ const SuggestedCard = ({ name, kinds, xid }) => {
     const mainCategory = formatCategories(kinds)[0]
     
     return (
-        <div className="snap-start border-2 border-dark-gray rounded-lg flex flex-col justify-between px-4 py-4 w-[320px] min-w-[320px] animate-fade-in">
+        <div className="md:snap-start border-2 border-dark-gray rounded-lg flex flex-col justify-between px-4 py-4 w-[320px] min-w-[320px] animate-fade-in">
             <div className="relative rounded-[8px] mb-4 overflow-y-hidden ">
                 <img src={image ? image : process.env.PUBLIC_URL + "/images/Logo.svg"} alt="preview"
                     className='object-contain h-[270px] mx-auto relative z-10 rounded-[8px] shadow-image'

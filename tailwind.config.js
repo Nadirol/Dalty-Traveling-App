@@ -21,7 +21,7 @@ module.exports = {
         'light-gray': 'rgba(234, 234, 235, 1)',
         'semi-light-gray': 'rgba(222, 222, 227, 1)',
         'regular-gray': 'rgba(147, 149, 151, 1)',
-        'mediumgray': 'rgba(148, 152, 164, 1)',
+        'medium-gray': 'rgba(148, 152, 164, 1)',
         'semi-dark-gray': 'rgba(103, 106, 108, 1)',
         'dark-gray': 'rgba(91, 95, 98, 1)',
         'very-dark-blue': 'rgba(45, 49, 52, 1)',

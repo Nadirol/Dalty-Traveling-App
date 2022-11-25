@@ -13,15 +13,21 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="bg-light-yellow">
-          <Header/>
           <Routes>
-            <Route path='/' element={<Main/>}/>
-            <Route path='/destination/:id' element={<Details key={window.location.pathname}/>}/>
+            <Route index element={<><Header/><Main/><Footer/></>}/>
+            <Route path='/home' element={<><Header/><Main/><Footer/></>}/>
+            <Route path='/destination/:id' element={
+              <>
+                <Header/>
+                <Details key={window.location.pathname}/>
+                <Footer/>
+              </>
+            }/>
             <Route path='discover' element={<Discover/>} />
             <Route path='discover/:filter' element={<Discover/>} />
             <Route path='/*' element={<Error/>}/>
           </Routes>
-          <Footer/>
+          
       </div>
     </QueryClientProvider>
 

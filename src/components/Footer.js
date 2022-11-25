@@ -5,7 +5,7 @@ const Footer = () => {
             <div className="flex flex-col justify-between items-center md:items-start mb-8 md:mb-0">
                 <div className="">
                     <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo" className="mb-5 mx-auto md:mx-0"/>
-                    <h3 className="text-dark-gray font-inter font-normal text-base md:w-3/4 mb-4 md:mb-0">Enjoy the touring with Salty</h3>
+                    <h3 className="text-dark-gray font-inter font-normal text-base md:w-3/4 mb-4 md:mb-0">Enjoy the touring with Dalty</h3>
                 </div>
                 <div className="flex gap-[14px]">
                     <div className="px-[13px] py-2.5 aspect-square rounded-[50%] border border-dark-gray 

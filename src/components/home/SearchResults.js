@@ -1,16 +1,23 @@
 import { ResultCard } from "../cards"; 
+import { Link } from "react-router-dom";
+import { GoBrowser } from "react-icons/go"
 
 const SearchResults = ({ locationTitle, resultsCount, searchResults, hasNextPage, fetchNextPage, resultSection }) => {
     return (
         <>
-            <div className="text-center xl:text-start mb-6">
-                <h1 className="font-inter font-semibold text-[1.5rem] md:text-[3rem] leading-none">
+            <div className="text-center xl:text-start flex justify-between items-center mb-6">
+                <h1 className="text-very-dark-blue font-inter font-semibold text-[1.5rem] md:text-[3rem] leading-none">
                     {locationTitle}
                 </h1>
+                <Link to='/discover' 
+                className="text-very-dark-blue font-inter font-normal text-sm md:text-base leading-none hover:text-orange 
+                    flex gap-2 items-center">
+                    More at Discover <GoBrowser/>
+                </Link>
             </div>
 
             <div>
-                <h3 className="font-inter font-normal text-base md:text-2xl leading-none text-start">Found {resultsCount} Results:</h3>
+                <h3 className="text-very-dark-blue font-inter font-normal text-base md:text-2xl leading-none text-start">Found {resultsCount} Results:</h3>
                 <div className="grid gap-4 auto-cols-fr md:grid-cols-3
                             pt-9 pb-[50px]">
                     {searchResults.map(result => (

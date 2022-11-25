@@ -65,7 +65,7 @@ const SearchSection = () => {
                                 <div className="flex">
                                     <input type="text" placeholder="Center Point, Lo..." value={searchValue} onChange={(e) => handleSearchChange(e)}
                                     className="w-full md:w-32 text-dark-gray font-inter font-normal text-base leading-none focus:outline-0
-                                        placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
+                                        placeholder:text-medium-gray placeholder:text-xs placeholder:leading-none placeholder:font-normal
                                             placeholder:font-inter bg-transparent"/>
                                     <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt=""/>
                                 </div>
@@ -79,7 +79,7 @@ const SearchSection = () => {
                                 type="text"
                                 placeholder="09th March,2021"
                                 className="w-full md:w-32 font-inter font-normal text-xs leading-none focus:outline-0
-                                    placeholder:text-mediumgray placeholder:text-xs placeholder:leading-none placeholder:font-normal
+                                    placeholder:text-medium-gray placeholder:text-xs placeholder:leading-none placeholder:font-normal
                                     placeholder:font-inter bg-transparent"/>
                                 <img src={process.env.PUBLIC_URL + "/images/calendar icon.svg"} alt=""/>
                             </div>

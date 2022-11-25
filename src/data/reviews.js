@@ -1,7 +1,7 @@
 const reviews = [
     {
         id: 0,
-        content: 'Salty helped me a lot in finding the best place for our first outdoor adventure trip. They responded very quickly and gave me a detailed account of the place—its history, as well as its best features.',
+        content: 'Dalty helped me a lot in finding the best place for our first outdoor adventure trip. They responded very quickly and gave me a detailed account of the place—its history, as well as its best features.',
         name: 'Andrew Sarma',
         title: 'Enterpreneur',
     },
@@ -13,19 +13,19 @@ const reviews = [
     },
     {
         id: 2,
-        content: "Salty is my new best friend. If you're like me and you like to travel and have short, intense trips but don't want to do all the work involved with planning and packing, Salty is the answer. It's the easiest way to travel and get the most out of your trip! I've been using it for a few months now, and it's quickly become indispensable. I just plug in my phone and it begins the process of planning and booking your trip.",
+        content: "Dalty is my new best friend. If you're like me and you like to travel and have short, intense trips but don't want to do all the work involved with planning and packing, Dalty is the answer. It's the easiest way to travel and get the most out of your trip! I've been using it for a few months now, and it's quickly become indispensable. I just plug in my phone and it begins the process of planning and booking your trip.",
         name: 'Tina Leanne',
         title: 'Accountant',
     },
     {
         id: 3,
-        content: "Salty is a travel app that lets you find the best places to go and things to do in your city. If you're craving to travel, but don't know where to go, Salty is here to help. You can plan your trip in a few taps, and see where the best things to do are.",
+        content: "Dalty is a travel app that lets you find the best places to go and things to do in your city. If you're craving to travel, but don't know where to go, Dalty is here to help. You can plan your trip in a few taps, and see where the best things to do are.",
         name: 'Brendan Kimbell',
         title: 'Reporter',
     },
     {
         id: 4,
-        content: "I am a professional travel writer, so I travel all the time. I've been to some beautiful places, but as far as being on vacation, I haven't had one in a very long time. That is, until I saw Salty. Salty is the best travel app out there. It has been great for my travels. I like that you can pin Salty to your home screen so you see it when you want to. ",
+        content: "I am a professional travel writer, so I travel all the time. I've been to some beautiful places, but as far as being on vacation, I haven't had one in a very long time. That is, until I saw Dalty. Dalty is the best travel app out there. It has been great for my travels. I like that you can pin Dalty to your home screen so you see it when you want to. ",
         name: 'Wilbrun Vera',
         title: 'Writer',
     },
