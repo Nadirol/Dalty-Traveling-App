@@ -53,7 +53,7 @@ module.exports = {
         'container': 'min(1170px, 100% - 2rem)',
         'slider-container': 'min(1320px, 100%)',
         'search-form': 'min(500px, 90%)',
-        'discover-search-form': 'min(900px, 80%)',
+        'discover-search-form': 'min(900px, 60%)',
         'contact-form': 'min(450px, 80%)',
         'screen-card': 'calc(100vw - 1.5rem)',
       },

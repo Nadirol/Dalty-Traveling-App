@@ -96,9 +96,8 @@ const Discover = () => {
     // useGetSearchResults(lon, lat, radius, 24, discoverQueryKey, filters);
 
     const loadMoreDiscover = () => {
-        console.log(outOfResults)
         if (outOfResults) {
-            radius += 3000
+            radius += radiusValue
         }
         fetchMoreDiscover()
     }

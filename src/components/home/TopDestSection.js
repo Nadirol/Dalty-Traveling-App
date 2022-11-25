@@ -1,52 +1,31 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { TagCard, TopDestinationCard } from "../cards";
 import { destinationTags } from "../../data";
+import { useGetLocation, useGetSearchResults } from "../../hooks";
+import Loader from "../Loader";
+
+let lon;
+let lat;
+
+const onLocationSuccess = (data) => {
+    lon = data.lon;
+    lat = data.lat
+}
 
 const TopDestSection = () => {
-
-    const apiKey = "5ae2e3f221c38a28845f05b6cdf805e810c7cdbb7f23f88fd8740ad9";
-
-    const apiGet = (method, query) => {
-      return axios.get(
-        "https://api.opentripmap.com/0.1/en/places/" +
-          method +
-          "?apikey=" +
-          apiKey +
-          (query ? "&" + query : '')
-      );
-    };
-  
-    const [topDesData, setTopDesData] = useState("");
     const [activeTagIndex, setActiveTagIndex] = useState(0)
   
-    useEffect(() => {
-      apiGet("geoname", `name=${destinationTags[0]}`)
-      .then(async res => {
-        apiGet(
-          'radius',
-          `radius=1000&limit=6&offset=0&lon=${await res.data.lon}&lat=${await res.data.lat}&rate=3&format=json`
-        )
-        .then(async res => {
-          setTopDesData(await res.data)
-        })
-      })
-    },[])
-  
-    const loadTopDesData = (tag, index) => {
-      setTopDesData("");
+    const handleTopDesTag = (index) => {
       setActiveTagIndex(index);
-      apiGet("geoname", `name=${tag}`)
-      .then(async res => {
-        apiGet(
-          'radius',
-          `radius=1000&limit=6&offset=0&lon=${await res.data.lon}&lat=${await res.data.lat}&rate=3&format=json`
-        )
-        .then(async res => {
-          setTopDesData(await res.data)
-        });
-      })
     }
+
+    const { isLoading: isLoadingLocation,
+      } = useGetLocation(destinationTags[activeTagIndex], onLocationSuccess, ['location', activeTagIndex], true);
+    
+    const searchQueryKey = ['searchResults', lon, lat]
+    const { isLoading: isLoadingTopDes,
+        data: topDesData,
+    } = useGetSearchResults(lon, lat, 3000, 6, searchQueryKey)
 
     return (
         <section className="text-center py-9 mb-9 w-container mx-auto ">
@@ -62,25 +41,28 @@ const TopDestSection = () => {
                 key={index}
                 id={index}
                 name={tag}
-                handleClick={() => loadTopDesData(tag, index)}
+                handleClick={() => handleTopDesTag(index)}
                 activeTagIndex={activeTagIndex}/>
             ))}
             </div>
-            {topDesData && (
-            <>
-                <div className="grid gap-4 auto-cols-fr md:grid-cols-3
-                        pt-9 pb-[50px] w-container mx-auto">
-                {topDesData.map(result => (
-                    <TopDestinationCard
-                    key={result.xid}
-                    xid={result.xid}
-                    name={result.name}
-                    kinds={result.kinds}
-                    />
-                ))}
+            { topDesData 
+              ? <div className="grid gap-4 auto-cols-fr md:grid-cols-3
+                  pt-9 pb-[50px] w-container mx-auto">
+                  { isLoadingLocation || isLoadingTopDes 
+                    ? <Loader />
+                    : topDesData.map(result => (
+                      <TopDestinationCard
+                      key={result.xid}
+                      xid={result.xid}
+                      name={result.name}
+                      kinds={result.kinds}
+                      />
+                  ))
+                  }
                 </div>
-            </>
-            )}
+              : <></>
+            }
+
         </section>
     )
 }
