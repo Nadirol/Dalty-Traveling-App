@@ -14,17 +14,20 @@ module.exports = {
         ...colors,
         'light-yellow': 'rgba(250, 248, 237, 1)',
         'blur-light-yellow': 'rgba(250, 248, 237, 0.2)',
-        'medium-yellow': 'rgba(255, 212, 130, 1)',
+        'semi-light-yellow': 'rgba(230, 226, 200, 1)',
+        'regular-yellow': 'rgba(255, 212, 130, 1)',
         'orange': 'rgba(246, 111, 77, 1)',
         'dark-orange': 'rgba(226, 75, 37, 1)',
-        'bright-neutral': 'rgba(250, 248, 237, 1)',
         'light-gray': 'rgba(234, 234, 235, 1)',
         'semi-light-gray': 'rgba(222, 222, 227, 1)',
         'regular-gray': 'rgba(147, 149, 151, 1)',
         'medium-gray': 'rgba(148, 152, 164, 1)',
         'semi-dark-gray': 'rgba(103, 106, 108, 1)',
         'dark-gray': 'rgba(91, 95, 98, 1)',
-        'very-dark-blue': 'rgba(45, 49, 52, 1)',
+        'very-dark-gray': 'rgba(45, 49, 52, 1)',
+        'extra-dark-gray': 'rgba(31, 30, 29, 1)',
+        'semi-black': 'rgba(26, 25, 24, 1)',
+        'black': 'rgba(12, 11, 6, 1)',
         'filter-dark': 'rgba(0, 0, 0, 0.3)',
         'filter-very-dark': 'rgba(0, 0, 0, 0.6)',
         'blue': 'rgb(51,102,204)',
@@ -36,6 +39,7 @@ module.exports = {
       boxShadow: {
         'card': '0px 24px 36px rgba(192, 188, 161, 0.32)',
         'card-bold': '0px 24px 36px rgba(192, 188, 161, 0.68)',
+        'card-bold-dark': '0px 24px 36px rgba(0, 0, 0, 0.9)',
         'image': '0 0 50px rgba(0, 0, 0, 0.3)',
         'image-lg': '3px 5px 10px rgba(0, 0, 0, 0.2)',
         'image-xl': '6px 10px 20px rgba(0, 0, 0, 0.3)',
@@ -91,4 +95,5 @@ module.exports = {
     require('tailwind-scrollbar-hide')
     // ...
   ],
+  darkMode: 'class',
 }

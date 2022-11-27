@@ -18,7 +18,7 @@ let outOfResults = false;
 const noFilters = "accomodations,amusements,interesting_places,sport,tourist_facilities"
 
 
-const Discover = () => {
+const Discover = ({ theme, toggleTheme }) => {
     const { filter } = useParams();
 
     const [activeFilters, setActiveFilters] = useState([categoriesList[0].toLowerCase().replaceAll(' ','_')]);
@@ -161,7 +161,7 @@ const Discover = () => {
     };
 
     return (
-        <div className="my-4">
+        <div className="">
             <DiscoverHeader 
                 handleSearchSubmit={handleSearchSubmit}
                 searchValue={searchValue}
@@ -171,6 +171,8 @@ const Discover = () => {
                 handleRadiusChange={handleRadiusChange}
                 nameValue={nameValue}
                 handleNameChange={handleNameChange}
+                theme={theme}
+                toggleTheme={toggleTheme}
             />
             <DiscoverFilters 
                 tagSlider={tagSlider}
@@ -197,7 +199,7 @@ const Discover = () => {
                                 />
                             ))}
                         </div>
-                        <div className="hover:bg-very-dark-blue hover:text-white rounded-[50%] p-3 w-min mx-auto text-dark-gray animate-pop"
+                        <div className="hover:bg-very-dark-gray hover:text-white rounded-[50%] p-3 w-min mx-auto text-dark-gray animate-pop"
                             onClick={loadMoreDiscover}>
                             <AiOutlineReload style={{ width: 28, height: 28 }} />
                         </div>

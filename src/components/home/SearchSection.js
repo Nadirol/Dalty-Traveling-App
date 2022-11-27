@@ -48,52 +48,43 @@ const SearchSection = () => {
             <div className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-16 xl:mb-[124px]">
                 <img src={process.env.PUBLIC_URL + "/images/hero1.png"} alt="" className="xl:ml-auto mx-auto"/>
                 <div className="mt-16">
-                    <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6">
+                    <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6 dark:text-regular-yellow">
                         Discover the Best Lovely Places
                     </h1>
-                    <p className="font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto xl:mx-0">
+                    <p className="dark:text-semi-light-yellow font-inter font-normal text-base md:text-[1.125rem] leading-snug mb-[2.75rem] w-search-form mx-auto xl:mx-0">
                         Plan and book your perfect trip with expert advice, travel tips,
                         destination information and inspiration from us.
                     </p>
                     <form onSubmit={(e) => handleSearchSubmit(e)}
-                        className="bg-white flex items-center px-7 py-5 rounded-[100vw] w-search-form mx-auto xl:mx-0">
+                        className="bg-white dark:bg-very-dark-gray flex items-center px-7 py-5 rounded-[100vw] w-search-form mx-auto xl:mx-0">
                         <div className="mx-auto flex">
-                            <div className="pr-1 md:pr-8 border-r border-light-gray">
-                                <h1 className="font-inter font-normal text-[1.125rem] leading-none mb-2 text-start">
+                            <div className="pr-1 md:pr-8 border-r border-light-gray dark:border-semi-black">
+                                <h1 className="search-heading">
                                     Where
                                 </h1>
                                 <div className="flex">
                                     <input type="text" placeholder="Center Point, Lo..." value={searchValue} onChange={(e) => handleSearchChange(e)}
-                                    className="w-full md:w-32 text-dark-gray font-inter font-normal text-base leading-none focus:outline-0
-                                        placeholder:text-medium-gray placeholder:text-xs placeholder:leading-none placeholder:font-normal
-                                            placeholder:font-inter bg-transparent"/>
+                                    className="w-full md:w-32 text-dark-gray dark:text-regular-yellow font-inter font-normal text-base leading-none focus:outline-0
+                                        placeholder-search"/>
                                     <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt=""/>
                                 </div>
                             </div>
                             <div className="pl-1 md:pl-8">
-                            <h1 className="font-inter font-normal text-[1.125rem] leading-none mb-2 text-start">
+                            <h1 className="search-heading">
                                 Date
                             </h1>
                             <div className="flex">
-                                <input
-                                type="text"
-                                placeholder="09th March,2021"
-                                className="w-full md:w-32 font-inter font-normal text-xs leading-none focus:outline-0
-                                    placeholder:text-medium-gray placeholder:text-xs placeholder:leading-none placeholder:font-normal
-                                    placeholder:font-inter bg-transparent"/>
+                                <input type="text" placeholder="09th March,2021"
+                                    className="w-full md:w-32  text-dark-gray dark:text-regular-yellow font-inter font-normal text-base 
+                                        leading-none focus:outline-0 placeholder-search"/>
                                 <img src={process.env.PUBLIC_URL + "/images/calendar icon.svg"} alt=""/>
                             </div>
                             </div>
                         </div>
                         <input type="submit" name="" id="submit-button" className="hidden"/>
-                        <label
-                            htmlFor="submit-button"
-                            className="cursor-pointer mx-auto ml-2 md:ml-6"
-                        >
-                            <img
-                            src={process.env.PUBLIC_URL + "/images/search icon.svg"}
-                            alt="search"
-                            />
+                        <label htmlFor="submit-button"
+                            className="cursor-pointer mx-auto ml-2 md:ml-6">
+                            <img src={process.env.PUBLIC_URL + "/images/search icon.svg"} alt="search"/>
                         </label>
                     </form>
                 </div>

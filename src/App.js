@@ -7,30 +7,64 @@ import Error from "./pages/Error";
 import Footer from "./components/Footer";
 import { Route, Routes } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { createContext } from "react";
+import { useState } from "react";
 
 const queryClient = new QueryClient()
 
+export const ThemeContext = createContext(null);
+
 const App = () => {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="bg-light-yellow">
-          <Routes>
-            <Route index element={<><Header/><Main/><Footer/></>}/>
-            <Route path='/home' element={<><Header/><Main/><Footer/></>}/>
-            <Route path='/destination/:id' element={
-              <>
-                <Header/>
-                <Details key={window.location.pathname}/>
-                <Footer/>
-              </>
-            }/>
-            <Route path='discover' element={<Discover/>} />
-            <Route path='discover/:filter' element={<Discover/>} />
-            <Route path='auth/:type' element={<Auth/>} />
-            <Route path='/*' element={<Error/>}/>
-          </Routes>
-          
-      </div>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <div className={` ${theme}`}>
+          <div className="bg-light-yellow dark:bg-extra-dark-gray">
+              <Routes>
+                <Route index element={
+                  <>
+                    <Header 
+                      theme={theme}
+                      toggleTheme={toggleTheme}                   
+                    />
+                    <Main/>
+                    <Footer theme={theme}/>
+                  </>
+                }/>
+                <Route path='/home' element={
+                  <>
+                    <Header 
+                      theme={theme}
+                      toggleTheme={toggleTheme} 
+                    />
+                    <Main/>
+                    <Footer theme={theme}/>
+                  </>
+                }/>
+                <Route path='/destination/:id' element={
+                  <>
+                    <Header 
+                      theme={theme}
+                      toggleTheme={toggleTheme} 
+                    />
+                    <Details key={window.location.pathname}/>
+                    <Footer theme={theme}/>
+                  </>
+                }/>
+                <Route path='discover' element={<Discover theme={theme} toggleTheme={toggleTheme}/>} />
+                <Route path='discover/:filter' element={<Discover theme={theme} toggleTheme={toggleTheme}/>} />
+                <Route path='auth/:type' element={<Auth/>} />
+                <Route path='/*' element={<Error/>}/>
+              </Routes>
+          </div>
+        </div>
+      </ThemeContext.Provider>
     </QueryClientProvider>
 
   )

@@ -5,7 +5,7 @@ const Signup = ({ emailValue, handleEmailChange}) => (
         <h2 className="text-dark-gray font-inter font-medium text-2xl md:text-[2rem] leading-none mb-3">
             SIGN UP
         </h2>
-        <h1 className="text-very-dark-blue font-inter font-semibold text-3xl md:text-[3rem] leading-none mb-2">
+        <h1 className="text-very-dark-gray font-inter font-semibold text-3xl md:text-[3rem] leading-none mb-2">
             Get Started
         </h1>
         <h3 className="text-dark-gray font-inter font-normal text-sm md:text-base leading-none">
@@ -16,7 +16,7 @@ const Signup = ({ emailValue, handleEmailChange}) => (
                 <FiMail className="mt-[2px] md:mt-[3px]"/>
                 <input type="email" placeholder="Email" required value={emailValue} onChange={e => handleEmailChange(e)}
                     className="bg-transparent outline-0 w-full	
-                    text-very-dark-blue font-inter font-normal text-base md:text-xl leading-none
+                    text-very-dark-gray font-inter font-normal text-base md:text-xl leading-none
                         placeholder:text-semi-dark-gray placeholder:font-inter placeholder:font-normal 
                             placeholder:text-xs md:placeholder:text-[14px] placeholder:leading-[20px]"/>
             </div>

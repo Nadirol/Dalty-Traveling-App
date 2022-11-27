@@ -1,3 +1,162 @@
 @tailwind base;
 @tailwind components;
+
+/* header */
+
+.nav-link {
+    @apply cursor-pointer font-poppins font-normal text-base leading-none dark:text-regular-yellow
+    decoration-light-yellow dark:decoration-extra-dark-gray decoration-2 underline-offset-[6px] 
+        hover:underline hover:decoration-orange dark:hover:decoration-orange transition-textdecoration duration-300
+}
+
+.login-btn {
+    @apply text-very-dark-gray dark:text-regular-yellow font-poppins font-medium text-sm leading-none py-5 px-4 xl:px-6 rounded-[27px] 
+    [&:hover>h5]:text-orange mx-auto
+}
+
+.sign-up-btn {
+    @apply   
+    hover:bg-orange [&:hover>h5]:text-white [&:hover>svg>path]:fill-white 
+    [&:hover>h5]:dark:text-extra-dark-gray [&:hover>svg>path]:dark:fill-extra-dark-gray
+}
+
+.prev-next-btn__disabled {
+    @apply border-regular-gray [&>*>path]:stroke-[#939597]
+}
+
+.prev-next-btn {
+    @apply border-very-dark-gray dark:border-regular-yellow hover:bg-very-dark-gray [&>*>path]:dark:stroke-regular-yellow
+    dark:hover:bg-regular-yellow [&:hover>*>path]:stroke-light-yellow [&:hover>*>path]:dark:stroke-extra-dark-gray
+}
+
+.book-btn {
+    @apply border border-very-dark-gray dark:border-regular-yellow hover:bg-very-dark-gray dark:hover:bg-regular-yellow
+    rounded-[100vw] text-very-dark-gray dark:text-regular-yellow hover:text-white dark:hover:text-extra-dark-gray
+}
+
+.tag-btn {
+    @apply hover:text-white dark:hover:text-extra-dark-gray font-poppins font-normal text-[14px] leading-none 
+    px-5 py-2.5 border border-very-dark-gray dark:border-regular-yellow  hover:bg-very-dark-gray dark:hover:bg-regular-yellow
+    rounded-[30px] cursor-pointer
+}
+
+.ctg-tag-btn {
+    @apply text-very-dark-gray dark:text-regular-yellow font-inter font-normal text-sm md:text-base leading-normal w-max
+    px-2 py-1 rounded-[27px] border border-very-dark-gray dark:border-regular-yellow 
+    hover:bg-very-dark-gray dark:hover:bg-regular-yellow hover:text-white dark:hover:text-extra-dark-gray
+}
+
+.tag-btn__active {
+    @apply bg-very-dark-gray dark:bg-regular-yellow text-white dark:text-extra-dark-gray
+}
+
+.tag-btn__inactive {
+    @apply bg-transparent text-very-dark-gray dark:text-regular-yellow
+}
+
+.flex-center-center {
+    @apply flex justify-center items-center
+}
+
+.flex-between-center {
+    @apply flex justify-between items-center
+}
+
+.flex-cols-between {
+    @apply flex flex-col justify-between
+}
+
+.dark-overlay-screen {
+    @apply md:after:hidden after:w-screen after:h-screen after:bg-filter-dark after:top-0 after:left-0 after:z-[20]
+}
+
+.dark-overlay-full {
+    @apply hover:before:block [&>div]:hover:opacity-100 before:z-10
+    before:hidden before:absolute before:inset-0 before:bg-filter-dark before:dark:bg-filter-very-dark before:rounded-[85px]
+}
+
+.small-middle {
+    @apply -md:bottom-1/2 -md:right-1/2 -md:translate-x-1/2 
+    -md:translate-y-1/2
+}
+
+.social-logo {
+    @apply  aspect-square rounded-[50%] border border-dark-gray [&>svg>path]:dark:fill-semi-light-yellow
+    dark:border-semi-light-yellow hover:border-orange [&:hover>svg>path]:fill-orange
+}
+
+.footer-heading {
+    @apply text-dark-gray dark:text-regular-yellow font-inter font-medium text-lg leading-none mb-[22px]
+}
+
+.footer-link {
+    @apply text-semi-dark-gray dark:text-semi-light-yellow font-inter font-normal text-[14px] leading-[34px]
+    hover:text-orange cursor-pointer
+}
+
+.search-heading {
+    @apply dark:text-regular-yellow font-inter font-normal text-[1.125rem] leading-none mb-2 text-start
+}
+
+.placeholder-search {
+    @apply placeholder:text-medium-gray placeholder:dark:text-semi-light-yellow placeholder:text-xs 
+    placeholder:leading-none placeholder:font-normal placeholder:font-inter bg-transparent
+}
+
+.placeholder-form {
+    @apply placeholder:text-dark-gray placeholder:font-inter placeholder:font-normal 
+    placeholder:text-xs md:placeholder:text-[14px] placeholder:leading-none
+}
+
+.placeholder-discover-search {
+    @apply placeholder:text-medium-gray placeholder:text-sm placeholder:leading-none placeholder:font-normal
+    placeholder:font-inter bg-transparent
+}
+
+.slider-x-snap {
+    @apply overflow-x-scroll scrollbar-hide snap-x 
+    snap-mandatory overscroll-x-contain
+}
+
+.details-p {
+    @apply text-dark-gray dark:text-semi-light-yellow font-inter font-normal text-sm md:text-base leading-normal 
+    mx-auto xl:mx-0 overflow-hidden relative before:hidden before:absolute before:h-full before:w-full
+        before:bg-gradient-to-b before:from-transparent before:to-light-yellow dark:before:to-extra-dark-gray
+}
+
+img {
+    @apply dark:brightness-[90%]
+}
+
+.filter-input {
+    @apply focus:outline-0 bg-transparent border-light-gray dark:border-semi-light-yellow rounded-[100vw] 
+    focus:border-dark-gray dark:focus:border-regular-yellow text-dark-gray dark:text-regular-yellow font-inter font-normal 
+    text-base leading-none placeholder:text-medium-gray placeholder:text-sm placeholder:leading-none placeholder:font-normal
+    placeholder:font-inter
+}
+
+.filter-slider-after {
+    @apply after:h-full after:w-full after:bg-gradient-to-l after:from-transparent
+    after:to-light-yellow after:dark:to-extra-dark-gray after:pointer-events-none
+}
+
+.filter-slider-before {
+    @apply before:h-full before:w-full before:bg-gradient-to-r before:from-transparent
+    before:to-light-yellow before:dark:to-extra-dark-gray before:pointer-events-none
+}
+
+.filter-tag-btn {
+    @apply hover:text-white dark:hover:text-extra-dark-gray font-poppins font-normal text-[14px] leading-none transition-colors duration-200
+    px-5 py-2.5 border border-very-dark-gray dark:border-regular-yellow hover:bg-dark-gray 
+    dark:hover:bg-semi-light-yellow rounded-[30px] cursor-pointer snap-start
+}
+
+.filter-tag__active {
+    @apply bg-very-dark-gray dark:bg-regular-yellow text-white dark:text-extra-dark-gray
+}
+
+.filter-tag__inactive {
+    @apply bg-transparent text-very-dark-gray dark:text-regular-yellow
+}
+
 @tailwind utilities;

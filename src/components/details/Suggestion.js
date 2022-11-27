@@ -44,7 +44,7 @@ const Suggestion = ({ destinationData }) => {
     return (
         <div className="">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="font-inter font-semibold text-base md:text-[2rem] text-center xl:text-start leading-none">
+                <h1 className="dark:text-regular-yellow font-inter font-semibold text-base md:text-[2rem] text-center xl:text-start leading-none">
                     Nearby Destinations
                 </h1>
                 <div className="hidden md:flex gap-4">
@@ -72,7 +72,7 @@ const Suggestion = ({ destinationData }) => {
                         <AiOutlineDoubleRight
                             key={'icon'}
                             style={{ width: 32, height: 32 }}
-                            className="text-very-dark-blue"
+                            className="text-very-dark-gray"
                         />
                     </button>
                 </div>

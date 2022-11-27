@@ -18,8 +18,8 @@ const ResultCard = ({ xid, name, kinds }) => {
     
     if (!isLoading) {
         return (
-            <div className="cursor-pointer border-2 border-regular-gray rounded-2xl p-6 snap-start 
-                hover:shadow-card-bold transition-shadow duration-500 flex flex-col justify-between">
+            <div className="cursor-pointer border-2 border-regular-gray dark rounded-2xl p-6 snap-start 
+                hover:shadow-card-bold dark:hover:shadow-card-bold-dark transition-shadow duration-500 flex-cols-between">
                 <div className="relative rounded-[8px] mb-4 overflow-y-hidden">
                     <img src={destinationData?.preview ? destinationData?.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"} 
                         alt="preview" loading="lazy"
@@ -30,7 +30,7 @@ const ResultCard = ({ xid, name, kinds }) => {
                 </div>
                 <div className="mb-auto">
                         <Link to={`/destination/${xid}`} 
-                            className="text-very-dark-blue font-inter font-semibold text-xl leading-none
+                            className="text-very-dark-gray dark:text-regular-yellow font-inter font-semibold text-xl leading-none
                                 hover:text-orange">
                             {name}
                         </Link>
@@ -38,10 +38,10 @@ const ResultCard = ({ xid, name, kinds }) => {
                         {resultCategories.map(ctg => (
                             <div className="inline-block">
                                 <Link to={`/discover/${ctg}`}
-                                    className="text-dark-gray font-inter font-normal text-[12px] leading-normal w-max hover:text-orange">
+                                    className="text-dark-gray dark:text-semi-light-yellow font-inter font-normal text-[12px] leading-normal w-max hover:text-orange">
                                     {ctg}
                                 </Link>
-                                <span className="text-dark-gray font-inter font-normal text-[12px] leading-normal">,&nbsp;</span>
+                                <span className="text-dark-gray dark:text-semi-light-yellow font-inter font-normal text-[12px] leading-normal">,&nbsp;</span>
                             </div>
                         ))}
                     </div>

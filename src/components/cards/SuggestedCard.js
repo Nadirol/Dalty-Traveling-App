@@ -28,12 +28,13 @@ const SuggestedCard = ({ name, kinds, xid }) => {
                 </div>
                 <div className="flex flex-col">
                     <Link to={`/destination/${xid}`}
-                        className="text-very-dark-blue font-inter font-semibold text-base leading-none
-                        hover:text-orange">
+                        className="text-very-dark-gray dark:text-semi-light-yellow font-inter font-semibold text-base leading-none
+                        hover:text-orange dark:hover:text-orange">
                         {name}
                     </Link>
                     <Link to={`/discover/${mainCategory}`}
-                        className="text-very-dark-blue font-inter font-normal text-sm leading-normal w-max hover:text-orange">
+                        className="text-very-dark-gray dark:text-semi-light-yellow font-inter 
+                            font-normal text-sm leading-normal w-max hover:text-orange dark:hover:text-orange">
                         {mainCategory}
                     </Link>
                 </div>

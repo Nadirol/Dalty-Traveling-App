@@ -56,7 +56,7 @@ const Auth = () => {
                     <Link to='/auth/login' 
                         className="text-dark-gray font-inter font-normal text-xs md:text-base leading-[30px]
                             px-4 md:py-1 border-2 border-dark-gray rounded-[1rem] 
-                                hover:bg-very-dark-blue hover:text-white hover:border-very-dark-blue">
+                                hover:bg-very-dark-gray hover:text-white hover:border-very-dark-gray">
                         Login
                     </Link>
                 </div>
@@ -87,7 +87,7 @@ const Auth = () => {
                     <Link to='/auth/sign-up' 
                         className="text-dark-gray font-inter font-normal text-xs md:text-base leading-[30px]
                             px-4 md:py-1 border-2 border-dark-gray rounded-[1rem] 
-                                hover:bg-very-dark-blue hover:text-white hover:border-very-dark-blue">
+                                hover:bg-very-dark-gray hover:text-white hover:border-very-dark-gray">
                         Sign Up
                     </Link>
                 </div>
