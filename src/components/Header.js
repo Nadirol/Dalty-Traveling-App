@@ -28,7 +28,7 @@ const Header = ({ theme, toggleTheme }) => {
                 <img src={process.env.PUBLIC_URL + `/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo" className='focus:outline-0'/>
             </Link>
             <div className={`${ navMenuOpen ? '-md:fixed' : '-md:hidden'} small-middle   z-30 md:flex items-center w-[75%]
-                md:w-full bg-white md:bg-transparent -md:p-9 -md:rounded-xl `}>
+                md:w-full -md:bg-white -md:dark:bg-semi-black md:bg-transparent -md:p-9 -md:rounded-xl `}>
                 <ul className="flex flex-col md:flex-row items-center gap-5 xl:gap-9 md:ml-8 xl:ml-[4.5rem] mb-9 md:mb-0">
                     <li className="nav-link">
                         <Link to='/home'>
@@ -50,8 +50,9 @@ const Header = ({ theme, toggleTheme }) => {
                         Blogs
                     </li>
                 </ul>
-                <div className="flex -md:flex-col gap-4 -md:mx-auto md:ml-auto">
-                    <button className='-md:mx-auto outline-0' onClick={toggleTheme}>
+                <div className="flex items-center -md:flex-col gap-4 -md:mx-auto md:ml-auto">
+                    <button className='-md:mx-auto outline-0 p-2 border-2 border-very-dark-gray dark:border-regular-yellow rounded-[50%]' 
+                        onClick={toggleTheme}>
                         { theme === 'light' 
                             ? <BsSun style={{ width: 20, height: 20 }}/>
                             : <BsFillMoonFill style={{ width: 20, height: 20 }} className="text-regular-yellow"/>

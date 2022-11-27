@@ -20,14 +20,14 @@ const ResultCard = ({ xid, name, kinds }) => {
         return (
             <div className="cursor-pointer border-2 border-regular-gray dark rounded-2xl p-6 snap-start 
                 hover:shadow-card-bold dark:hover:shadow-card-bold-dark transition-shadow duration-500 flex-cols-between">
-                <div className="relative rounded-[8px] mb-4 overflow-y-hidden">
+                <Link to={`/destination/${xid}`} className="relative rounded-[8px] mb-4 overflow-y-hidden">
                     <img src={destinationData?.preview ? destinationData?.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"} 
                         alt="preview" loading="lazy"
                             className='object-contain h-[270px] mx-auto relative z-10 rounded-[8px] shadow-image'/>
                     <img src={destinationData?.preview ? destinationData?.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"}  
                         alt='background' loading="lazy"
                             className='absolute z-0 inset-0 blur-[2px] opacity-70 w-full h-full brightness-[0.75]'/>
-                </div>
+                </Link>
                 <div className="mb-auto">
                         <Link to={`/destination/${xid}`} 
                             className="text-very-dark-gray dark:text-regular-yellow font-inter font-semibold text-xl leading-none

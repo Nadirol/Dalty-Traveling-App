@@ -72,7 +72,7 @@ const Suggestion = ({ destinationData }) => {
                         <AiOutlineDoubleRight
                             key={'icon'}
                             style={{ width: 32, height: 32 }}
-                            className="text-very-dark-gray"
+                            className="text-very-dark-gray dark:text-regular-yellow"
                         />
                     </button>
                 </div>

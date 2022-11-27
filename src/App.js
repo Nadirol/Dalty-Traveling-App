@@ -59,7 +59,7 @@ const App = () => {
                 }/>
                 <Route path='discover' element={<Discover theme={theme} toggleTheme={toggleTheme}/>} />
                 <Route path='discover/:filter' element={<Discover theme={theme} toggleTheme={toggleTheme}/>} />
-                <Route path='auth/:type' element={<Auth/>} />
+                <Route path='auth/:type' element={<Auth theme={theme}/>} />
                 <Route path='/*' element={<Error/>}/>
               </Routes>
           </div>

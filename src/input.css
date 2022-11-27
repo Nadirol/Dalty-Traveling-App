@@ -11,12 +11,12 @@
 
 .login-btn {
     @apply text-very-dark-gray dark:text-regular-yellow font-poppins font-medium text-sm leading-none py-5 px-4 xl:px-6 rounded-[27px] 
-    [&:hover>h5]:text-orange mx-auto
+    [&:hover>h5]:text-orange mx-auto focus:outline-0
 }
 
 .sign-up-btn {
     @apply   
-    hover:bg-orange [&:hover>h5]:text-white [&:hover>svg>path]:fill-white 
+    hover:bg-orange [&:hover>h5]:text-white [&:hover>svg>path]:fill-white focus:outline-0
     [&:hover>h5]:dark:text-extra-dark-gray [&:hover>svg>path]:dark:fill-extra-dark-gray
 }
 
@@ -157,6 +157,10 @@ img {
 
 .filter-tag__inactive {
     @apply bg-transparent text-very-dark-gray dark:text-regular-yellow
+}
+
+.auth-footer-nav-link {
+    @apply text-dark-gray font-inter font-normal text-xs leading-none
 }
 
 @tailwind utilities;

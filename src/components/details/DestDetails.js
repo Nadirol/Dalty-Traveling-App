@@ -100,7 +100,7 @@ const DesDetails = ({ destinationData }) => {
                 {destinationData?.wikipedia_extracts && (
                     <div className="text-center hidden xl:block w-[90%] mx-auto xl:mx-0 mb-4">
                         <button onClick={toggleDetailsSize}
-                            className='text-dark-gray dark:text-light-yellow font-inter font-medium text-xs md:text-base 
+                            className='text-dark-gray dark:text-semi-light-yellow font-inter font-medium text-xs md:text-base 
                                 leading-normal cursor-pointer underline'>
                             {detailsMinimized ? 'See More' : 'Minimize'}
                         </button>

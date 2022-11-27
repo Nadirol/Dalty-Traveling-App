@@ -80,7 +80,7 @@ const DiscoverHeader = ({ handleSearchSubmit, searchValue, handleSearchChange, c
                     </div>
                 </form>
                 <div className={`${ navMenuOpen ? '-md:fixed' : '-md:hidden'} small-middle z-30 -md:p-9 -md:rounded-xl
-                    md:flex`}>
+                    flex -md:gap-6 -md:flex-col -md:bg-white -md:dark:bg-semi-black`}>
                         <button className='-md:mx-auto outline-0' onClick={toggleTheme}>
                             { theme === 'light' 
                                 ? <BsSun style={{ width: 20, height: 20 }}/>

@@ -68,12 +68,12 @@ const Discover = ({ theme, toggleTheme }) => {
 
     const apiGetSearchResults = async ({ pageParam = 0 }) => {
         return await
-        getApi(
-            "radius",
-            `radius=${radius}&limit=${pageLength}&offset=${pageParam}&lon=${lon}&lat=${lat}&kinds=${filters ? filters : noFilters}&rate=${rating}${nameValue ? `&name=${nameValue}` : ''}&format=json`
-        ).then(res => {
-            return res.data
-        })
+            getApi(
+                "radius",
+                `radius=${radius}&limit=${pageLength}&offset=${pageParam}&lon=${lon}&lat=${lat}&kinds=${filters.length > 0 ? filters : noFilters}&rate=${rating}${nameValue ? `&name=${nameValue}` : ''}&format=json`
+            ).then(res => {
+                return res.data
+            })
     }
 
     const { isLoading: isLoadingDiscover, 
@@ -161,7 +161,7 @@ const Discover = ({ theme, toggleTheme }) => {
     };
 
     return (
-        <div className="">
+        <div className="min-h-screen">
             <DiscoverHeader 
                 handleSearchSubmit={handleSearchSubmit}
                 searchValue={searchValue}
