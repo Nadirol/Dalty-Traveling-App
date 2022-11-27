@@ -25,7 +25,7 @@ const Header = () => {
                 style={{ width: 35, height: 35 }} onClick={openNavMenu}/>
             }
             <Link to='/home'>
-                <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo"/>
+                <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo" className='focus:outline-0'/>
             </Link>
             <div className={`${ navMenuOpen ? '-md:fixed' : '-md:hidden'} -md:bottom-1/2 -md:right-1/2 -md:translate-x-1/2 
                 -md:translate-y-1/2 z-30 md:flex items-center w-[75%]

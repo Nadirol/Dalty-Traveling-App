@@ -26,7 +26,7 @@ const App = () => {
             }/>
             <Route path='discover' element={<Discover/>} />
             <Route path='discover/:filter' element={<Discover/>} />
-            <Route path='auth/sign-up' element={<Auth/>} />
+            <Route path='auth/:type' element={<Auth/>} />
             <Route path='/*' element={<Error/>}/>
           </Routes>
           

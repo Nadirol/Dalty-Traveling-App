@@ -1,12 +1,25 @@
-import { Link } from "react-router-dom";
-import { FiMail } from "react-icons/fi"
+import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import Signup from "../components/auth/Signup";
+import Login from "../components/auth/Login";
 
 const Auth = () => {
+    const { type } = useParams();
+    const [emailValue, setEmailValue] = useState('');
+    const handleEmailChange = (e) => {
+        setEmailValue(e.target.value)
+    }
+
+    const [passwordValue, setPasswordValue] = useState('');
+    const handlePasswordChange = (e) => {
+        setPasswordValue(e.target.value)
+    }
+
     return (
-        <div className="md:grid grid-cols-auth">
+        <div className="md:grid grid-cols-auth-md xl:grid-cols-auth">
             <div className="p-8 text-center h-screen hidden md:flex flex-col justify-between">
                 <Link to='/home'>
-                    <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo"/>
+                    <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="brand logo" className="focus:outline-0"/>
                 </Link>
                 <img src={process.env.PUBLIC_URL + "/images/hero1.png"} alt="hero" 
                     className="mx-auto"/>
@@ -34,57 +47,23 @@ const Auth = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-white p-4 md:p-8 w-full h-screen md:h-screen flex flex-col justify-between">
+            { type === 'sign-up'
+            ?<div className="bg-white p-4 md:p-8 w-full h-screen md:h-screen flex flex-col justify-between">
                 <div className="flex gap-4 items-center w-fit ml-auto">
                     <h1 className="text-dark-gray font-inter font-normal text-xs md:text-base leading-[30px]">
                         Already have an account ?
                     </h1>
-                    <Link to='/home' 
+                    <Link to='/auth/login' 
                         className="text-dark-gray font-inter font-normal text-xs md:text-base leading-[30px]
                             px-4 md:py-1 border-2 border-dark-gray rounded-[1rem] 
                                 hover:bg-very-dark-blue hover:text-white hover:border-very-dark-blue">
                         Login
                     </Link>
                 </div>
-                <div className="w-auth-form mx-auto">
-                    <h2 className="text-dark-gray font-inter font-medium text-2xl md:text-[2rem] leading-none mb-3">
-                        SIGN UP
-                    </h2>
-                    <h1 className="text-very-dark-blue font-inter font-semibold text-3xl md:text-[3rem] leading-none mb-2">
-                        Get Started
-                    </h1>
-                    <h3 className="text-dark-gray font-inter font-normal text-sm md:text-base leading-none">
-                        Please enter your account details
-                    </h3>
-                    <form className="py-6 md:py-8 border-b border-light-gray relative mb-6">
-                        <div className="bg-light-gray rounded-[1rem] flex gap-3 items-center px-6 py-3 mb-4">
-                            <FiMail className="mt-[2px] md:mt-[3px]"/>
-                            <input type="email" placeholder="Email" required
-                                className="bg-transparent outline-0 w-full	
-                                text-very-dark-blue font-inter font-normal text-base md:text-xl leading-none
-                                    placeholder:text-semi-dark-gray placeholder:font-inter placeholder:font-normal 
-                                        placeholder:text-xs md:placeholder:text-[14px] placeholder:leading-[20px]"/>
-                        </div>
-                        <input type="submit" value="Continue"
-                            className="bg-orange w-full text-white font-inter font-semibold text-xl
-                                hover:bg-dark-orange cursor-pointer rounded-[1rem] p-2"/>
-                        <h1 className="absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 
-                            bg-white px-4 text-dark-gray font-inter
-                                font-normal text-xs md:text-sm leading-none w-max">
-                            OR SIGN UP WITH
-                        </h1>
-                    </form>
-                    <button className="border-2 border-light-gray rounded-[1rem] w-[80%] md:w-3/4 mx-auto mb-4
-                        flex items-center justify-center py-2 text-dark-gray font-inter font-normal text-base md:text-lg">
-                        <img src={process.env.PUBLIC_URL + "/images/google icon.png"} alt="" 
-                            className="object-contain max-w-[1.5rem] mr-2"/>
-                        Google Account
-                    </button>
-                    <button className="border-2 border-light-gray rounded-[1rem] w-[80%] md:w-3/4 mx-auto
-                        flex items-center justify-center py-2 text-dark-gray font-inter font-normal text-xs md:text-base">
-                        Quick Sign Up and Login
-                    </button>
-                </div>
+                <Signup
+                    emailValue={emailValue}
+                    handleEmailChange={handleEmailChange}
+                />
                 <div className="flex gap-4 w-fit mx-auto">
                     <h1 className="text-dark-gray font-inter font-normal text-xs leading-none">
                         Terms of Use
@@ -100,6 +79,41 @@ const Auth = () => {
                     </h1>
                 </div>
             </div>
+            :<div className="bg-white p-4 md:p-8 w-full h-screen md:h-screen flex flex-col justify-between">
+                <div className="flex gap-4 items-center w-fit ml-auto">
+                    <h1 className="text-dark-gray font-inter font-normal text-xs md:text-base leading-[30px]">
+                        Haven't Sign Up Yet ?
+                    </h1>
+                    <Link to='/auth/sign-up' 
+                        className="text-dark-gray font-inter font-normal text-xs md:text-base leading-[30px]
+                            px-4 md:py-1 border-2 border-dark-gray rounded-[1rem] 
+                                hover:bg-very-dark-blue hover:text-white hover:border-very-dark-blue">
+                        Sign Up
+                    </Link>
+                </div>
+                <Login
+                    emailValue={emailValue}
+                    handleEmailChange={handleEmailChange}
+                    passwordValue={passwordValue}
+                    handlePasswordChange={handlePasswordChange}
+                />
+                <div className="flex gap-4 w-fit mx-auto">
+                    <h1 className="text-dark-gray font-inter font-normal text-xs leading-none">
+                        Terms of Use
+                    </h1>
+                    <h1 className="text-dark-gray font-inter font-normal text-xs leading-none">
+                        Privacy Policy
+                    </h1>
+                    <h1 className="text-dark-gray font-inter font-normal text-xs leading-none">
+                        Cookie Policy
+                    </h1>
+                    <h1 className="text-dark-gray font-inter font-normal text-xs leading-none">
+                        Contact Us
+                    </h1>
+                </div>
+            </div>
+            }
+
         </div>
     )
 }

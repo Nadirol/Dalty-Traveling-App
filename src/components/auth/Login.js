@@ -1,12 +1,13 @@
 import { FiMail } from "react-icons/fi"
+import { AiOutlineLock } from "react-icons/ai"
 
-const Signup = ({ emailValue, handleEmailChange}) => (
+const Login = ({ emailValue, handleEmailChange, passwordValue, handlePasswordChange }) => (
     <div className="w-auth-form mx-auto">
         <h2 className="text-dark-gray font-inter font-medium text-2xl md:text-[2rem] leading-none mb-3">
-            SIGN UP
+            LOGIN
         </h2>
         <h1 className="text-very-dark-blue font-inter font-semibold text-3xl md:text-[3rem] leading-none mb-2">
-            Get Started
+            Welcome Back
         </h1>
         <h3 className="text-dark-gray font-inter font-normal text-sm md:text-base leading-none">
             Please enter your account details
@@ -15,6 +16,14 @@ const Signup = ({ emailValue, handleEmailChange}) => (
             <div className="bg-light-gray rounded-[1rem] flex gap-3 items-center px-6 py-3 mb-4 mx-auto w-full">
                 <FiMail className="mt-[2px] md:mt-[3px]"/>
                 <input type="email" placeholder="Email" required value={emailValue} onChange={e => handleEmailChange(e)}
+                    className="bg-transparent outline-0 w-full focus:bg-transparent
+                    text-very-dark-blue font-inter font-normal text-base md:text-xl leading-none
+                        placeholder:text-semi-dark-gray placeholder:font-inter placeholder:font-normal 
+                            placeholder:text-xs md:placeholder:text-[14px] placeholder:leading-[20px]"/>
+            </div>
+            <div className="bg-light-gray rounded-[1rem] flex gap-3 items-center px-6 py-3 mb-4 mx-auto w-full">
+                <AiOutlineLock className="mt-[2px] md:mt-[3px]"/>
+                <input type="password" placeholder="Password" required value={passwordValue} onChange={e => handlePasswordChange(e)}
                     className="bg-transparent outline-0 w-full	
                     text-very-dark-blue font-inter font-normal text-base md:text-xl leading-none
                         placeholder:text-semi-dark-gray placeholder:font-inter placeholder:font-normal 
@@ -26,7 +35,7 @@ const Signup = ({ emailValue, handleEmailChange}) => (
             <h1 className="absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 
                 bg-white px-4 text-dark-gray font-inter
                     font-normal text-xs md:text-sm leading-none w-max">
-                OR SIGN UP WITH
+                OR LOGIN WITH
             </h1>
         </form>
         <button className="border-2 border-light-gray rounded-[1rem] w-[80%] md:w-3/4 mb-4 mx-auto
@@ -42,4 +51,4 @@ const Signup = ({ emailValue, handleEmailChange}) => (
     </div>
 )
 
-export default Signup;
+export default Login;

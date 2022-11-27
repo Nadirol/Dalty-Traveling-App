@@ -44,7 +44,8 @@ module.exports = {
         'gallery': '270px 370px 170px 270px',
         'gallery-md': '135px 185px 85px 135px',
         'gallery-fit': '1fr auto',
-        'auth': '560px 1fr'
+        'auth': '640px 1fr',
+        'auth-md': '400px 1fr'
       },
       gridTemplateRows: {
         'gallery': '250px 13px 13px 250px',
@@ -54,7 +55,7 @@ module.exports = {
         'container': 'min(1170px, 100% - 2rem)',
         'slider-container': 'min(1320px, 100%)',
         'search-form': 'min(500px, 90%)',
-        'auth-form': 'min(600px, 90%)',
+        'auth-form': 'min(450px, 90%)',
         'discover-search-form': 'min(900px, 60%)',
         'contact-form': 'min(450px, 80%)',
         'screen-card': 'calc(100vw - 1.5rem)',
