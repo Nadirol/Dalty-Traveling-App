@@ -19,9 +19,9 @@ const Auth = ({ theme }) => {
         <div className="md:grid grid-cols-auth-md xl:grid-cols-auth bg-light-yellow dark:bg-extra-dark-gray">
             <div className="p-8 text-center h-screen hidden md:flex flex-col justify-between">
                 <Link to='/home'>
-                    <img src={process.env.PUBLIC_URL + `/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo" className="focus:outline-0"/>
+                    <img src={`/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo" className="focus:outline-0"/>
                 </Link>
-                <img src={process.env.PUBLIC_URL + "/images/hero1.png"} alt="hero" 
+                <img src={"/images/hero1.png"} alt="hero" 
                     className="mx-auto"/>
                 <div className="">
                     <h1 className="text-dark-gray dark:text-semi-light-yellow font-inter font-normal text-base md:w-3/4 mb-4 mx-auto">

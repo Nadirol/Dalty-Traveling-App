@@ -37,7 +37,7 @@ const DesDetails = ({ destinationData }) => {
     return (
         <div className=" grid gap-12 xl:grid-flow-col xl:auto-cols-fr pt-12 mb-12">
             <div className="">
-                <img src={destinationData.preview ? destinationData.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"} alt="" 
+                <img src={destinationData.preview ? destinationData.preview?.source : "/images/Logo.svg"} alt="" 
                     className={`mx-auto  ${destinationData.preview ? 'shadow-image-xl' : 'h-3/5'}`}/>
                 <div className="flex gap-16 justify-center items-center mx-auto mt-8">
                     <button className={`flex items-center cursor-pointer
@@ -54,7 +54,6 @@ const DesDetails = ({ destinationData }) => {
                             ? (<BsFillBookmarkCheckFill style={{ width: 36, height: 36 }} className="mr-1"/>)
                             : (<BsBookmarkFill style={{ width: 36, height: 36 }} className="mr-1"/>)
                         }
-                        
                         {isBookmarked 
                         ? 'Saved' : 'Save'}
                     </div>
@@ -67,7 +66,7 @@ const DesDetails = ({ destinationData }) => {
                     {capitalizeFirstLetter(destinationData.name)}
                 </h1>
                 <div className="flex gap-3 mx-auto xl:mx-0">
-                    <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt=""/>
+                    <img src={"/images/location icon.svg"} alt=""/>
                     <a href={`https://maps.google.com/?ll=${destinationData?.point.lat},${destinationData?.point.lon}`}
                         className="text-orange font-inter font-normal text-xs md:text-base leading-normal 
                             w-max cursor-pointer" target="_blank" rel="noreferrer">

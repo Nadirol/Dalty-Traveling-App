@@ -46,7 +46,7 @@ const SearchSection = () => {
     return (
         <section className=" w-container mx-auto">
             <div className="grid gap-8 xl:gap-36 xl:grid-flow-col xl:auto-cols-fr text-center xl:text-start mb-16 xl:mb-[124px]">
-                <img src={process.env.PUBLIC_URL + "/images/hero1.png"} alt="" className="xl:ml-auto mx-auto"/>
+                <img src={"/images/hero1.png"} alt="" className="xl:ml-auto mx-auto"/>
                 <div className="mt-16">
                     <h1 className="font-sen font-bold text-[4rem] md:text-[5.25rem] leading-none mb-6 dark:text-regular-yellow">
                         Discover the Best Lovely Places
@@ -66,7 +66,7 @@ const SearchSection = () => {
                                     <input type="text" placeholder="Center Point, Lo..." value={searchValue} onChange={(e) => handleSearchChange(e)}
                                     className="w-full md:w-32 text-dark-gray dark:text-regular-yellow font-inter font-normal text-base leading-none focus:outline-0
                                         placeholder-search"/>
-                                    <img src={process.env.PUBLIC_URL + "/images/location icon.svg"} alt=""/>
+                                    <img src={"/images/location icon.svg"} alt=""/>
                                 </div>
                             </div>
                             <div className="pl-1 md:pl-8">
@@ -77,14 +77,14 @@ const SearchSection = () => {
                                 <input type="text" placeholder="09th March,2021"
                                     className="w-full md:w-32  text-dark-gray dark:text-regular-yellow font-inter font-normal text-base 
                                         leading-none focus:outline-0 placeholder-search"/>
-                                <img src={process.env.PUBLIC_URL + "/images/calendar icon.svg"} alt=""/>
+                                <img src={"/images/calendar icon.svg"} alt=""/>
                             </div>
                             </div>
                         </div>
                         <input type="submit" name="" id="submit-button" className="hidden"/>
                         <label htmlFor="submit-button"
                             className="cursor-pointer mx-auto ml-2 md:ml-6">
-                            <img src={process.env.PUBLIC_URL + "/images/search icon.svg"} alt="search"/>
+                            <img src={"/images/search icon.svg"} alt="search"/>
                         </label>
                     </form>
                 </div>

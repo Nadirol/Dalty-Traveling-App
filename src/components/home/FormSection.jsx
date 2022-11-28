@@ -2,7 +2,7 @@ const FormSection = () => (
     <section className="py-[46px] mb-4 w-container mx-auto ">
         <div className="bg-regular-yellow dark:bg-semi-black rounded-[30px] py-[75px] text-center relative">
         <img
-            src={process.env.PUBLIC_URL + "/images/intersect.png"}
+            src={"/images/intersect.png"}
             alt=""
             className="absolute inset-0 z-0 w-full h-full"
         />
@@ -19,7 +19,7 @@ const FormSection = () => (
                         text-xl focus:outline-0 w-[80%] md:w-full placeholder-form"/>
                 <input type="submit" className="hidden" id="email-sumbit__button"/>
                 <label htmlFor="email-sumbit__button">
-                    <img src={process.env.PUBLIC_URL + "/images/paper plane2.svg"} alt="submit button"
+                    <img src={"/images/paper plane2.svg"} alt="submit button"
                         className="p-3 rounded-xl bg-orange cursor-pointer hover:bg-dark-orange"/>
                 </label>
             </form>

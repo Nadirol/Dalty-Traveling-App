@@ -20,10 +20,10 @@ const SuggestedCard = ({ name, kinds, xid }) => {
         return (
             <div className="md:snap-start border-2 border-dark-gray rounded-lg flex flex-col justify-between px-4 py-4 w-[320px] min-w-[320px] animate-fade-in">
                 <div className="relative rounded-[8px] mb-4 overflow-y-hidden ">
-                    <img src={destinationData?.preview ? destinationData?.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"} alt="preview"
+                    <img src={destinationData?.preview ? destinationData?.preview?.source : "/images/Logo.svg"} alt="preview"
                         className='object-contain h-[270px] mx-auto relative z-10 rounded-[8px] shadow-image'
                         />
-                    <img src={destinationData?.preview ? destinationData?.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"}  alt='background'
+                    <img src={destinationData?.preview ? destinationData?.preview?.source : "/images/Logo.svg"}  alt='background'
                     className='absolute z-0 inset-0 blur-[2px] opacity-70 w-full h-full brightness-[0.75]'/>
                 </div>
                 <div className="flex flex-col">

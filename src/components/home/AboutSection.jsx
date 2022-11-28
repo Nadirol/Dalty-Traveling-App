@@ -2,10 +2,10 @@ const AboutSection = () => (
     <section className="pb-8 w-container mx-auto">
         <div className="grid text-center xl:gap-28 xl:grid-flow-col xl:auto-cols-fr xl:text-start pt-[50px] pb-[58px]">
         <div className="relative xl:mr-auto xl:mb-auto -xl:mx-auto">
-            <img src={process.env.PUBLIC_URL + "/images/hero2.png"} alt="" />
+            <img src={"/images/hero2.png"} alt="" />
             <div className="bg-white dark:bg-semi-black rounded-[14px] text-center px-1.5 py-2 md:px-[14px] md:py-[20px] 
                     absolute bottom-[80px] left-[-10px] md:left-[-51px]">
-                <img src={process.env.PUBLIC_URL + "/images/star location icon.svg"} alt=""
+                <img src={"/images/star location icon.svg"} alt=""
                     className="mx-auto aspect-square w-12 md:w-20 mb-[20px]"/>
                 <h2 className="text-orange font-poppins font-semibold text-base md:text-[30px] leading-none mb-2">
                     600%
@@ -16,7 +16,7 @@ const AboutSection = () => (
             </div>
             <div className="bg-white dark:bg-semi-black rounded-[10px] px-2 py-3 md:pl-[16px] md:pr-[21px] md:py-[20px]
                 absolute bottom-[-20px] right-[1rem] flex justify-between">
-                <img src={process.env.PUBLIC_URL + "/images/connect icon.svg"} alt=""
+                <img src={"/images/connect icon.svg"} alt=""
                     className="w-[2rem] md:w-full"/>
                 <div className="flex flex-col justify-between">
                     <h2 className="text-very-dark-gray dark:text-orange font-poppins font-semibold text-base md:text-[30px] leading-none">
