@@ -3,7 +3,7 @@ const Footer = ({ theme }) => {
         <footer className="flex flex-col md:flex-row justify-between py-12 md:py-[84px] w-container mx-auto">
             <div className="flex flex-col justify-between items-center md:items-start mb-8 md:mb-0">
                 <div className="">
-                    <img src={process.env.PUBLIC_URL + `/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo" className="mb-5 mx-auto md:mx-0"/>
+                    <img src={`/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo" className="mb-5 mx-auto md:mx-0"/>
                     <h3 className="text-dark-gray dark:text-semi-light-yellow font-inter font-normal text-base md:w-3/4 mb-4 md:mb-0">Enjoy the touring with Dalty</h3>
                 </div>
                 <div className="flex gap-[14px]">

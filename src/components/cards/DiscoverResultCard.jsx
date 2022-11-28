@@ -8,7 +8,7 @@ const DiscoverResultCard = ({ image, name, xid, distance }) => {
     return (
         <div className="mb-6 break-inside-avoid-column">
             <Link to={`/destination/${xid}`}>
-                <img src={image ? image : process.env.PUBLIC_URL + "/images/Logo.svg"} alt="" 
+                <img src={image ? image : "/images/Logo.svg"} alt="" 
                     className="rounded-xl shadow-image-lg mb-3" loading="lazy"/>
             </Link>
             <Link to={`/destination/${xid}`} 

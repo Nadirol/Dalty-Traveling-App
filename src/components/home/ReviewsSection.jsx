@@ -17,7 +17,7 @@ const ReviewsSection = () => {
         <section
             className="grid xl:grid-flow-col xl:auto-cols-fr py-[66px] 
                     text-center md:text-start xl:pl-[72px] mb-7 w-container mx-auto">
-            <img src={process.env.PUBLIC_URL + "/images/hero3.png"} alt=""
+            <img src={"/images/hero3.png"} alt=""
                 className="mx-auto xl:mx-0"/>
             <div className="pt-10">
                 <div className="w-16 h-2 bg-regular-yellow rounded mb-3"></div>

@@ -22,9 +22,9 @@ const TopDestinationCard = ({ xid, name, kinds }) => {
             before:absolute before:bg-gradient-to-t from-filter-very-dark to-transparent before:inset-0 before:rounded-[20px]
                     md:before:opacity-0 hover:before:opacity-100 before:transition-all before:duration-300 before:z-[9]
                         [&:hover>*>span]:bg-very-dark-gray [&:hover>*>span]:text-white">
-                {/* <img src={destinationData?.preview ? destinationData?.preview?.source : process.env.PUBLIC_URL + "/images/Logo.svg"} alt="preview" 
+                {/* <img src={destinationData?.preview ? destinationData?.preview?.source : "/images/Logo.svg"} alt="preview" 
                     className="absolute z-0 inset-0 h-full w-full object-cover"/> */}
-                <img src={process.env.PUBLIC_URL + "/images/Logo.svg"} alt="preview" 
+                <img src={"/images/Logo.svg"} alt="preview" 
                     className="absolute z-0 inset-0 h-full w-full object-contain"/>
                 <div className="relative z-10 flex flex-col justify-between items-start text-start w-full h-full">
                     <span className="text-very-dark-gray font-inter font-medium text-[14px] leading-none

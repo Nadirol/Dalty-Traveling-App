@@ -25,7 +25,7 @@ const Header = ({ theme, toggleTheme }) => {
                 style={{ width: 35, height: 35 }} onClick={openNavMenu}/>
             }
             <Link to='/home'>
-                <img src={process.env.PUBLIC_URL + `/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo" className='focus:outline-0'/>
+                <img src={`/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo" className='focus:outline-0'/>
             </Link>
             <div className={`${ navMenuOpen ? '-md:fixed' : '-md:hidden'} small-middle   z-30 md:flex items-center w-[75%]
                 md:w-full -md:bg-white -md:dark:bg-semi-black md:bg-transparent -md:p-9 -md:rounded-xl `}>

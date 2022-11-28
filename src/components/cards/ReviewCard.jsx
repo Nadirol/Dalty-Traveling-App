@@ -9,11 +9,11 @@ const ReviewCard = ({ id, content, name, title, prevReview, nextReview, dataLeng
                 <div className="flex justify-between items-end">
                     <div className="">
                         <div className="flex gap-1 mb-4 animate-fade-in">
-                            <img className="w-[18px] aspect-square" src={process.env.PUBLIC_URL + "/images/star icon.svg"} alt="" />
-                            <img className="w-[18px] aspect-square" src={process.env.PUBLIC_URL + "/images/star icon.svg"} alt="" />
-                            <img className="w-[18px] aspect-square" src={process.env.PUBLIC_URL + "/images/star icon.svg"} alt="" />
-                            <img className="w-[18px] aspect-square" src={process.env.PUBLIC_URL + "/images/star icon.svg"} alt="" />
-                            <img className="w-[18px] aspect-square" src={process.env.PUBLIC_URL + "/images/star icon.svg"} alt="" />
+                            <img className="w-[18px] aspect-square" src={"/images/star icon.svg"} alt="" />
+                            <img className="w-[18px] aspect-square" src={"/images/star icon.svg"} alt="" />
+                            <img className="w-[18px] aspect-square" src={"/images/star icon.svg"} alt="" />
+                            <img className="w-[18px] aspect-square" src={"/images/star icon.svg"} alt="" />
+                            <img className="w-[18px] aspect-square" src={"/images/star icon.svg"} alt="" />
                         </div>
                         <h3 className="text-very-dark-gray dark:text-regular-yellow font-inter 
                             font-medium text-xl leading-none mb-2 animate-fade-in">

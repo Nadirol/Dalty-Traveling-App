@@ -26,7 +26,7 @@ const DiscoverHeader = ({ handleSearchSubmit, searchValue, handleSearchChange, c
         return (
             <div className="w-full mx-auto mb-8 flex -md:flex-col -md:gap-8 items-center justify-between p-4">
                 <Link to='/home'>
-                    <img src={process.env.PUBLIC_URL + `/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo"/>
+                    <img src={`/images/${theme === 'light' ? 'Logo' : 'Logo yellow'}.svg`} alt="brand logo"/>
                 </Link>
                 { navMenuOpen ? 
                     <GrClose className='md:hidden fixed right-8 top-6 cursor-pointer z-50'
@@ -57,7 +57,7 @@ const DiscoverHeader = ({ handleSearchSubmit, searchValue, handleSearchChange, c
                             htmlFor="submit-button"
                             className="cursor-pointer mx-auto ml-2 md:ml-6"
                         >
-                            <img src={process.env.PUBLIC_URL + "/images/search icon.svg"} alt="search"/>
+                            <img src={"/images/search icon.svg"} alt="search"/>
                         </label>
                     </div>
                     <div className={`absolute z-10 bg-white dark:bg-semi-black top-0 left-0 w-full rounded-t-[2rem] rounded-b-xl overflow-hidden
