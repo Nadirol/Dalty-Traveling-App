@@ -36,7 +36,7 @@ const FormSection = () => {
             </div>
             <div className={`fixed right-1/2 translate-x-1/2 px-8 py-4 rounded-2xl z-30
                 bg-white dark:bg-semi-black transition-all duration-300 pointer-events-none 
-                    ${ popUpVisible ? 'bottom-12 opacity-100' : 'opacity-0 bottom-0'} `}>
+                    ${ popUpVisible ? 'bottom-12 opacity-100' : 'opacity-0 bottom-0'} shadow-card dark:shadow-card-bold-dark`}>
                 <h1 className="text-very-dark-gray dark:text-regular-yellow font-inter font-semibold text-base leading-none z-30">
                     Thanks For Signing Up!
                 </h1>
