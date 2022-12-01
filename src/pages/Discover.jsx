@@ -161,7 +161,7 @@ const Discover = ({ theme, toggleTheme }) => {
     };
 
     return (
-        <div className="min-h-screen">
+        <div className="">
             <DiscoverHeader 
                 handleSearchSubmit={handleSearchSubmit}
                 searchValue={searchValue}
@@ -187,7 +187,7 @@ const Discover = ({ theme, toggleTheme }) => {
             { isLoadingDiscover || isLoadingImages
                 ? <Loader/>
                 : (
-                    <div className="px-4">
+                    <div className="px-4 min-h-screen">
                         <div className="my-6 animate-fade-in columns-2 md:columns-3 xl:columns-4">
                             {discoverData.map((item,index) => (
                                 <DiscoverResultCard
