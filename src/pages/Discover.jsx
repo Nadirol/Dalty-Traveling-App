@@ -185,7 +185,11 @@ const Discover = ({ theme, toggleTheme }) => {
                 nextTag={nextTag}
             />
             { isLoadingDiscover || isLoadingImages
-                ? <Loader/>
+                ? (
+                    <div className="min-h-screen">
+                        <Loader/>
+                    </div>
+                )
                 : (
                     <div className="px-4 min-h-screen">
                         <div className="my-6 animate-fade-in columns-2 md:columns-3 xl:columns-4">
