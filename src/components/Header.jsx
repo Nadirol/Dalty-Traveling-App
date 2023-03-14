@@ -4,9 +4,11 @@ import { GrClose } from 'react-icons/gr'
 import { Link } from 'react-router-dom';
 import { BsSun, BsFillMoonFill } from "react-icons/bs"
 
+import { UserAuth } from '../context/AuthContext';
+
+
 const Header = ({ theme, toggleTheme }) => {
     const [ navMenuOpen, setNavMenuOpen ] = useState(false);
-
     const openNavMenu = () => {
         setNavMenuOpen(state => !state)
     }
@@ -14,6 +16,16 @@ const Header = ({ theme, toggleTheme }) => {
     const closeNavMenu = () => {
         setNavMenuOpen(state => !state)
     }
+
+    const { user, logOut } = UserAuth();
+    const handleGoogleLogOut = async () => {
+        try {
+            await logOut()
+        }
+        catch(error) {
+            console.log(error)
+        }
+    };
 
     return (
         <header className={`py-6 w-container mx-auto flex-between-center dark-overlay-screen ${ navMenuOpen ? '-md:after:fixed' : '-md:after:hidden'}`}>
@@ -58,17 +70,24 @@ const Header = ({ theme, toggleTheme }) => {
                             : <BsFillMoonFill style={{ width: 20, height: 20 }} className="text-regular-yellow"/>
                         }
                     </button>
-                    <Link to='/auth/login'
-                        className="login-btn">
-                        Login            
-                    </Link>
-                    <Link to='/auth/sign-up'
-                        className="sign-up-btn flex-center-center gap-3 border-2 border-orange py-4 px-6 xl:px-7 rounded-[27px]">
-                        <h5 className="text-orange font-poppins font-medium text-base leading-none">Sign Up</h5> 
-                        <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 8.45744L4.04598 10.2128L13.4253 2.87235L6.06897 11.1702V15L8.82758 11.9681L13.4253 13.5638L16 0L0 8.45744Z" fill="#F66F4D"/>
-                        </svg>                
-                    </Link>
+                    { user?.uid
+                    ? <button onClick={handleGoogleLogOut}>Sign Out</button>
+                    : 
+                    <>
+                        <Link to='/auth/login'
+                            className="login-btn">
+                            Login            
+                        </Link>
+                        <Link to='/auth/sign-up'
+                            className="sign-up-btn flex-center-center gap-3 border-2 border-orange py-4 px-6 xl:px-7 rounded-[27px]">
+                            <h5 className="text-orange font-poppins font-medium text-base leading-none">Sign Up</h5> 
+                            <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 8.45744L4.04598 10.2128L13.4253 2.87235L6.06897 11.1702V15L8.82758 11.9681L13.4253 13.5638L16 0L0 8.45744Z" fill="#F66F4D"/>
+                            </svg>                
+                        </Link>
+                    </>
+                    }
+
                 </div>
             </div>
         </header>

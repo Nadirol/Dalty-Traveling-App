@@ -60,8 +60,6 @@ const Auth = ({ theme }) => {
                     </Link>
                 </div>
                 <Signup
-                    emailValue={emailValue}
-                    handleEmailChange={handleEmailChange}
                 />
                 <div className="flex gap-4 w-fit mx-auto">
                     <h1 className="auth-footer-nav-link ">

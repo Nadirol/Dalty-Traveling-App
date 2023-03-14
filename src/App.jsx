@@ -31,7 +31,7 @@ const App = () => {
                   <>
                     <Header 
                       theme={theme}
-                      toggleTheme={toggleTheme}                   
+                      toggleTheme={toggleTheme}              
                     />
                     <Main/>
                     <Footer theme={theme}/>
@@ -41,7 +41,7 @@ const App = () => {
                   <>
                     <Header 
                       theme={theme}
-                      toggleTheme={toggleTheme} 
+                      toggleTheme={toggleTheme}
                     />
                     <Main/>
                     <Footer theme={theme}/>
